@@ -1,0 +1,3987 @@
+{
+  "info": {
+    "name": "Samsara API",
+    "_postman_id": "63f7ab40-42c7-4b70-bde2-af5c23975b03",
+    "description": "# Introduction\n\nSamsara provides API endpoints for interacting with Samsara Cloud, so that you can build powerful applications and custom solutions with sensor data. Samsara has endpoints available to track and analyze sensors, vehicles, and entire fleets.\n\nThe Samsara Cloud API is a [RESTful API](https://en.wikipedia.org/wiki/Representational_state_transfer) accessed by an [HTTP](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol) client such as wget or curl, or HTTP libraries of most modern programming languages including python, ruby, java. We use built-in HTTP features, like HTTP authentication and HTTP verbs, which are understood by off-the-shelf HTTP clients. We allow you to interact securely with our API from a client-side web application (though you should never expose your secret API key). [JSON](http://www.json.org/) is returned by all API responses, including errors. If you’re familiar with what you can build with a REST API, the following API reference guide will be your go-to resource.\n\nAPI access to the Samsara cloud is available to all Samsara administrators. To start developing with Samsara APIs you will need to [obtain your API keys](#section/Authentication) to authenticate your API requests.\n\nIf you have any questions you can reach out to us on [support@samsara.com](mailto:support@samsara.com)\n\n# Endpoints\n\nAll our APIs can be accessed through HTTP requests to URLs like:\n\n```curl\nhttps://api.samsara.com/<version>/<endpoint>\n```\n\nAll our APIs are [versioned](#section/Versioning). If we intend to make breaking changes to an API which either changes the response format or request parameter, we will increment the version.\n\n# Authentication\n\nTo authenticate your API request you will need to include your secret token. You can manage your API tokens in the [Dashboard](https://cloud.samsara.com). They are visible under `Settings->Organization->API Tokens`.\n\nYour API tokens carry many privileges, so be sure to keep them secure. Do not share your secret API tokens in publicly accessible areas such as GitHub, client-side code, and so on.\n\nAuthentication to the API is performed via [HTTP Basic Auth](https://en.wikipedia.org/wiki/Basic_access_authentication). Provide your API token as the basic access_token value in the URL. You do not need to provide a password.\n\n```curl\nhttps://api.samsara.com/<version>/<endpoint>?access_token={access_token}\n```\n\nAll API requests must be made over [HTTPS](https://en.wikipedia.org/wiki/HTTPS). Calls made over plain HTTP or without authentication will fail.\n\n# Request Methods\n\nOur API endpoints use [HTTP request methods](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods) to specify the desired operation to be performed. The documentation below specified request method supported by each endpoint and the resulting action.\n\n## GET\n\nGET requests are typically used for fetching data (like data for a particular driver).\n\n## POST\n\nPOST requests are typically used for creating or updating a record (like adding new tags to the system). With that being said, a few of our POST requests can be used for fetching data (like current location data of your fleet).\n\n## PUT\n\nPUT requests are typically used for updating an existing record (like updating all devices associated with a particular tag).\n\n## PATCH\n\nPATCH requests are typically used for modifying an existing record (like modifying a few devices associated with a particular tag).\n\n## DELETE\n\nDELETE requests are used for deleting a record (like deleting a tag from the system).\n\n# Response Codes\n\nAll API requests will respond with appropriate [HTTP status code](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes). Your API client should handle each response class differently.\n\n## 2XX\n\nThese are successful responses and indicate that the API request returned the expected response.\n\n## 4XX\n\nThese indicate that there was a problem with the request like a missing parameter or invalid values. Check the response for specific [error details](#section/Error-Responses). Requests that respond with a 4XX status code, should be modified before retrying.\n\n## 5XX\n\nThese indicate server errors when the server is unreachable or is misconfigured. In this case, you should retry the API request after some delay.\n\n# Error Responses\n\nIn case of a 4XX status code, the body of the response will contain information to briefly explain the error reported. To help debugging the error, you can refer to the following table for understanding the error message.\n\n| Status Code | Message | Description |\n|-------------|----------------|-------------------------------------------------------------------|\n| 401 | Invalid token | The API token is invalid and could not be authenticated. Please refer to the [authentication section](#section/Authentication). |\n| 404 | Page not found | The API endpoint being accessed is invalid. |\n| 400 | Bad request | Default response for an invalid request. Please check the request to make sure it follows the format specified in the documentation. |\n\n# Versioning\n\nAll our APIs are versioned. Our current API version is `v1` and we are continuously working on improving it further and provide additional endpoints. If we intend to make breaking changes to an API which either changes the response format or request parameter, we will increment the version. Thus, you can use our current API version worry free.\n\n# FAQs\n\nCheck out our [responses to FAQs here](https://kb.samsara.com/hc/en-us/sections/360000538054-APIs). Don’t see an answer to your question? Reach out to us on [support@samsara.com](mailto:support@samsara.com).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/"
+  },
+  "item": [
+    {
+      "name": "Fleet",
+      "description": "Access to fleet data",
+      "item": [
+        {
+          "id": "203f4307-bf9b-4926-8630-865b364aca88",
+          "name": "GetOrganizationAddresses",
+          "request": {
+            "url": "https://api.samsara.com/v1/addresses?access_token=access_token",
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw"
+            },
+            "description": "Fetch all addresses/geofences for the organization. An address contains either a circle or polygon geofence describing the address boundaries."
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "body": "[\r\n  {\r\n    \"contacts\": [\r\n      {\r\n        \"email\": \"jane.jones@yahoo.com\",\r\n        \"firstName\": \"Jane\",\r\n        \"id\": 123,\r\n        \"lastName\": \"Jones\",\r\n        \"phone\": \"111-222-3344\"\r\n      }\r\n    ],\r\n    \"formattedAddress\": \"350 Rhode Island St, San Francisco, CA\",\r\n    \"geofence\": {\r\n      \"circle\": {\r\n        \"latitude\": 37.765363,\r\n        \"longitude\": -122.403098,\r\n        \"radiusMeters\": 250\r\n      },\r\n      \"polygon\": {\r\n        \"vertices\": [\r\n          {\r\n            \"latitude\": 37.765363,\r\n            \"longitude\": -122.403098\r\n          }\r\n        ]\r\n      }\r\n    },\r\n    \"id\": 123,\r\n    \"name\": \"Samsara HQ\",\r\n    \"notes\": \"Delivery site 1\",\r\n    \"tags\": [\r\n      {\r\n        \"id\": 12345,\r\n        \"name\": \"Broken Vehicles\"\r\n      }\r\n    ]\r\n  }\r\n]",
+              "status": "List of addresses/geofences. For each address entry, the geofence field will only be populated with either 'circle' or 'polygon', depending on the geofence type.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "e24b2d31-f3eb-4095-bbf4-537397891992"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "7ad09a37-9463-480f-8149-645da40788c0"
+            }
+          ]
+        },
+        {
+          "id": "ec346d78-f56b-477a-b2cb-1a1f72de8af4",
+          "name": "AddOrganizationAddresses",
+          "request": {
+            "url": "https://api.samsara.com/v1/addresses?access_token=access_token",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"addresses\": [\r\n    {\r\n      \"contactIds\": [\r\n        178\r\n      ],\r\n      \"formattedAddress\": \"350 Rhode Island St, San Francisco, CA\",\r\n      \"geofence\": {\r\n        \"circle\": {\r\n          \"latitude\": 37.765363,\r\n          \"longitude\": -122.403098,\r\n          \"radiusMeters\": 250\r\n        },\r\n        \"polygon\": {\r\n          \"vertices\": [\r\n            {\r\n              \"latitude\": 37.765363,\r\n              \"longitude\": -122.403098\r\n            }\r\n          ]\r\n        }\r\n      },\r\n      \"name\": \"Samsara HQ\",\r\n      \"notes\": \"Delivery site 1\",\r\n      \"tagIds\": [\r\n        178\r\n      ]\r\n    }\r\n  ]\r\n}"
+            },
+            "description": "Add one or more addresses to the organization"
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "body": "[\r\n  {\r\n    \"contacts\": [\r\n      {\r\n        \"email\": \"jane.jones@yahoo.com\",\r\n        \"firstName\": \"Jane\",\r\n        \"id\": 123,\r\n        \"lastName\": \"Jones\",\r\n        \"phone\": \"111-222-3344\"\r\n      }\r\n    ],\r\n    \"formattedAddress\": \"350 Rhode Island St, San Francisco, CA\",\r\n    \"geofence\": {\r\n      \"circle\": {\r\n        \"latitude\": 37.765363,\r\n        \"longitude\": -122.403098,\r\n        \"radiusMeters\": 250\r\n      },\r\n      \"polygon\": {\r\n        \"vertices\": [\r\n          {\r\n            \"latitude\": 37.765363,\r\n            \"longitude\": -122.403098\r\n          }\r\n        ]\r\n      }\r\n    },\r\n    \"id\": 123,\r\n    \"name\": \"Samsara HQ\",\r\n    \"notes\": \"Delivery site 1\",\r\n    \"tags\": [\r\n      {\r\n        \"id\": 12345,\r\n        \"name\": \"Broken Vehicles\"\r\n      }\r\n    ]\r\n  }\r\n]",
+              "status": "List of added addresses/geofences. For each address entry, the geofence field will only be populated with either 'circle' or 'polygon', depending on the geofence type. Circle geofences added without a specific lat/lng are geocoded asynchronously, and will be 0,0 in the immediate response.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "a70f9416-90cb-49e1-a37e-61ae18dfcacc"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "5b5b71aa-9cdf-48b8-8eb4-fb7b456b3af8"
+            }
+          ]
+        },
+        {
+          "id": "b905ea30-8987-471f-b9f1-e6739967b725",
+          "name": "GetOrganizationAddress",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "api.samsara.com",
+              "path": [
+                "v1",
+                "addresses/:addressId"
+              ],
+              "query": [
+                {
+                  "key": "access_token",
+                  "value": "access_token",
+                  "disabled": false
+                }
+              ],
+              "variable": [
+                {
+                  "id": "addressId",
+                  "value": "247",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw"
+            },
+            "description": "Fetch an address by its id."
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "body": "{\r\n  \"contacts\": [\r\n    {\r\n      \"email\": \"jane.jones@yahoo.com\",\r\n      \"firstName\": \"Jane\",\r\n      \"id\": 123,\r\n      \"lastName\": \"Jones\",\r\n      \"phone\": \"111-222-3344\"\r\n    }\r\n  ],\r\n  \"formattedAddress\": \"350 Rhode Island St, San Francisco, CA\",\r\n  \"geofence\": {\r\n    \"circle\": {\r\n      \"latitude\": 37.765363,\r\n      \"longitude\": -122.403098,\r\n      \"radiusMeters\": 250\r\n    },\r\n    \"polygon\": {\r\n      \"vertices\": [\r\n        {\r\n          \"latitude\": 37.765363,\r\n          \"longitude\": -122.403098\r\n        }\r\n      ]\r\n    }\r\n  },\r\n  \"id\": 123,\r\n  \"name\": \"Samsara HQ\",\r\n  \"notes\": \"Delivery site 1\",\r\n  \"tags\": [\r\n    {\r\n      \"id\": 12345,\r\n      \"name\": \"Broken Vehicles\"\r\n    }\r\n  ]\r\n}",
+              "status": "The address/geofence. The geofence field will only be populated with either 'circle' or 'polygon', depending on the geofence type.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "b4c18bcb-dfcc-4abb-aef9-bb937190495f"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "31624a8e-5089-4ecc-9988-a8317739d917"
+            }
+          ]
+        },
+        {
+          "id": "02c3e636-e2d3-4bb6-b3c5-b8979072d246",
+          "name": "DeleteOrganizationAddress",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "api.samsara.com",
+              "path": [
+                "v1",
+                "addresses/:addressId"
+              ],
+              "query": [
+                {
+                  "key": "access_token",
+                  "value": "access_token",
+                  "disabled": false
+                }
+              ],
+              "variable": [
+                {
+                  "id": "addressId",
+                  "value": "27",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw"
+            },
+            "description": "Delete an address."
+          },
+          "response": [
+            {
+              "header": [],
+              "status": "Address was successfully deleted. No response body is returned.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "a01b7837-f86e-44ef-ac90-e624fab8af70"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "030ba447-471f-471f-a6fb-249b2fae16cd"
+            }
+          ]
+        },
+        {
+          "id": "a50d3b72-9ed7-44bc-86b1-6d6073a99981",
+          "name": "UpdateOrganizationAddress",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "api.samsara.com",
+              "path": [
+                "v1",
+                "addresses/:addressId"
+              ],
+              "query": [
+                {
+                  "key": "access_token",
+                  "value": "access_token",
+                  "disabled": false
+                }
+              ],
+              "variable": [
+                {
+                  "id": "addressId",
+                  "value": "27",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"contactIds\": [\r\n    178\r\n  ],\r\n  \"formattedAddress\": \"350 Rhode Island St, San Francisco, CA\",\r\n  \"geofence\": {\r\n    \"circle\": {\r\n      \"latitude\": 37.765363,\r\n      \"longitude\": -122.403098,\r\n      \"radiusMeters\": 250\r\n    },\r\n    \"polygon\": {\r\n      \"vertices\": [\r\n        {\r\n          \"latitude\": 37.765363,\r\n          \"longitude\": -122.403098\r\n        }\r\n      ]\r\n    }\r\n  },\r\n  \"name\": \"Samsara HQ\",\r\n  \"notes\": \"Delivery site 1\",\r\n  \"tagIds\": [\r\n    178\r\n  ]\r\n}"
+            },
+            "description": "Update the name, formatted address, geofence, notes, or tag and contact Ids for an address. The set of tags or contacts associated with this address will be updated to exactly match the list of IDs passed in. To remove all tags or contacts from an address, pass an empty list; to remove notes, pass an empty string."
+          },
+          "response": [
+            {
+              "header": [],
+              "status": "Address was successfully updated. No response body is returned.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "c936ba10-ffff-4aeb-9cd6-36e36b3b2393"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "437bf7c3-0dd5-437c-9239-0fb4396f3ac2"
+            }
+          ]
+        },
+        {
+          "id": "199c8eef-e54a-4f43-a3ca-58d8fdf07bcf",
+          "name": "ListContacts",
+          "request": {
+            "url": "https://api.samsara.com/v1/contacts?access_token=access_token",
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw"
+            },
+            "description": "Fetch all contacts for the organization."
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "body": "[\r\n  {\r\n    \"email\": \"jane.jones@yahoo.com\",\r\n    \"firstName\": \"Jane\",\r\n    \"id\": 123,\r\n    \"lastName\": \"Jones\",\r\n    \"phone\": \"111-222-3344\"\r\n  }\r\n]",
+              "status": "List of contacts.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "c924944c-d3c9-46a2-a70d-99ff6cb526fb"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "585c2d91-9098-4f10-9d79-3c822af5d74c"
+            }
+          ]
+        },
+        {
+          "id": "f705d52f-6d32-4f1c-8ab1-2d41d40b6d24",
+          "name": "GetOrganizationContact",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "api.samsara.com",
+              "path": [
+                "v1",
+                "contacts/:contact_id"
+              ],
+              "query": [
+                {
+                  "key": "access_token",
+                  "value": "access_token",
+                  "disabled": false
+                }
+              ],
+              "variable": [
+                {
+                  "id": "contact_id",
+                  "value": "27",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw"
+            },
+            "description": "Fetch a contact by its id."
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "body": "{\r\n  \"email\": \"jane.jones@yahoo.com\",\r\n  \"firstName\": \"Jane\",\r\n  \"id\": 123,\r\n  \"lastName\": \"Jones\",\r\n  \"phone\": \"111-222-3344\"\r\n}",
+              "status": "The contact.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "ee49df0c-63aa-4436-a207-d57b3827ab8c"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "eec6cd1f-80eb-46c3-b1ca-087e6dfde23b"
+            }
+          ]
+        },
+        {
+          "id": "91430395-6b40-4828-9136-a7af8a330bef",
+          "name": "add_fleet_address",
+          "request": {
+            "url": "https://api.samsara.com/v1/fleet/add_address?access_token=access_token",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"address\": \"501 York St\",\r\n  \"groupId\": 101,\r\n  \"name\": \"HQ\",\r\n  \"radius\": 10\r\n}"
+            },
+            "description": "This method adds an address book entry to the specified group."
+          },
+          "response": [
+            {
+              "header": [],
+              "status": "Address was successfully added. No response body is returned.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "bebb8380-c67d-4997-b61e-e99fa294cde0"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "d015ca11-3f65-4391-ac7c-3e9c158a50b7"
+            }
+          ]
+        },
+        {
+          "id": "fd5c0936-b0e8-46cc-9e4c-bf768547dcfe",
+          "name": "GetAllAssets",
+          "request": {
+            "url": "https://api.samsara.com/v1/fleet/assets?access_token=access_token&group_id=27",
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw"
+            },
+            "description": "Fetch all of the assets for the group."
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "body": "{\r\n  \"assets\": [\r\n    {\r\n      \"assetSerialNumber\": \"SNTEST123\",\r\n      \"cable\": [\r\n        {\r\n          \"assetType\": \"Reefer (Thermo King)\"\r\n        }\r\n      ],\r\n      \"engineHours\": 104,\r\n      \"id\": 1,\r\n      \"name\": \"Trailer 123\"\r\n    }\r\n  ]\r\n}",
+              "status": "List of assets.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "d71475a0-96b6-41ba-9e4a-1d18acc85f1b"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "53c8bd0d-2e3d-4454-90f9-8b9cf6fc96c2"
+            }
+          ]
+        },
+        {
+          "id": "3d4873f4-686b-448f-b8ec-c53519a41178",
+          "name": "GetAllAssetCurrentLocations",
+          "request": {
+            "url": "https://api.samsara.com/v1/fleet/assets/locations?access_token=access_token&group_id=27",
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw"
+            },
+            "description": "Fetch current locations of all assets for the group."
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "body": "{\r\n  \"assets\": [\r\n    {\r\n      \"cable\": [\r\n        {\r\n          \"assetType\": \"Reefer (Thermo King)\"\r\n        }\r\n      ],\r\n      \"engineHours\": 104,\r\n      \"id\": 1,\r\n      \"location\": [\r\n        {\r\n          \"latitude\": 37,\r\n          \"location\": \"525 York, San Francisco, CA\",\r\n          \"longitude\": -122.7,\r\n          \"speedMilesPerHour\": 35,\r\n          \"timeMs\": 12314151\r\n        }\r\n      ],\r\n      \"name\": \"Trailer 123\"\r\n    }\r\n  ]\r\n}",
+              "status": "List of assets and their current locations.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "b5ce3307-e213-45b8-87bb-952d13f86f66"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "e76be71e-864b-4b16-9eb2-8dc07d31ed83"
+            }
+          ]
+        },
+        {
+          "id": "d1aa1657-c4e2-4fa6-a1c7-649ad2bc6516",
+          "name": "GetAssetLocation",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "api.samsara.com",
+              "path": [
+                "v1",
+                "fleet/assets/:asset_id/locations"
+              ],
+              "query": [
+                {
+                  "key": "access_token",
+                  "value": "access_token",
+                  "disabled": false
+                },
+                {
+                  "key": "startMs",
+                  "value": "27",
+                  "disabled": false
+                },
+                {
+                  "key": "endMs",
+                  "value": "27",
+                  "disabled": false
+                }
+              ],
+              "variable": [
+                {
+                  "id": "asset_id",
+                  "value": "27",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw"
+            },
+            "description": "Fetch the historical locations for the asset."
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "body": "[\r\n  {\r\n    \"latitude\": 37,\r\n    \"location\": \"525 York, San Francisco, CA\",\r\n    \"longitude\": -122.7,\r\n    \"speedMilesPerHour\": 35,\r\n    \"time\": 12314151\r\n  }\r\n]",
+              "status": "Asset location details.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "a381860e-d082-48b7-bb2b-b864f4373486"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "2c02d28d-357e-44ba-9069-733edfbed3ca"
+            }
+          ]
+        },
+        {
+          "id": "bede451e-6500-4418-b6d9-a1da025fdf95",
+          "name": "GetAssetReefer",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "api.samsara.com",
+              "path": [
+                "v1",
+                "fleet/assets/:asset_id/reefer"
+              ],
+              "query": [
+                {
+                  "key": "access_token",
+                  "value": "access_token",
+                  "disabled": false
+                },
+                {
+                  "key": "startMs",
+                  "value": "27",
+                  "disabled": false
+                },
+                {
+                  "key": "endMs",
+                  "value": "27",
+                  "disabled": false
+                }
+              ],
+              "variable": [
+                {
+                  "id": "asset_id",
+                  "value": "27",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw"
+            },
+            "description": "Fetch the reefer-specific stats of an asset."
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "body": "{\r\n  \"assetType\": \"Reefer (Thermo King)\",\r\n  \"id\": 1,\r\n  \"name\": \"Reefer 123\",\r\n  \"reeferStats\": {\r\n    \"alarms\": [\r\n      {\r\n        \"alarms\": [\r\n          {\r\n            \"alarmCode\": 102,\r\n            \"description\": \"Check Return Air Sensor\",\r\n            \"operatorAction\": \"Check and repair at end of trip\",\r\n            \"severity\": 1\r\n          }\r\n        ],\r\n        \"changedAtMs\": 1453449599999\r\n      }\r\n    ],\r\n    \"engineHours\": [\r\n      {\r\n        \"changedAtMs\": 1453449599999,\r\n        \"engineHours\": 1200\r\n      }\r\n    ],\r\n    \"fuelPercentage\": [\r\n      {\r\n        \"changedAtMs\": 1453449599999,\r\n        \"fuelPercentage\": 99\r\n      }\r\n    ],\r\n    \"powerStatus\": [\r\n      {\r\n        \"changedAtMs\": 1453449599999,\r\n        \"status\": \"Active (Continuous)\"\r\n      }\r\n    ],\r\n    \"returnAirTemp\": [\r\n      {\r\n        \"changedAtMs\": 1453449599999,\r\n        \"tempInMilliC\": 31110\r\n      }\r\n    ],\r\n    \"setPoint\": [\r\n      {\r\n        \"changedAtMs\": 1453449599999,\r\n        \"tempInMilliC\": 31110\r\n      }\r\n    ]\r\n  }\r\n}",
+              "status": "Reefer-specific asset details.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "b9319db9-e6ab-408e-89c6-ae2f99376f30"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "551607ab-c869-4887-a1ed-92da81e0da8d"
+            }
+          ]
+        },
+        {
+          "id": "13df76f3-51b3-4d11-81b1-302de926e14d",
+          "name": "fetchAllDispatchRoutes",
+          "request": {
+            "url": "https://api.samsara.com/v1/fleet/dispatch/routes?access_token=access_token&group_id=27&end_time=27&duration=27",
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw"
+            },
+            "description": "Fetch all of the dispatch routes for the group."
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "body": "[\r\n  {\r\n    \"dispatch_jobs\": [\r\n      {\r\n        \"arrived_at_ms\": 1462881998034,\r\n        \"completed_at_ms\": 1462881998034,\r\n        \"dispatch_route_id\": 55,\r\n        \"driver_id\": 444,\r\n        \"en_route_at_ms\": 1462881998034,\r\n        \"estimated_arrival_ms\": 1462881998034,\r\n        \"fleet_viewer_url\": \"https://cloud.samsara.com/fleet/viewer/job/fleet_viewer_token\",\r\n        \"group_id\": 101,\r\n        \"id\": 773,\r\n        \"job_state\": \"JobState_Arrived\",\r\n        \"skipped_at_ms\": 1462881998034,\r\n        \"vehicle_id\": 112,\r\n        \"destination_address\": \"123 Main St, Philadelphia, PA 19106\",\r\n        \"destination_address_id\": 67890,\r\n        \"destination_lat\": 123.456,\r\n        \"destination_lng\": 37.459,\r\n        \"destination_name\": \"ACME Inc. Philadelphia HQ\",\r\n        \"notes\": \"Ensure crates are stacked no more than 3 high.\",\r\n        \"scheduled_arrival_time_ms\": 1462881998034,\r\n        \"scheduled_departure_time_ms\": 1462881998034\r\n      }\r\n    ],\r\n    \"id\": 556,\r\n    \"actual_end_ms\": 1462882101000,\r\n    \"actual_start_ms\": 1462882098000,\r\n    \"driver_id\": 555,\r\n    \"group_id\": 101,\r\n    \"name\": \"Bid #123\",\r\n    \"scheduled_end_ms\": 1462881998034,\r\n    \"scheduled_meters\": 10000,\r\n    \"scheduled_start_ms\": 1462881998034,\r\n    \"start_location_address\": \"123 Main St, Philadelphia, PA 19106\",\r\n    \"start_location_address_id\": 67890,\r\n    \"start_location_lat\": 123.456,\r\n    \"start_location_lng\": 37.459,\r\n    \"start_location_name\": \"ACME Inc. Philadelphia HQ\",\r\n    \"trailer_id\": 666,\r\n    \"vehicle_id\": 444\r\n  }\r\n]",
+              "status": "All dispatch route objects for the group.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "ead56941-6adb-406b-8978-7f6c2c576408"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "55e719a6-95ab-4f38-9654-a5ea58b9692a"
+            }
+          ]
+        },
+        {
+          "id": "f8b76e87-ae64-49d9-a11d-e31675c3d714",
+          "name": "createDispatchRoute",
+          "request": {
+            "url": "https://api.samsara.com/v1/fleet/dispatch/routes?access_token=access_token",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"dispatch_jobs\": [\r\n    {\r\n      \"destination_address\": \"123 Main St, Philadelphia, PA 19106\",\r\n      \"destination_address_id\": 67890,\r\n      \"destination_lat\": 123.456,\r\n      \"destination_lng\": 37.459,\r\n      \"destination_name\": \"ACME Inc. Philadelphia HQ\",\r\n      \"notes\": \"Ensure crates are stacked no more than 3 high.\",\r\n      \"scheduled_arrival_time_ms\": 1462881998034,\r\n      \"scheduled_departure_time_ms\": 1462881998034\r\n    }\r\n  ],\r\n  \"actual_end_ms\": 1462882101000,\r\n  \"actual_start_ms\": 1462882098000,\r\n  \"driver_id\": 555,\r\n  \"group_id\": 101,\r\n  \"name\": \"Bid #123\",\r\n  \"scheduled_end_ms\": 1462881998034,\r\n  \"scheduled_meters\": 10000,\r\n  \"scheduled_start_ms\": 1462881998034,\r\n  \"start_location_address\": \"123 Main St, Philadelphia, PA 19106\",\r\n  \"start_location_address_id\": 67890,\r\n  \"start_location_lat\": 123.456,\r\n  \"start_location_lng\": 37.459,\r\n  \"start_location_name\": \"ACME Inc. Philadelphia HQ\",\r\n  \"trailer_id\": 666,\r\n  \"vehicle_id\": 444\r\n}"
+            },
+            "description": "Create a new dispatch route."
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "body": "{\r\n  \"dispatch_jobs\": [\r\n    {\r\n      \"arrived_at_ms\": 1462881998034,\r\n      \"completed_at_ms\": 1462881998034,\r\n      \"dispatch_route_id\": 55,\r\n      \"driver_id\": 444,\r\n      \"en_route_at_ms\": 1462881998034,\r\n      \"estimated_arrival_ms\": 1462881998034,\r\n      \"fleet_viewer_url\": \"https://cloud.samsara.com/fleet/viewer/job/fleet_viewer_token\",\r\n      \"group_id\": 101,\r\n      \"id\": 773,\r\n      \"job_state\": \"JobState_Arrived\",\r\n      \"skipped_at_ms\": 1462881998034,\r\n      \"vehicle_id\": 112,\r\n      \"destination_address\": \"123 Main St, Philadelphia, PA 19106\",\r\n      \"destination_address_id\": 67890,\r\n      \"destination_lat\": 123.456,\r\n      \"destination_lng\": 37.459,\r\n      \"destination_name\": \"ACME Inc. Philadelphia HQ\",\r\n      \"notes\": \"Ensure crates are stacked no more than 3 high.\",\r\n      \"scheduled_arrival_time_ms\": 1462881998034,\r\n      \"scheduled_departure_time_ms\": 1462881998034\r\n    }\r\n  ],\r\n  \"id\": 556,\r\n  \"actual_end_ms\": 1462882101000,\r\n  \"actual_start_ms\": 1462882098000,\r\n  \"driver_id\": 555,\r\n  \"group_id\": 101,\r\n  \"name\": \"Bid #123\",\r\n  \"scheduled_end_ms\": 1462881998034,\r\n  \"scheduled_meters\": 10000,\r\n  \"scheduled_start_ms\": 1462881998034,\r\n  \"start_location_address\": \"123 Main St, Philadelphia, PA 19106\",\r\n  \"start_location_address_id\": 67890,\r\n  \"start_location_lat\": 123.456,\r\n  \"start_location_lng\": 37.459,\r\n  \"start_location_name\": \"ACME Inc. Philadelphia HQ\",\r\n  \"trailer_id\": 666,\r\n  \"vehicle_id\": 444\r\n}",
+              "status": "Created route object including the new route ID.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "c854cef5-0c3e-4de1-af8c-a50b4fe1cba7"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "bbb2e369-37ee-4d93-b24d-02626d4d5b5e"
+            }
+          ]
+        },
+        {
+          "id": "c9b53957-5da2-4635-86aa-d7f230603cb0",
+          "name": "fetchAllRouteJobUpdates",
+          "request": {
+            "url": "https://api.samsara.com/v1/fleet/dispatch/routes/job_updates?access_token=access_token&group_id=27&sequence_id=sequence_id&include=include",
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw"
+            },
+            "description": "Fetch all updates to a job including route data in the last 24 hours or subsequent to an sequence ID"
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "body": "{\r\n  \"job_updates\": [\r\n    {\r\n      \"changed_at_ms\": 1462881998034,\r\n      \"job_id\": 773,\r\n      \"job_state\": \"JobState_Arrived\",\r\n      \"prev_job_state\": \"JobState_EnRoute\",\r\n      \"route\": {\r\n        \"dispatch_jobs\": [\r\n          {\r\n            \"arrived_at_ms\": 1462881998034,\r\n            \"completed_at_ms\": 1462881998034,\r\n            \"dispatch_route_id\": 55,\r\n            \"driver_id\": 444,\r\n            \"en_route_at_ms\": 1462881998034,\r\n            \"estimated_arrival_ms\": 1462881998034,\r\n            \"fleet_viewer_url\": \"https://cloud.samsara.com/fleet/viewer/job/fleet_viewer_token\",\r\n            \"group_id\": 101,\r\n            \"id\": 773,\r\n            \"job_state\": \"JobState_Arrived\",\r\n            \"skipped_at_ms\": 1462881998034,\r\n            \"vehicle_id\": 112,\r\n            \"destination_address\": \"123 Main St, Philadelphia, PA 19106\",\r\n            \"destination_address_id\": 67890,\r\n            \"destination_lat\": 123.456,\r\n            \"destination_lng\": 37.459,\r\n            \"destination_name\": \"ACME Inc. Philadelphia HQ\",\r\n            \"notes\": \"Ensure crates are stacked no more than 3 high.\",\r\n            \"scheduled_arrival_time_ms\": 1462881998034,\r\n            \"scheduled_departure_time_ms\": 1462881998034\r\n          }\r\n        ],\r\n        \"id\": 556,\r\n        \"actual_end_ms\": 1462882101000,\r\n        \"actual_start_ms\": 1462882098000,\r\n        \"driver_id\": 555,\r\n        \"group_id\": 101,\r\n        \"name\": \"Bid #123\",\r\n        \"scheduled_end_ms\": 1462881998034,\r\n        \"scheduled_meters\": 10000,\r\n        \"scheduled_start_ms\": 1462881998034,\r\n        \"start_location_address\": \"123 Main St, Philadelphia, PA 19106\",\r\n        \"start_location_address_id\": 67890,\r\n        \"start_location_lat\": 123.456,\r\n        \"start_location_lng\": 37.459,\r\n        \"start_location_name\": \"ACME Inc. Philadelphia HQ\",\r\n        \"trailer_id\": 666,\r\n        \"vehicle_id\": 444\r\n      },\r\n      \"route_id\": 556\r\n    }\r\n  ],\r\n  \"sequence_id\": \"eyJpZCI6MywiY3JlYXRlZF9hdCI6MTQ5OTQyOTIyMDAwMn0=\"\r\n}",
+              "status": "All job updates on routes.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "89bf8419-c31c-4944-9ebb-40de503d4b02"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "ec853735-ac7a-473f-9470-6761b954b6dd"
+            }
+          ]
+        },
+        {
+          "id": "290ec957-619c-47ee-85fa-e16a630194d2",
+          "name": "getDispatchRouteById",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "api.samsara.com",
+              "path": [
+                "v1",
+                "fleet/dispatch/routes/:route_id"
+              ],
+              "query": [
+                {
+                  "key": "access_token",
+                  "value": "access_token",
+                  "disabled": false
+                }
+              ],
+              "variable": [
+                {
+                  "id": "route_id",
+                  "value": "27",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw"
+            },
+            "description": "Fetch a dispatch route by id."
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "body": "{\r\n  \"dispatch_jobs\": [\r\n    {\r\n      \"arrived_at_ms\": 1462881998034,\r\n      \"completed_at_ms\": 1462881998034,\r\n      \"dispatch_route_id\": 55,\r\n      \"driver_id\": 444,\r\n      \"en_route_at_ms\": 1462881998034,\r\n      \"estimated_arrival_ms\": 1462881998034,\r\n      \"fleet_viewer_url\": \"https://cloud.samsara.com/fleet/viewer/job/fleet_viewer_token\",\r\n      \"group_id\": 101,\r\n      \"id\": 773,\r\n      \"job_state\": \"JobState_Arrived\",\r\n      \"skipped_at_ms\": 1462881998034,\r\n      \"vehicle_id\": 112,\r\n      \"destination_address\": \"123 Main St, Philadelphia, PA 19106\",\r\n      \"destination_address_id\": 67890,\r\n      \"destination_lat\": 123.456,\r\n      \"destination_lng\": 37.459,\r\n      \"destination_name\": \"ACME Inc. Philadelphia HQ\",\r\n      \"notes\": \"Ensure crates are stacked no more than 3 high.\",\r\n      \"scheduled_arrival_time_ms\": 1462881998034,\r\n      \"scheduled_departure_time_ms\": 1462881998034\r\n    }\r\n  ],\r\n  \"id\": 556,\r\n  \"actual_end_ms\": 1462882101000,\r\n  \"actual_start_ms\": 1462882098000,\r\n  \"driver_id\": 555,\r\n  \"group_id\": 101,\r\n  \"name\": \"Bid #123\",\r\n  \"scheduled_end_ms\": 1462881998034,\r\n  \"scheduled_meters\": 10000,\r\n  \"scheduled_start_ms\": 1462881998034,\r\n  \"start_location_address\": \"123 Main St, Philadelphia, PA 19106\",\r\n  \"start_location_address_id\": 67890,\r\n  \"start_location_lat\": 123.456,\r\n  \"start_location_lng\": 37.459,\r\n  \"start_location_name\": \"ACME Inc. Philadelphia HQ\",\r\n  \"trailer_id\": 666,\r\n  \"vehicle_id\": 444\r\n}",
+              "status": "The dispatch route corresponding to route_id.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "f8f3ac5f-7055-4ee3-b2bc-55078d92ec40"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "2e296a82-ca5b-4137-a166-0cb3350e6f93"
+            }
+          ]
+        },
+        {
+          "id": "99c48578-955b-46ff-8807-66d34d2584f2",
+          "name": "updateDispatchRouteById",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "api.samsara.com",
+              "path": [
+                "v1",
+                "fleet/dispatch/routes/:route_id"
+              ],
+              "query": [
+                {
+                  "key": "access_token",
+                  "value": "access_token",
+                  "disabled": false
+                }
+              ],
+              "variable": [
+                {
+                  "id": "route_id",
+                  "value": "27",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"dispatch_jobs\": [\r\n    {\r\n      \"arrived_at_ms\": 1462881998034,\r\n      \"completed_at_ms\": 1462881998034,\r\n      \"dispatch_route_id\": 55,\r\n      \"driver_id\": 444,\r\n      \"en_route_at_ms\": 1462881998034,\r\n      \"estimated_arrival_ms\": 1462881998034,\r\n      \"fleet_viewer_url\": \"https://cloud.samsara.com/fleet/viewer/job/fleet_viewer_token\",\r\n      \"group_id\": 101,\r\n      \"id\": 773,\r\n      \"job_state\": \"JobState_Arrived\",\r\n      \"skipped_at_ms\": 1462881998034,\r\n      \"vehicle_id\": 112,\r\n      \"destination_address\": \"123 Main St, Philadelphia, PA 19106\",\r\n      \"destination_address_id\": 67890,\r\n      \"destination_lat\": 123.456,\r\n      \"destination_lng\": 37.459,\r\n      \"destination_name\": \"ACME Inc. Philadelphia HQ\",\r\n      \"notes\": \"Ensure crates are stacked no more than 3 high.\",\r\n      \"scheduled_arrival_time_ms\": 1462881998034,\r\n      \"scheduled_departure_time_ms\": 1462881998034\r\n    }\r\n  ],\r\n  \"id\": 556,\r\n  \"actual_end_ms\": 1462882101000,\r\n  \"actual_start_ms\": 1462882098000,\r\n  \"driver_id\": 555,\r\n  \"group_id\": 101,\r\n  \"name\": \"Bid #123\",\r\n  \"scheduled_end_ms\": 1462881998034,\r\n  \"scheduled_meters\": 10000,\r\n  \"scheduled_start_ms\": 1462881998034,\r\n  \"start_location_address\": \"123 Main St, Philadelphia, PA 19106\",\r\n  \"start_location_address_id\": 67890,\r\n  \"start_location_lat\": 123.456,\r\n  \"start_location_lng\": 37.459,\r\n  \"start_location_name\": \"ACME Inc. Philadelphia HQ\",\r\n  \"trailer_id\": 666,\r\n  \"vehicle_id\": 444\r\n}"
+            },
+            "description": "Update a dispatch route and its associated jobs."
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "body": "{\r\n  \"dispatch_jobs\": [\r\n    {\r\n      \"arrived_at_ms\": 1462881998034,\r\n      \"completed_at_ms\": 1462881998034,\r\n      \"dispatch_route_id\": 55,\r\n      \"driver_id\": 444,\r\n      \"en_route_at_ms\": 1462881998034,\r\n      \"estimated_arrival_ms\": 1462881998034,\r\n      \"fleet_viewer_url\": \"https://cloud.samsara.com/fleet/viewer/job/fleet_viewer_token\",\r\n      \"group_id\": 101,\r\n      \"id\": 773,\r\n      \"job_state\": \"JobState_Arrived\",\r\n      \"skipped_at_ms\": 1462881998034,\r\n      \"vehicle_id\": 112,\r\n      \"destination_address\": \"123 Main St, Philadelphia, PA 19106\",\r\n      \"destination_address_id\": 67890,\r\n      \"destination_lat\": 123.456,\r\n      \"destination_lng\": 37.459,\r\n      \"destination_name\": \"ACME Inc. Philadelphia HQ\",\r\n      \"notes\": \"Ensure crates are stacked no more than 3 high.\",\r\n      \"scheduled_arrival_time_ms\": 1462881998034,\r\n      \"scheduled_departure_time_ms\": 1462881998034\r\n    }\r\n  ],\r\n  \"id\": 556,\r\n  \"actual_end_ms\": 1462882101000,\r\n  \"actual_start_ms\": 1462882098000,\r\n  \"driver_id\": 555,\r\n  \"group_id\": 101,\r\n  \"name\": \"Bid #123\",\r\n  \"scheduled_end_ms\": 1462881998034,\r\n  \"scheduled_meters\": 10000,\r\n  \"scheduled_start_ms\": 1462881998034,\r\n  \"start_location_address\": \"123 Main St, Philadelphia, PA 19106\",\r\n  \"start_location_address_id\": 67890,\r\n  \"start_location_lat\": 123.456,\r\n  \"start_location_lng\": 37.459,\r\n  \"start_location_name\": \"ACME Inc. Philadelphia HQ\",\r\n  \"trailer_id\": 666,\r\n  \"vehicle_id\": 444\r\n}",
+              "status": "Update the dispatch route. Allowable updates include setting job state, adding or removing jobs, and changing job locations and times.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "02f94cab-33c8-49f4-b7fe-ce5585f9088b"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "12c38dce-0421-4163-9512-c2f80bc5dcbc"
+            }
+          ]
+        },
+        {
+          "id": "b10c9539-33a1-49c5-b690-d23c14cc8ab3",
+          "name": "deleteDispatchRouteById",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "api.samsara.com",
+              "path": [
+                "v1",
+                "fleet/dispatch/routes/:route_id"
+              ],
+              "query": [
+                {
+                  "key": "access_token",
+                  "value": "access_token",
+                  "disabled": false
+                }
+              ],
+              "variable": [
+                {
+                  "id": "route_id",
+                  "value": "27",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw"
+            },
+            "description": "Delete a dispatch route and its associated jobs."
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "status": "Successfully deleted the dispatch route. No response body is returned.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "e46d33b0-a4be-4806-968a-4c4f65e423a5"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "a82fbefc-20ba-4fc5-946a-23a1d6240cfa"
+            }
+          ]
+        },
+        {
+          "id": "6ed9e187-68f4-494d-9e3d-95882c2e81df",
+          "name": "getDispatchRouteHistory",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "api.samsara.com",
+              "path": [
+                "v1",
+                "fleet/dispatch/routes/:route_id/history"
+              ],
+              "query": [
+                {
+                  "key": "access_token",
+                  "value": "access_token",
+                  "disabled": false
+                },
+                {
+                  "key": "start_time",
+                  "value": "27",
+                  "disabled": false
+                },
+                {
+                  "key": "end_time",
+                  "value": "27",
+                  "disabled": false
+                }
+              ],
+              "variable": [
+                {
+                  "id": "route_id",
+                  "value": "27",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw"
+            },
+            "description": "Fetch the history of a dispatch route."
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "body": "{\r\n  \"history\": [\r\n    {\r\n      \"changed_at_ms\": 1499411220000,\r\n      \"route\": {\r\n        \"dispatch_jobs\": [\r\n          {\r\n            \"arrived_at_ms\": 1462881998034,\r\n            \"completed_at_ms\": 1462881998034,\r\n            \"dispatch_route_id\": 55,\r\n            \"driver_id\": 444,\r\n            \"en_route_at_ms\": 1462881998034,\r\n            \"estimated_arrival_ms\": 1462881998034,\r\n            \"fleet_viewer_url\": \"https://cloud.samsara.com/fleet/viewer/job/fleet_viewer_token\",\r\n            \"group_id\": 101,\r\n            \"id\": 773,\r\n            \"job_state\": \"JobState_Arrived\",\r\n            \"skipped_at_ms\": 1462881998034,\r\n            \"vehicle_id\": 112,\r\n            \"destination_address\": \"123 Main St, Philadelphia, PA 19106\",\r\n            \"destination_address_id\": 67890,\r\n            \"destination_lat\": 123.456,\r\n            \"destination_lng\": 37.459,\r\n            \"destination_name\": \"ACME Inc. Philadelphia HQ\",\r\n            \"notes\": \"Ensure crates are stacked no more than 3 high.\",\r\n            \"scheduled_arrival_time_ms\": 1462881998034,\r\n            \"scheduled_departure_time_ms\": 1462881998034\r\n          }\r\n        ],\r\n        \"id\": 556,\r\n        \"actual_end_ms\": 1462882101000,\r\n        \"actual_start_ms\": 1462882098000,\r\n        \"driver_id\": 555,\r\n        \"group_id\": 101,\r\n        \"name\": \"Bid #123\",\r\n        \"scheduled_end_ms\": 1462881998034,\r\n        \"scheduled_meters\": 10000,\r\n        \"scheduled_start_ms\": 1462881998034,\r\n        \"start_location_address\": \"123 Main St, Philadelphia, PA 19106\",\r\n        \"start_location_address_id\": 67890,\r\n        \"start_location_lat\": 123.456,\r\n        \"start_location_lng\": 37.459,\r\n        \"start_location_name\": \"ACME Inc. Philadelphia HQ\",\r\n        \"trailer_id\": 666,\r\n        \"vehicle_id\": 444\r\n      }\r\n    }\r\n  ]\r\n}",
+              "status": "The historical route state changes between start_time and end_time.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "8cea94c6-39e5-413d-83ed-d6d920a5c2a5"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "57f9e917-eef3-469f-84e4-fbc500f6da47"
+            }
+          ]
+        },
+        {
+          "id": "dc513846-e11f-4d1f-9015-c2b2c71b9b42",
+          "name": "get_fleet_drivers",
+          "request": {
+            "url": "https://api.samsara.com/v1/fleet/drivers?access_token=access_token",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"groupId\": 101\r\n}"
+            },
+            "description": "Get all the drivers for the specified group."
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "body": "{\r\n  \"drivers\": [\r\n    {\r\n      \"id\": 556,\r\n      \"isDeactivated\": true,\r\n      \"tags\": [\r\n        {\r\n          \"id\": 12345,\r\n          \"name\": \"Broken Vehicles\"\r\n        }\r\n      ],\r\n      \"currentVehicleId\": 879,\r\n      \"eldAdverseWeatherExemptionEnabled\": true,\r\n      \"eldBigDayExemptionEnabled\": true,\r\n      \"eldDayStartHour\": 129,\r\n      \"eldExempt\": true,\r\n      \"eldExemptReason\": \"eldExemptReason\",\r\n      \"eldPcEnabled\": false,\r\n      \"eldYmEnabled\": false,\r\n      \"externalIds\": \"{\\r\\n  \\\"maintenanceId\\\": \\\"250020\\\",\\r\\n  \\\"payrollId\\\": \\\"123\\\"\\r\\n}\",\r\n      \"groupId\": 101,\r\n      \"licenseNumber\": \"E1234567\",\r\n      \"licenseState\": \"CA\",\r\n      \"name\": \"Susan Jones\",\r\n      \"notes\": \"Also goes by the nickname 'Furious Fred'.\",\r\n      \"phone\": \"5558234327\",\r\n      \"username\": \"Susan Jones\",\r\n      \"vehicleId\": 444\r\n    }\r\n  ]\r\n}",
+              "status": "All drivers in the group.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "7163e03f-1aa6-43a7-a597-73a95d8c41a1"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "3791a64c-36fd-4ee5-ac74-b0d733cc5975"
+            }
+          ]
+        },
+        {
+          "id": "875a7705-1ad1-4ef8-a4bf-f71906564aa5",
+          "name": "createDriver",
+          "request": {
+            "url": "https://api.samsara.com/v1/fleet/drivers/create?access_token=access_token",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"password\": \"mypassword\",\r\n  \"tagIds\": [\r\n    129\r\n  ],\r\n  \"eldAdverseWeatherExemptionEnabled\": true,\r\n  \"eldBigDayExemptionEnabled\": true,\r\n  \"eldDayStartHour\": 129,\r\n  \"eldExempt\": true,\r\n  \"eldExemptReason\": \"eldExemptReason\",\r\n  \"eldPcEnabled\": false,\r\n  \"eldYmEnabled\": false,\r\n  \"externalIds\": \"{\\r\\n  \\\"maintenanceId\\\": \\\"250020\\\",\\r\\n  \\\"payrollId\\\": \\\"123\\\"\\r\\n}\",\r\n  \"groupId\": 101,\r\n  \"licenseNumber\": \"E1234567\",\r\n  \"licenseState\": \"CA\",\r\n  \"name\": \"Susan Jones\",\r\n  \"notes\": \"Also goes by the nickname 'Furious Fred'.\",\r\n  \"phone\": \"5558234327\",\r\n  \"username\": \"Susan Jones\",\r\n  \"vehicleId\": 444\r\n}"
+            },
+            "description": "Create a new driver."
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "body": "{\r\n  \"id\": 556,\r\n  \"isDeactivated\": true,\r\n  \"tags\": [\r\n    {\r\n      \"id\": 12345,\r\n      \"name\": \"Broken Vehicles\"\r\n    }\r\n  ],\r\n  \"currentVehicleId\": 879,\r\n  \"eldAdverseWeatherExemptionEnabled\": true,\r\n  \"eldBigDayExemptionEnabled\": true,\r\n  \"eldDayStartHour\": 129,\r\n  \"eldExempt\": true,\r\n  \"eldExemptReason\": \"eldExemptReason\",\r\n  \"eldPcEnabled\": false,\r\n  \"eldYmEnabled\": false,\r\n  \"externalIds\": \"{\\r\\n  \\\"maintenanceId\\\": \\\"250020\\\",\\r\\n  \\\"payrollId\\\": \\\"123\\\"\\r\\n}\",\r\n  \"groupId\": 101,\r\n  \"licenseNumber\": \"E1234567\",\r\n  \"licenseState\": \"CA\",\r\n  \"name\": \"Susan Jones\",\r\n  \"notes\": \"Also goes by the nickname 'Furious Fred'.\",\r\n  \"phone\": \"5558234327\",\r\n  \"username\": \"Susan Jones\",\r\n  \"vehicleId\": 444\r\n}",
+              "status": "Returns the successfully created the driver.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "91341a1d-13ec-4b8c-af55-97bda19215a7"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "040a2ba8-b106-4247-95b2-a46e2a6a3e20"
+            }
+          ]
+        },
+        {
+          "id": "43859b6e-c823-45f1-8713-f199ab5a544c",
+          "name": "getDriverDocumentTypesByOrgId",
+          "request": {
+            "url": "https://api.samsara.com/v1/fleet/drivers/document_types",
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw"
+            },
+            "description": "Fetch all of the document types."
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "body": "[\r\n  {\r\n    \"fieldTypes\": [\r\n      {\r\n        \"label\": \"Fuel Cost ($)\",\r\n        \"numberValueTypeMetadata\": {\r\n          \"numDecimalPlaces\": 2\r\n        },\r\n        \"valueType\": \"ValueType_Number\"\r\n      }\r\n    ],\r\n    \"name\": \"Fuel Receipt\",\r\n    \"orgId\": 773,\r\n    \"uuid\": \"4aff772c-a7bb-45e6-8e41-6a53e34feb83\"\r\n  }\r\n]",
+              "status": "Returns all of the document types.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "ec6900f3-ef38-4b9d-8ca5-e87377d5985a"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "76eb5130-4863-45c6-abc5-3c4d53b68493"
+            }
+          ]
+        },
+        {
+          "id": "838c94a7-f2f7-404b-a0d4-d813fd459ec6",
+          "name": "getDriverDocumentsByOrgId",
+          "request": {
+            "url": "https://api.samsara.com/v1/fleet/drivers/documents?access_token=access_token&endMs=119&durationMs=119",
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw"
+            },
+            "description": "Fetch all of the documents."
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "body": "[\r\n  {\r\n    \"documentType\": \"Fuel Receipt\",\r\n    \"driverCreatedAtMs\": 1462881998034,\r\n    \"driverId\": 555,\r\n    \"fields\": [\r\n      {\r\n        \"label\": \"Photos\",\r\n        \"photoValue\": [],\r\n        \"valueType\": \"ValueType_Photo\"\r\n      },\r\n      {\r\n        \"label\": \"Gallons\",\r\n        \"numberValue\": 12.34,\r\n        \"valueType\": \"ValueType_Number\"\r\n      },\r\n      {\r\n        \"label\": \"City\",\r\n        \"stringValue\": \"San Francisco, CA\",\r\n        \"valueType\": \"ValueType_String\"\r\n      }\r\n    ],\r\n    \"vehicleId\": 222,\r\n    \"dispatchJobId\": 773,\r\n    \"notes\": \"Fueled up before delivery.\"\r\n  }\r\n]",
+              "status": "Returns all of the documents.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "ef40250b-c679-4417-88a8-f9df90f2876c"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "59ce77b6-e913-4837-9e21-6b789a25e4f5"
+            }
+          ]
+        },
+        {
+          "id": "8094877c-918d-4b8e-b98d-cdcd013d5599",
+          "name": "getAllDeactivatedDrivers",
+          "request": {
+            "url": "https://api.samsara.com/v1/fleet/drivers/inactive?access_token=access_token&group_id=119",
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw"
+            },
+            "description": "Fetch all deactivated drivers for the group."
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "body": "[\r\n  {\r\n    \"id\": 556,\r\n    \"isDeactivated\": true,\r\n    \"tags\": [\r\n      {\r\n        \"id\": 12345,\r\n        \"name\": \"Broken Vehicles\"\r\n      }\r\n    ],\r\n    \"currentVehicleId\": 879,\r\n    \"eldAdverseWeatherExemptionEnabled\": true,\r\n    \"eldBigDayExemptionEnabled\": true,\r\n    \"eldDayStartHour\": 129,\r\n    \"eldExempt\": true,\r\n    \"eldExemptReason\": \"eldExemptReason\",\r\n    \"eldPcEnabled\": false,\r\n    \"eldYmEnabled\": false,\r\n    \"externalIds\": \"{\\r\\n  \\\"maintenanceId\\\": \\\"250020\\\",\\r\\n  \\\"payrollId\\\": \\\"123\\\"\\r\\n}\",\r\n    \"groupId\": 101,\r\n    \"licenseNumber\": \"E1234567\",\r\n    \"licenseState\": \"CA\",\r\n    \"name\": \"Susan Jones\",\r\n    \"notes\": \"Also goes by the nickname 'Furious Fred'.\",\r\n    \"phone\": \"5558234327\",\r\n    \"username\": \"Susan Jones\",\r\n    \"vehicleId\": 444\r\n  }\r\n]",
+              "status": "Returns an array of all deactivated drivers for the group. Deactivated drivers are referenced at /fleet/drivers/inactive/{driver_id}",
+              "code": 200,
+              "name": "Response_200",
+              "id": "4ffbaa00-c78c-4fa2-b8c3-5e66529c13c4"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "56e90550-79f0-474f-8d68-58ce09421e7a"
+            }
+          ]
+        },
+        {
+          "id": "86d2cee8-cc72-4ae1-9d2f-057245da61ac",
+          "name": "getDeactivatedDriverById",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "api.samsara.com",
+              "path": [
+                "v1",
+                "fleet/drivers/inactive/:driver_id_or_external_id"
+              ],
+              "query": [
+                {
+                  "key": "access_token",
+                  "value": "access_token",
+                  "disabled": false
+                }
+              ],
+              "variable": [
+                {
+                  "id": "driver_id_or_external_id",
+                  "value": "driver_id_or_external_id",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw"
+            },
+            "description": "Fetch deactivated driver by id."
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "body": "{\r\n  \"id\": 556,\r\n  \"isDeactivated\": true,\r\n  \"tags\": [\r\n    {\r\n      \"id\": 12345,\r\n      \"name\": \"Broken Vehicles\"\r\n    }\r\n  ],\r\n  \"currentVehicleId\": 879,\r\n  \"eldAdverseWeatherExemptionEnabled\": true,\r\n  \"eldBigDayExemptionEnabled\": true,\r\n  \"eldDayStartHour\": 129,\r\n  \"eldExempt\": true,\r\n  \"eldExemptReason\": \"eldExemptReason\",\r\n  \"eldPcEnabled\": false,\r\n  \"eldYmEnabled\": false,\r\n  \"externalIds\": \"{\\r\\n  \\\"maintenanceId\\\": \\\"250020\\\",\\r\\n  \\\"payrollId\\\": \\\"123\\\"\\r\\n}\",\r\n  \"groupId\": 101,\r\n  \"licenseNumber\": \"E1234567\",\r\n  \"licenseState\": \"CA\",\r\n  \"name\": \"Susan Jones\",\r\n  \"notes\": \"Also goes by the nickname 'Furious Fred'.\",\r\n  \"phone\": \"5558234327\",\r\n  \"username\": \"Susan Jones\",\r\n  \"vehicleId\": 444\r\n}",
+              "status": "Returns the deactivated driver with the given driver_id.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "d23ecc94-571c-49e9-99f6-a4bacf9ffb84"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "4a94950c-7a5c-480a-a64a-d2dba0a9eb93"
+            }
+          ]
+        },
+        {
+          "id": "25de358f-ecf7-4e71-8c22-32d2a0934935",
+          "name": "reactivateDriverById",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "api.samsara.com",
+              "path": [
+                "v1",
+                "fleet/drivers/inactive/:driver_id_or_external_id"
+              ],
+              "query": [
+                {
+                  "key": "access_token",
+                  "value": "access_token",
+                  "disabled": false
+                }
+              ],
+              "variable": [
+                {
+                  "id": "driver_id_or_external_id",
+                  "value": "driver_id_or_external_id",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"reactivate\": true\r\n}"
+            },
+            "description": "Reactivate the inactive driver having id."
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "body": "{\r\n  \"id\": 556,\r\n  \"isDeactivated\": true,\r\n  \"tags\": [\r\n    {\r\n      \"id\": 12345,\r\n      \"name\": \"Broken Vehicles\"\r\n    }\r\n  ],\r\n  \"currentVehicleId\": 879,\r\n  \"eldAdverseWeatherExemptionEnabled\": true,\r\n  \"eldBigDayExemptionEnabled\": true,\r\n  \"eldDayStartHour\": 129,\r\n  \"eldExempt\": true,\r\n  \"eldExemptReason\": \"eldExemptReason\",\r\n  \"eldPcEnabled\": false,\r\n  \"eldYmEnabled\": false,\r\n  \"externalIds\": \"{\\r\\n  \\\"maintenanceId\\\": \\\"250020\\\",\\r\\n  \\\"payrollId\\\": \\\"123\\\"\\r\\n}\",\r\n  \"groupId\": 101,\r\n  \"licenseNumber\": \"E1234567\",\r\n  \"licenseState\": \"CA\",\r\n  \"name\": \"Susan Jones\",\r\n  \"notes\": \"Also goes by the nickname 'Furious Fred'.\",\r\n  \"phone\": \"5558234327\",\r\n  \"username\": \"Susan Jones\",\r\n  \"vehicleId\": 444\r\n}",
+              "status": "Returns the reactivated driver, which is now available at /fleet/drivers/{driver_id}.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "a4c518c9-5a55-4d73-bed4-9ae8bca2b85e"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "783de237-0f3f-4d09-bc85-8f6109fc9712"
+            }
+          ]
+        },
+        {
+          "id": "67a5d575-60c0-44ad-8ee3-1984f040ad98",
+          "name": "get_fleet_drivers_summary",
+          "request": {
+            "url": "https://api.samsara.com/v1/fleet/drivers/summary?access_token=access_token&snap_to_day_bounds=false",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"endMs\": 1481076244389,\r\n  \"orgId\": 101,\r\n  \"startMs\": 1481076243389\r\n}"
+            },
+            "description": "Get the distance and time each driver in an organization has driven in a given time period."
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "body": "{\r\n  \"Summaries\": [\r\n    {\r\n      \"activeMs\": 43200000,\r\n      \"distanceMiles\": 123.24,\r\n      \"driveMs\": 21600000,\r\n      \"driverId\": 444,\r\n      \"driverName\": \"Fred Jacobs\",\r\n      \"driverUsername\": \"fjacobs\",\r\n      \"groupId\": 111,\r\n      \"onDutyMs\": 21600000\r\n    }\r\n  ]\r\n}",
+              "status": "Distance traveled and time active for each driver in the organization over the specified time period.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "ad40d39b-b764-4a63-baba-2a807be37033"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "3a1a39d7-06bf-4d9c-913e-1a02fd781cd9"
+            }
+          ]
+        },
+        {
+          "id": "947e04af-e5cc-40a6-9b34-269b7868ca6f",
+          "name": "GetDriverSafetyScore",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "api.samsara.com",
+              "path": [
+                "v1",
+                "fleet/drivers/:driverId/safety/score"
+              ],
+              "query": [
+                {
+                  "key": "access_token",
+                  "value": "access_token",
+                  "disabled": false
+                },
+                {
+                  "key": "startMs",
+                  "value": "119",
+                  "disabled": false
+                },
+                {
+                  "key": "endMs",
+                  "value": "119",
+                  "disabled": false
+                }
+              ],
+              "variable": [
+                {
+                  "id": "driverId",
+                  "value": "119",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw"
+            },
+            "description": "Fetch the safety score for the driver."
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "body": "{\r\n  \"crashCount\": 0,\r\n  \"driverId\": 1234,\r\n  \"harshAccelCount\": 1,\r\n  \"harshBrakingCount\": 2,\r\n  \"harshEvents\": [\r\n    {\r\n      \"harshEventType\": \"Harsh Braking\",\r\n      \"timestampMs\": 1535590776000,\r\n      \"vehicleId\": 212014918086169\r\n    }\r\n  ],\r\n  \"harshTurningCount\": 0,\r\n  \"safetyScore\": 97,\r\n  \"safetyScoreRank\": \"26\",\r\n  \"timeOverSpeedLimitMs\": 3769,\r\n  \"totalDistanceDrivenMeters\": 291836,\r\n  \"totalHarshEventCount\": 3,\r\n  \"totalTimeDrivenMs\": 19708293\r\n}",
+              "status": "Safety score details.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "aa502b1e-561e-4a00-973d-c56b2e2984b8"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "fc3090bf-d15d-417a-bc73-531d781d565d"
+            }
+          ]
+        },
+        {
+          "id": "c44c1306-1723-4812-a673-b7052cc97663",
+          "name": "getDriverById",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "api.samsara.com",
+              "path": [
+                "v1",
+                "fleet/drivers/:driver_id_or_external_id"
+              ],
+              "query": [
+                {
+                  "key": "access_token",
+                  "value": "access_token",
+                  "disabled": false
+                }
+              ],
+              "variable": [
+                {
+                  "id": "driver_id_or_external_id",
+                  "value": "driver_id_or_external_id",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw"
+            },
+            "description": "Fetch driver by id."
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "body": "{\r\n  \"id\": 556,\r\n  \"isDeactivated\": true,\r\n  \"tags\": [\r\n    {\r\n      \"id\": 12345,\r\n      \"name\": \"Broken Vehicles\"\r\n    }\r\n  ],\r\n  \"currentVehicleId\": 879,\r\n  \"eldAdverseWeatherExemptionEnabled\": true,\r\n  \"eldBigDayExemptionEnabled\": true,\r\n  \"eldDayStartHour\": 129,\r\n  \"eldExempt\": true,\r\n  \"eldExemptReason\": \"eldExemptReason\",\r\n  \"eldPcEnabled\": false,\r\n  \"eldYmEnabled\": false,\r\n  \"externalIds\": \"{\\r\\n  \\\"maintenanceId\\\": \\\"250020\\\",\\r\\n  \\\"payrollId\\\": \\\"123\\\"\\r\\n}\",\r\n  \"groupId\": 101,\r\n  \"licenseNumber\": \"E1234567\",\r\n  \"licenseState\": \"CA\",\r\n  \"name\": \"Susan Jones\",\r\n  \"notes\": \"Also goes by the nickname 'Furious Fred'.\",\r\n  \"phone\": \"5558234327\",\r\n  \"username\": \"Susan Jones\",\r\n  \"vehicleId\": 444\r\n}",
+              "status": "Returns the driver for the given driver_id.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "d5259628-5916-4b09-b8c1-9131a4c944cb"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "feb86a95-895d-41bb-86ae-447b2642025c"
+            }
+          ]
+        },
+        {
+          "id": "be500537-d4db-4477-a9c1-17239e3361f6",
+          "name": "deactivateDriver",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "api.samsara.com",
+              "path": [
+                "v1",
+                "fleet/drivers/:driver_id_or_external_id"
+              ],
+              "query": [
+                {
+                  "key": "access_token",
+                  "value": "access_token",
+                  "disabled": false
+                }
+              ],
+              "variable": [
+                {
+                  "id": "driver_id_or_external_id",
+                  "value": "driver_id_or_external_id",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw"
+            },
+            "description": "Deactivate a driver with the given id."
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "status": "Successfully deactivated the driver, which is now referenced by /fleet/drivers/inactive/{driver_id}.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "b855d518-5727-4b3d-838a-be4a5f2bbea7"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "a1ce7967-2058-48e5-8a0e-a373f7b5eeaf"
+            }
+          ]
+        },
+        {
+          "id": "1156cb05-f210-4a0d-a828-c04f2eb17b28",
+          "name": "getDispatchRoutesByDriverId",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "api.samsara.com",
+              "path": [
+                "v1",
+                "fleet/drivers/:driver_id/dispatch/routes"
+              ],
+              "query": [
+                {
+                  "key": "access_token",
+                  "value": "access_token",
+                  "disabled": false
+                },
+                {
+                  "key": "end_time",
+                  "value": "119",
+                  "disabled": false
+                },
+                {
+                  "key": "duration",
+                  "value": "119",
+                  "disabled": false
+                }
+              ],
+              "variable": [
+                {
+                  "id": "driver_id",
+                  "value": "119",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw"
+            },
+            "description": "Fetch all of the dispatch routes for a given driver."
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "body": "[\r\n  {\r\n    \"dispatch_jobs\": [\r\n      {\r\n        \"arrived_at_ms\": 1462881998034,\r\n        \"completed_at_ms\": 1462881998034,\r\n        \"dispatch_route_id\": 55,\r\n        \"driver_id\": 444,\r\n        \"en_route_at_ms\": 1462881998034,\r\n        \"estimated_arrival_ms\": 1462881998034,\r\n        \"fleet_viewer_url\": \"https://cloud.samsara.com/fleet/viewer/job/fleet_viewer_token\",\r\n        \"group_id\": 101,\r\n        \"id\": 773,\r\n        \"job_state\": \"JobState_Arrived\",\r\n        \"skipped_at_ms\": 1462881998034,\r\n        \"vehicle_id\": 112,\r\n        \"destination_address\": \"123 Main St, Philadelphia, PA 19106\",\r\n        \"destination_address_id\": 67890,\r\n        \"destination_lat\": 123.456,\r\n        \"destination_lng\": 37.459,\r\n        \"destination_name\": \"ACME Inc. Philadelphia HQ\",\r\n        \"notes\": \"Ensure crates are stacked no more than 3 high.\",\r\n        \"scheduled_arrival_time_ms\": 1462881998034,\r\n        \"scheduled_departure_time_ms\": 1462881998034\r\n      }\r\n    ],\r\n    \"id\": 556,\r\n    \"actual_end_ms\": 1462882101000,\r\n    \"actual_start_ms\": 1462882098000,\r\n    \"driver_id\": 555,\r\n    \"group_id\": 101,\r\n    \"name\": \"Bid #123\",\r\n    \"scheduled_end_ms\": 1462881998034,\r\n    \"scheduled_meters\": 10000,\r\n    \"scheduled_start_ms\": 1462881998034,\r\n    \"start_location_address\": \"123 Main St, Philadelphia, PA 19106\",\r\n    \"start_location_address_id\": 67890,\r\n    \"start_location_lat\": 123.456,\r\n    \"start_location_lng\": 37.459,\r\n    \"start_location_name\": \"ACME Inc. Philadelphia HQ\",\r\n    \"trailer_id\": 666,\r\n    \"vehicle_id\": 444\r\n  }\r\n]",
+              "status": "Returns the dispatch routes for the given driver_id.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "8f380102-5a03-417a-8769-410add125bd2"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "548e0805-120b-45f5-b4a2-aa3d19ede84c"
+            }
+          ]
+        },
+        {
+          "id": "79ec2086-0ef3-4a70-9cd2-b67b632fa3d6",
+          "name": "createDriverDispatchRoute",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "api.samsara.com",
+              "path": [
+                "v1",
+                "fleet/drivers/:driver_id/dispatch/routes"
+              ],
+              "query": [
+                {
+                  "key": "access_token",
+                  "value": "access_token",
+                  "disabled": false
+                }
+              ],
+              "variable": [
+                {
+                  "id": "driver_id",
+                  "value": "119",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"dispatch_jobs\": [\r\n    {\r\n      \"destination_address\": \"123 Main St, Philadelphia, PA 19106\",\r\n      \"destination_address_id\": 67890,\r\n      \"destination_lat\": 123.456,\r\n      \"destination_lng\": 37.459,\r\n      \"destination_name\": \"ACME Inc. Philadelphia HQ\",\r\n      \"notes\": \"Ensure crates are stacked no more than 3 high.\",\r\n      \"scheduled_arrival_time_ms\": 1462881998034,\r\n      \"scheduled_departure_time_ms\": 1462881998034\r\n    }\r\n  ],\r\n  \"actual_end_ms\": 1462882101000,\r\n  \"actual_start_ms\": 1462882098000,\r\n  \"driver_id\": 555,\r\n  \"group_id\": 101,\r\n  \"name\": \"Bid #123\",\r\n  \"scheduled_end_ms\": 1462881998034,\r\n  \"scheduled_meters\": 10000,\r\n  \"scheduled_start_ms\": 1462881998034,\r\n  \"start_location_address\": \"123 Main St, Philadelphia, PA 19106\",\r\n  \"start_location_address_id\": 67890,\r\n  \"start_location_lat\": 123.456,\r\n  \"start_location_lng\": 37.459,\r\n  \"start_location_name\": \"ACME Inc. Philadelphia HQ\",\r\n  \"trailer_id\": 666,\r\n  \"vehicle_id\": 444\r\n}"
+            },
+            "description": "Create a new dispatch route for the driver with driver_id."
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "body": "{\r\n  \"dispatch_jobs\": [\r\n    {\r\n      \"arrived_at_ms\": 1462881998034,\r\n      \"completed_at_ms\": 1462881998034,\r\n      \"dispatch_route_id\": 55,\r\n      \"driver_id\": 444,\r\n      \"en_route_at_ms\": 1462881998034,\r\n      \"estimated_arrival_ms\": 1462881998034,\r\n      \"fleet_viewer_url\": \"https://cloud.samsara.com/fleet/viewer/job/fleet_viewer_token\",\r\n      \"group_id\": 101,\r\n      \"id\": 773,\r\n      \"job_state\": \"JobState_Arrived\",\r\n      \"skipped_at_ms\": 1462881998034,\r\n      \"vehicle_id\": 112,\r\n      \"destination_address\": \"123 Main St, Philadelphia, PA 19106\",\r\n      \"destination_address_id\": 67890,\r\n      \"destination_lat\": 123.456,\r\n      \"destination_lng\": 37.459,\r\n      \"destination_name\": \"ACME Inc. Philadelphia HQ\",\r\n      \"notes\": \"Ensure crates are stacked no more than 3 high.\",\r\n      \"scheduled_arrival_time_ms\": 1462881998034,\r\n      \"scheduled_departure_time_ms\": 1462881998034\r\n    }\r\n  ],\r\n  \"id\": 556,\r\n  \"actual_end_ms\": 1462882101000,\r\n  \"actual_start_ms\": 1462882098000,\r\n  \"driver_id\": 555,\r\n  \"group_id\": 101,\r\n  \"name\": \"Bid #123\",\r\n  \"scheduled_end_ms\": 1462881998034,\r\n  \"scheduled_meters\": 10000,\r\n  \"scheduled_start_ms\": 1462881998034,\r\n  \"start_location_address\": \"123 Main St, Philadelphia, PA 19106\",\r\n  \"start_location_address_id\": 67890,\r\n  \"start_location_lat\": 123.456,\r\n  \"start_location_lng\": 37.459,\r\n  \"start_location_name\": \"ACME Inc. Philadelphia HQ\",\r\n  \"trailer_id\": 666,\r\n  \"vehicle_id\": 444\r\n}",
+              "status": "Created route object including the new route ID.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "3cb75214-dbea-405c-bd02-d8ca817b62a3"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "1b333e11-e074-4521-8f0d-f69f222b059b"
+            }
+          ]
+        },
+        {
+          "id": "b569d5cf-4128-45b4-9f85-b024e70f2ce8",
+          "name": "createDriverDocument",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "api.samsara.com",
+              "path": [
+                "v1",
+                "fleet/drivers/:driver_id/documents"
+              ],
+              "query": [
+                {
+                  "key": "access_token",
+                  "value": "access_token",
+                  "disabled": false
+                }
+              ],
+              "variable": [
+                {
+                  "id": "driver_id",
+                  "value": "119",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"documentTypeUuid\": \"4aff772c-a7bb-45e6-8e41-6a53e34feb83\",\r\n  \"fields\": [\r\n    {\r\n      \"label\": \"Driver Photo\",\r\n      \"photoValue\": [],\r\n      \"valueType\": \"ValueType_Photo\"\r\n    },\r\n    {\r\n      \"label\": \"Gallons\",\r\n      \"numberValue\": 12.34,\r\n      \"valueType\": \"ValueType_Number\"\r\n    },\r\n    {\r\n      \"label\": \"City\",\r\n      \"stringValue\": \"San Francisco, CA\",\r\n      \"valueType\": \"ValueType_String\"\r\n    }\r\n  ],\r\n  \"dispatchJobId\": 773,\r\n  \"notes\": \"Fueled up before delivery.\"\r\n}"
+            },
+            "description": "Create a driver document for the given driver."
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "body": "{\r\n  \"documentType\": \"Fuel Receipt\",\r\n  \"driverCreatedAtMs\": 1462881998034,\r\n  \"driverId\": 555,\r\n  \"fields\": [\r\n    {\r\n      \"label\": \"Photos\",\r\n      \"photoValue\": [],\r\n      \"valueType\": \"ValueType_Photo\"\r\n    },\r\n    {\r\n      \"label\": \"Gallons\",\r\n      \"numberValue\": 12.34,\r\n      \"valueType\": \"ValueType_Number\"\r\n    },\r\n    {\r\n      \"label\": \"City\",\r\n      \"stringValue\": \"San Francisco, CA\",\r\n      \"valueType\": \"ValueType_String\"\r\n    }\r\n  ],\r\n  \"vehicleId\": 222,\r\n  \"dispatchJobId\": 773,\r\n  \"notes\": \"Fueled up before delivery.\"\r\n}",
+              "status": "Returns the created document.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "81127267-135b-4bb7-8ef4-1fba3d658667"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "e6154b76-1fe0-4765-942e-bb9fd497e570"
+            }
+          ]
+        },
+        {
+          "id": "94f7d9ca-f95a-4a1e-af2f-cb5763482864",
+          "name": "get_fleet_drivers_hos_daily_logs",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "api.samsara.com",
+              "path": [
+                "v1",
+                "fleet/drivers/:driver_id/hos_daily_logs"
+              ],
+              "query": [
+                {
+                  "key": "access_token",
+                  "value": "access_token",
+                  "disabled": false
+                }
+              ],
+              "variable": [
+                {
+                  "id": "driver_id",
+                  "value": "119",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"driverId\": 444,\r\n  \"endMs\": 1462881998034,\r\n  \"groupId\": 101,\r\n  \"startMs\": 1462878398034\r\n}"
+            },
+            "description": "Get summarized daily HOS charts for a specified driver."
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "body": "{\r\n  \"days\": [\r\n    {\r\n      \"activeHours\": 5.4,\r\n      \"activeMs\": 691200,\r\n      \"certified\": true,\r\n      \"certifiedAtMs\": 129,\r\n      \"distanceMiles\": 123.24,\r\n      \"endMs\": 1473836400000,\r\n      \"startMs\": 1473750000000,\r\n      \"trailerIds\": [\r\n        10293,\r\n        192933\r\n      ],\r\n      \"vehicleIds\": [\r\n        192319,\r\n        12958\r\n      ]\r\n    }\r\n  ]\r\n}",
+              "status": "Distance traveled and time active for each driver in the organization over the specified time period.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "85db7cfd-30c8-4906-b7a4-b08cd3bc856c"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "6d8e33de-8154-49d0-8e4f-2f7c91993a36"
+            }
+          ]
+        },
+        {
+          "id": "3eae7c35-c420-481d-8936-93be3014675e",
+          "name": "get_fleet_hos_authentication_logs",
+          "request": {
+            "url": "https://api.samsara.com/v1/fleet/hos_authentication_logs?access_token=access_token",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"driverId\": 444,\r\n  \"endMs\": 1462881998034,\r\n  \"groupId\": 101,\r\n  \"startMs\": 1462878398034\r\n}"
+            },
+            "description": "Get the HOS (hours of service) signin and signout logs for the specified driver. Only signout logs include location information."
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "body": "{\r\n  \"authenticationLogs\": [\r\n    {\r\n      \"actionType\": \"signin\",\r\n      \"address\": \"123 Main St., Ahwatukee, Arizona 85044\",\r\n      \"addressName\": \"Garage Number 3\",\r\n      \"city\": \"Ahwatukee\",\r\n      \"happenedAtMs\": 1462881998034,\r\n      \"state\": \"Arizona\"\r\n    }\r\n  ]\r\n}",
+              "status": "HOS authentication logs for the specified driver.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "7e084596-de21-45be-a1d5-a2d286876459"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "6b3d5d68-a8d7-404c-ab4a-7cb339f4828c"
+            }
+          ]
+        },
+        {
+          "id": "96978d77-0094-43b6-beba-f409197cb333",
+          "name": "get_fleet_hos_logs",
+          "request": {
+            "url": "https://api.samsara.com/v1/fleet/hos_logs?access_token=access_token",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"driverId\": 444,\r\n  \"endMs\": 1462881998034,\r\n  \"groupId\": 101,\r\n  \"startMs\": 1462878398034\r\n}"
+            },
+            "description": "Get the HOS (hours of service) logs for the specified driver. This method returns all the HOS statuses that the driver was in during this time period."
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "body": "{\r\n  \"logs\": [\r\n    {\r\n      \"codriverIds\": [\r\n        87.4188671598299\r\n      ],\r\n      \"driverId\": 444,\r\n      \"groupId\": 101,\r\n      \"locCity\": \"Ahwatukee\",\r\n      \"locLat\": 23.413702345,\r\n      \"locLng\": -98.502888123,\r\n      \"locName\": \"McLean Site A\",\r\n      \"locState\": \"Arizona\",\r\n      \"logStartMs\": 1462881998034,\r\n      \"remark\": \"Lunch Break\",\r\n      \"statusType\": \"OFF_DUTY\",\r\n      \"vehicleId\": 112\r\n    }\r\n  ]\r\n}",
+              "status": "HOS logs for the specified driver.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "bf690d9d-5a77-448d-accd-24a383c222e9"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "139cd454-cd2b-4951-a786-b62092a02246"
+            }
+          ]
+        },
+        {
+          "id": "c251de8b-ab78-4ab8-8f50-c8c90536c473",
+          "name": "get_fleet_hos_logs_summary",
+          "request": {
+            "url": "https://api.samsara.com/v1/fleet/hos_logs_summary?access_token=access_token",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"groupId\": 101\r\n}"
+            },
+            "description": "Get the current HOS status for all drivers in the group."
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "body": "{\r\n  \"drivers\": [\r\n    {\r\n      \"cycleRemaining\": 252000000,\r\n      \"cycleTomorrow\": 252000000,\r\n      \"driverId\": 444,\r\n      \"driverName\": \"Fred Jacobs\",\r\n      \"drivingInViolationCycle\": 50400000,\r\n      \"drivingInViolationToday\": 39600000,\r\n      \"dutyStatus\": \"OFF_DUTY\",\r\n      \"shiftDriveRemaining\": 39600000,\r\n      \"shiftRemaining\": 50400000,\r\n      \"timeInCurrentStatus\": 5000,\r\n      \"timeUntilBreak\": 28800000,\r\n      \"vehicleName\": \"Vehicle 1\"\r\n    }\r\n  ]\r\n}",
+              "status": "HOS logs for the specified driver.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "5e52c83c-9cf0-43e1-a335-2fdcb40fd534"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "83d996e1-7365-4a0f-be3e-1694a9b459f5"
+            }
+          ]
+        },
+        {
+          "id": "a8097d81-661b-4449-9fa1-28bb1838e467",
+          "name": "list_fleet",
+          "request": {
+            "url": "https://api.samsara.com/v1/fleet/list?access_token=access_token&startingAfter=startingAfter&endingBefore=endingBefore&limit=119",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"groupId\": 101\r\n}"
+            },
+            "description": "Get list of the vehicles. This method returns a list of the vehicles in the Samsara Cloud and information about them."
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "body": "{\r\n  \"groupId\": 101,\r\n  \"pagination\": {\r\n    \"endCursor\": \"MTU5MTEzNjA2OTU0MzQ3\",\r\n    \"hasNextPage\": true,\r\n    \"hasPrevPage\": true,\r\n    \"startCursor\": \"MTU5MTEzNjA2OTU0MzQ3\"\r\n  },\r\n  \"vehicles\": [\r\n    {\r\n      \"engineHours\": 1500,\r\n      \"fuelLevelPercent\": 0.3,\r\n      \"id\": 112,\r\n      \"name\": \"Truck A7\",\r\n      \"note\": \"Red truck 2015 M16\",\r\n      \"odometerMeters\": 60130000,\r\n      \"vin\": \"1FUJA6BD31LJ09646\"\r\n    }\r\n  ]\r\n}",
+              "status": "List of vehicles and information about each.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "9e259e4f-253b-4bbe-8abb-61047c162524"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "3f1a0787-1446-40fe-9b09-6639649e3a32"
+            }
+          ]
+        },
+        {
+          "id": "54e75fb3-49d1-4522-ad24-4723961e7ba3",
+          "name": "get_fleet_locations",
+          "request": {
+            "url": "https://api.samsara.com/v1/fleet/locations?access_token=access_token",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"groupId\": 101\r\n}"
+            },
+            "description": "Get current location of vehicles in a group. This method returns the current location in latitude and longitude of all vehicles in a requested group."
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "body": "{\r\n  \"groupId\": 101,\r\n  \"vehicles\": [\r\n    {\r\n      \"heading\": 246.42,\r\n      \"id\": 112,\r\n      \"latitude\": 123.456,\r\n      \"location\": \"1 Main St, Dallas, TX\",\r\n      \"longitude\": 32.897,\r\n      \"name\": \"Truck A7\",\r\n      \"odometerMeters\": 71774705,\r\n      \"onTrip\": true,\r\n      \"speed\": 64.37,\r\n      \"time\": 1462881998034,\r\n      \"vin\": \"JTNBB46KX73011966\"\r\n    }\r\n  ]\r\n}",
+              "status": "List of vehicle objects containing their location and the time at which that location was logged.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "9a2f6280-e0e0-4cb4-8955-fe3be6615344"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "07b2613d-99a3-4e83-9cca-ff67133f1119"
+            }
+          ]
+        },
+        {
+          "id": "4b4816fb-55fd-4be7-8a8a-fc5d7feca2ca",
+          "name": "get_dvirs",
+          "request": {
+            "url": "https://api.samsara.com/v1/fleet/maintenance/dvirs?access_token=access_token&end_ms=119&duration_ms=119&group_id=119",
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw"
+            },
+            "description": "Get DVIRs for the org within provided time constraints"
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "body": "{\r\n  \"dvirs\": [\r\n    {\r\n      \"authorSignature\": {\r\n        \"driverId\": 2581,\r\n        \"email\": \"j.smith@yahoo.com\",\r\n        \"mechanicUserId\": 14849,\r\n        \"name\": \"John Smith\",\r\n        \"signedAt\": 12535500000,\r\n        \"type\": \"driver\",\r\n        \"username\": \"jsmith\"\r\n      },\r\n      \"defectsCorrected\": true,\r\n      \"defectsNeedNotBeCorrected\": false,\r\n      \"id\": 19,\r\n      \"inspectionType\": \"pre trip\",\r\n      \"mechanicNotes\": \"The vehicle is now safe.\",\r\n      \"mechanicOrAgentSignature\": {\r\n        \"driverId\": 2581,\r\n        \"email\": \"j.smith@yahoo.com\",\r\n        \"mechanicUserId\": 14849,\r\n        \"name\": \"John Smith\",\r\n        \"signedAt\": 12535500000,\r\n        \"type\": \"driver\",\r\n        \"username\": \"jsmith\"\r\n      },\r\n      \"nextDriverSignature\": {\r\n        \"driverId\": 2581,\r\n        \"email\": \"j.smith@yahoo.com\",\r\n        \"name\": \"John Smith\",\r\n        \"signedAt\": 12535500000,\r\n        \"type\": \"driver\",\r\n        \"username\": \"jsmith\"\r\n      },\r\n      \"odometerMiles\": 49912,\r\n      \"timeMs\": 1453449599999,\r\n      \"trailerDefects\": [\r\n        {\r\n          \"comment\": \"Air Compressor not working\",\r\n          \"defectType\": \"Air Compressor\"\r\n        }\r\n      ],\r\n      \"trailerId\": 19,\r\n      \"trailerName\": \"Storer's Trailer 19\",\r\n      \"vehicle\": {\r\n        \"id\": 19,\r\n        \"name\": \"Storer's vehicle 19\"\r\n      },\r\n      \"vehicleCondition\": \"SATISFACTORY\",\r\n      \"vehicleDefects\": [\r\n        {\r\n          \"comment\": \"Air Compressor not working\",\r\n          \"defectType\": \"Air Compressor\"\r\n        }\r\n      ]\r\n    }\r\n  ]\r\n}",
+              "status": "DVIRs for the specified duration.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "7976ecb9-14ac-46ae-8d32-37f0d3f2abf7"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "025b9795-b3ff-45eb-b896-c4e73537c88e"
+            }
+          ]
+        },
+        {
+          "id": "0d4ec1b6-02ac-415d-b283-8a2895afe203",
+          "name": "create_dvir",
+          "request": {
+            "url": "https://api.samsara.com/v1/fleet/maintenance/dvirs?access_token=access_token",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"inspectionType\": \"mechanic\",\r\n  \"mechanicNotes\": \"Replaced headlight on passenger side.\",\r\n  \"odometerMiles\": 38426,\r\n  \"previousDefectsCorrected\": true,\r\n  \"previousDefectsIgnored\": false,\r\n  \"safe\": \"safe\",\r\n  \"trailerId\": 11,\r\n  \"userEmail\": \"j.smith@yahoo.com\",\r\n  \"vehicleId\": 10\r\n}"
+            },
+            "description": "Create a new dvir, marking a vehicle or trailer safe or unsafe."
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "body": "{\r\n  \"authorSignature\": {\r\n    \"driverId\": 2581,\r\n    \"email\": \"j.smith@yahoo.com\",\r\n    \"mechanicUserId\": 14849,\r\n    \"name\": \"John Smith\",\r\n    \"signedAt\": 12535500000,\r\n    \"type\": \"driver\",\r\n    \"username\": \"jsmith\"\r\n  },\r\n  \"defectsCorrected\": true,\r\n  \"defectsNeedNotBeCorrected\": false,\r\n  \"id\": 19,\r\n  \"inspectionType\": \"pre trip\",\r\n  \"mechanicNotes\": \"The vehicle is now safe.\",\r\n  \"mechanicOrAgentSignature\": {\r\n    \"driverId\": 2581,\r\n    \"email\": \"j.smith@yahoo.com\",\r\n    \"mechanicUserId\": 14849,\r\n    \"name\": \"John Smith\",\r\n    \"signedAt\": 12535500000,\r\n    \"type\": \"driver\",\r\n    \"username\": \"jsmith\"\r\n  },\r\n  \"nextDriverSignature\": {\r\n    \"driverId\": 2581,\r\n    \"email\": \"j.smith@yahoo.com\",\r\n    \"name\": \"John Smith\",\r\n    \"signedAt\": 12535500000,\r\n    \"type\": \"driver\",\r\n    \"username\": \"jsmith\"\r\n  },\r\n  \"odometerMiles\": 49912,\r\n  \"timeMs\": 1453449599999,\r\n  \"trailerDefects\": [\r\n    {\r\n      \"comment\": \"Air Compressor not working\",\r\n      \"defectType\": \"Air Compressor\"\r\n    }\r\n  ],\r\n  \"trailerId\": 19,\r\n  \"trailerName\": \"Storer's Trailer 19\",\r\n  \"vehicle\": {\r\n    \"id\": 19,\r\n    \"name\": \"Storer's vehicle 19\"\r\n  },\r\n  \"vehicleCondition\": \"SATISFACTORY\",\r\n  \"vehicleDefects\": [\r\n    {\r\n      \"comment\": \"Air Compressor not working\",\r\n      \"defectType\": \"Air Compressor\"\r\n    }\r\n  ]\r\n}",
+              "status": "Newly created DVIR.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "188761c6-5798-4eb8-a1ef-0f29579a52be"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "9ae7db6f-d80f-432a-a994-e7fcfedbee6e"
+            }
+          ]
+        },
+        {
+          "id": "60ebe2ec-3550-4d9c-82c6-dce9cfbaed63",
+          "name": "get_fleet_maintenance_list",
+          "request": {
+            "url": "https://api.samsara.com/v1/fleet/maintenance/list?access_token=access_token",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"groupId\": 101\r\n}"
+            },
+            "description": "Get list of the vehicles with any engine faults or check light data."
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "body": "{\r\n  \"vehicles\": [\r\n    {\r\n      \"id\": 112,\r\n      \"j1939\": {\r\n        \"checkEngineLight\": {\r\n          \"emissionsIsOn\": true,\r\n          \"protectIsOn\": true,\r\n          \"stopIsOn\": true,\r\n          \"warningIsOn\": true\r\n        },\r\n        \"diagnosticTroubleCodes\": [\r\n          {\r\n            \"fmiId\": 178,\r\n            \"fmiText\": \"fmiText\",\r\n            \"occurrenceCount\": 178,\r\n            \"spnDescription\": \"spnDescription\",\r\n            \"spnId\": 178,\r\n            \"txId\": 178\r\n          }\r\n        ]\r\n      },\r\n      \"passenger\": {\r\n        \"checkEngineLight\": {\r\n          \"isOn\": true\r\n        },\r\n        \"diagnosticTroubleCodes\": [\r\n          {\r\n            \"dtcDescription\": \"dtcDescription\",\r\n            \"dtcId\": 178,\r\n            \"dtcShortCode\": \"dtcShortCode\"\r\n          }\r\n        ]\r\n      }\r\n    }\r\n  ]\r\n}",
+              "status": "List of vehicles and maintenance information about each.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "f3620a06-2054-47d3-b88a-63672d81f1a6"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "d4cd2996-b996-4abd-8099-e2fef18d5e8a"
+            }
+          ]
+        },
+        {
+          "id": "49df18a0-35ac-4925-9e11-18e8be82a48b",
+          "name": "update_vehicles",
+          "request": {
+            "url": "https://api.samsara.com/v1/fleet/set_data?access_token=access_token",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"groupId\": 101,\r\n  \"vehicles\": [\r\n    {\r\n      \"engineHours\": 1500,\r\n      \"fuelLevelPercent\": 0.3,\r\n      \"id\": 112,\r\n      \"name\": \"Truck A7\",\r\n      \"note\": \"Red truck 2015 M16\",\r\n      \"odometerMeters\": 60130000,\r\n      \"vin\": \"1FUJA6BD31LJ09646\"\r\n    }\r\n  ]\r\n}"
+            },
+            "description": "This method enables the mutation of metadata for vehicles in the Samsara Cloud."
+          },
+          "response": [
+            {
+              "header": [],
+              "status": "Vehicles were successfully updated. No response body is returned.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "c35ca090-5723-4975-b8e1-36f927257963"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "e8200b2c-dcbb-4fcd-b37b-03f8420820e9"
+            }
+          ]
+        },
+        {
+          "id": "71aa1941-d6cb-4ffc-91de-c66ec460fa77",
+          "name": "get_fleet_trips",
+          "request": {
+            "url": "https://api.samsara.com/v1/fleet/trips?access_token=access_token",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"endMs\": 1462881998034,\r\n  \"groupId\": 101,\r\n  \"startMs\": 1462878398034,\r\n  \"vehicleId\": 112\r\n}"
+            },
+            "description": "Get historical trips data for specified vehicle. This method returns a set of historical trips data for the specified vehicle in the specified time range."
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "body": "{\r\n  \"trips\": [\r\n    {\r\n      \"distanceMeters\": 2500,\r\n      \"driverId\": 719,\r\n      \"endAddress\": \"Winchell's Donuts House\",\r\n      \"endCoordinates\": {\r\n        \"latitude\": 23.413702345,\r\n        \"longitude\": -91.502888123\r\n      },\r\n      \"endLocation\": \"571 S Lake Ave, Pasadena, CA 91101\",\r\n      \"endMs\": 1462881998034,\r\n      \"endOdometer\": 210430500,\r\n      \"fuelConsumedMl\": 75700,\r\n      \"startAddress\": \"Ramen Tatsunoya\",\r\n      \"startCoordinates\": {\r\n        \"latitude\": 29.443702345,\r\n        \"longitude\": -98.502888123\r\n      },\r\n      \"startLocation\": \"16 N Fair Oaks Ave, Pasadena, CA 91103\",\r\n      \"startMs\": 1462878398034,\r\n      \"startOdometer\": 210430450,\r\n      \"tollMeters\": 32000\r\n    }\r\n  ]\r\n}",
+              "status": "List of trips taken by the requested vehicle within the specified timeframe.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "1d18394d-87e9-4073-a309-b8f74802db39"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "f68b30eb-e845-48cd-b1a2-4c150ab4cad5"
+            }
+          ]
+        },
+        {
+          "id": "91463f0e-5f98-48ec-a2a6-5ace80854bb0",
+          "name": "getVehiclesLocations",
+          "request": {
+            "url": "https://api.samsara.com/v1/fleet/vehicles/locations?access_token=access_token&startMs=119&endMs=119",
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw"
+            },
+            "description": "Fetch locations for a given vehicle between a start/end time. The maximum query duration is 30 minutes."
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "body": "[\r\n  {\r\n    \"id\": 112,\r\n    \"locations\": [\r\n      {\r\n        \"latitude\": 37.2,\r\n        \"location\": \"525 York, San Francisco, CA\",\r\n        \"longitude\": -122.5,\r\n        \"speedMilesPerHour\": 35.2,\r\n        \"timeMs\": 1535586471332\r\n      }\r\n    ],\r\n    \"name\": \"Truck A7\"\r\n  }\r\n]",
+              "status": "Returns locations for a given vehicle between a start/end time, with a maximum query duration of 30 minutes.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "165c0903-11e8-479d-b09b-ed2dbedb323c"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "08001eed-2172-4a1b-bcb9-85add7dde534"
+            }
+          ]
+        },
+        {
+          "id": "eb23807d-82b0-466d-b3fb-c72502a13f8e",
+          "name": "GetVehicleStats",
+          "request": {
+            "url": "https://api.samsara.com/v1/fleet/vehicles/stats?access_token=access_token&startMs=119&endMs=119&series=engineState&tagIds=tagIds&startingAfter=startingAfter&endingBefore=endingBefore&limit=119",
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw"
+            },
+            "description": "Fetch engine state and aux input data for all vehicles in the group between a start/end time. Data returned may be affected by device connectivity and processing time."
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "body": "{\r\n  \"pagination\": {\r\n    \"endCursor\": \"MTU5MTEzNjA2OTU0MzQ3\",\r\n    \"hasNextPage\": true,\r\n    \"hasPrevPage\": true,\r\n    \"startCursor\": \"MTU5MTEzNjA2OTU0MzQ3\"\r\n  },\r\n  \"vehicleStats\": [\r\n    {\r\n      \"auxInput1\": {\r\n        \"name\": \"Boom\",\r\n        \"values\": [\r\n          {\r\n            \"timeMs\": 1546542978484,\r\n            \"value\": true\r\n          }\r\n        ]\r\n      },\r\n      \"auxInput2\": {\r\n        \"name\": \"Boom\",\r\n        \"values\": [\r\n          {\r\n            \"timeMs\": 1546542978484,\r\n            \"value\": true\r\n          }\r\n        ]\r\n      },\r\n      \"engineState\": [\r\n        {\r\n          \"timeMs\": 1546542978484,\r\n          \"value\": \"Running\"\r\n        }\r\n      ],\r\n      \"vehicleId\": 112\r\n    }\r\n  ]\r\n}",
+              "status": "Returns engine state and/or aux input data for all vehicles in the group between a start/end time.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "5b566392-1f1b-4fe8-a524-f2b2a9d6fb9e"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "8ba2cc2b-0b9c-436f-91ae-f6b0fbe101c2"
+            }
+          ]
+        },
+        {
+          "id": "646d417c-0996-432d-bd83-20a0ca56dbd2",
+          "name": "GetVehicleHarshEvent",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "api.samsara.com",
+              "path": [
+                "v1",
+                "fleet/vehicles/:vehicleId/safety/harsh_event"
+              ],
+              "query": [
+                {
+                  "key": "access_token",
+                  "value": "access_token",
+                  "disabled": false
+                },
+                {
+                  "key": "timestamp",
+                  "value": "119",
+                  "disabled": false
+                }
+              ],
+              "variable": [
+                {
+                  "id": "vehicleId",
+                  "value": "119",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw"
+            },
+            "description": "Fetch harsh event details for a vehicle."
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "body": "{\r\n  \"downloadForwardVideoUrl\": \"https://samsara-dashcam-videos.s3.us-west-2.amazonaws.com/123/212123456789012/1539201872984/abC123De4-camera-video-segment-123456789.mp4?...\",\r\n  \"downloadInwardVideoUrl\": \"https://samsara-dashcam-videos.s3.us-west-2.amazonaws.com/123/212123456789012/1539201872984/abC123De4-camera-video-segment-driver-123456789.mp4?...\",\r\n  \"downloadTrackedInwardVideoUrl\": \"https://samsara-dashcam-videos.s3.us-west-2.amazonaws.com/123/212123456789012/1539201872984/abC123De4-camera-video-segment-driver-123456789.tracked.mp4?...\",\r\n  \"harshEventType\": \"Harsh Braking\",\r\n  \"incidentReportUrl\": \"https://cloud.samsara.com/groups/1234/fleet/reports/safety/vehicle/212123456789012/incident/1539201882984\",\r\n  \"isDistracted\": true,\r\n  \"location\": {\r\n    \"address\": \"350 Rhode Island St, San Francisco, CA\",\r\n    \"latitude\": \"33.07614328\",\r\n    \"longitude\": \"-96.14907287\"\r\n  }\r\n}",
+              "status": "Harsh event details.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "613ff0fe-7343-451d-a901-9119b6c8099c"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "e63e1847-3887-4b6b-bce0-a9bcd7ac64cc"
+            }
+          ]
+        },
+        {
+          "id": "e2974f9f-f3cb-4009-9ae0-57f4bd981bee",
+          "name": "GetVehicleSafetyScore",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "api.samsara.com",
+              "path": [
+                "v1",
+                "fleet/vehicles/:vehicleId/safety/score"
+              ],
+              "query": [
+                {
+                  "key": "access_token",
+                  "value": "access_token",
+                  "disabled": false
+                },
+                {
+                  "key": "startMs",
+                  "value": "119",
+                  "disabled": false
+                },
+                {
+                  "key": "endMs",
+                  "value": "119",
+                  "disabled": false
+                }
+              ],
+              "variable": [
+                {
+                  "id": "vehicleId",
+                  "value": "119",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw"
+            },
+            "description": "Fetch the safety score for the vehicle."
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "body": "{\r\n  \"crashCount\": 0,\r\n  \"harshAccelCount\": 1,\r\n  \"harshBrakingCount\": 2,\r\n  \"harshEvents\": [\r\n    {\r\n      \"harshEventType\": \"Harsh Braking\",\r\n      \"timestampMs\": 1535590776000,\r\n      \"vehicleId\": 212014918086169\r\n    }\r\n  ],\r\n  \"harshTurningCount\": 0,\r\n  \"safetyScore\": 97,\r\n  \"safetyScoreRank\": \"26\",\r\n  \"timeOverSpeedLimitMs\": 3769,\r\n  \"totalDistanceDrivenMeters\": 291836,\r\n  \"totalHarshEventCount\": 3,\r\n  \"totalTimeDrivenMs\": 19708293,\r\n  \"vehicleId\": 4321\r\n}",
+              "status": "Safety score details.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "52e9d1ce-5e9a-48e2-be59-e052e5dc9e68"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "4405793f-d659-4c4c-9555-042b26de53f9"
+            }
+          ]
+        },
+        {
+          "id": "ae34d0e3-c3ae-43a8-8988-caebafd6b10a",
+          "name": "getFleetVehicle",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "api.samsara.com",
+              "path": [
+                "v1",
+                "fleet/vehicles/:vehicle_id_or_external_id"
+              ],
+              "query": [
+                {
+                  "key": "access_token",
+                  "value": "access_token",
+                  "disabled": false
+                }
+              ],
+              "variable": [
+                {
+                  "id": "vehicle_id_or_external_id",
+                  "value": "vehicle_id_or_external_id",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw"
+            },
+            "description": "Gets a specific vehicle."
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "body": "{\r\n  \"externalIds\": \"{\\r\\n  \\\"maintenanceId\\\": \\\"ABFS18600\\\"\\r\\n}\",\r\n  \"harshAccelSetting\": \"Heavy\",\r\n  \"id\": 112,\r\n  \"name\": \"Truck A7\",\r\n  \"vehicleInfo\": {\r\n    \"make\": \"Honda\",\r\n    \"model\": \"Odyssey\",\r\n    \"vin\": \"1FUJA6BD31LJ09646\",\r\n    \"year\": 1997\r\n  }\r\n}",
+              "status": "The specified vehicle.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "855a59de-6807-4c40-bc1a-3da7630de511"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "4e9d1df6-4eee-4b2f-9f91-cbc2e2b172d1"
+            }
+          ]
+        },
+        {
+          "id": "b41e0716-0453-400a-a040-8583de58cfc8",
+          "name": "patchFleetVehicle",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "api.samsara.com",
+              "path": [
+                "v1",
+                "fleet/vehicles/:vehicle_id_or_external_id"
+              ],
+              "query": [
+                {
+                  "key": "access_token",
+                  "value": "access_token",
+                  "disabled": false
+                }
+              ],
+              "variable": [
+                {
+                  "id": "vehicle_id_or_external_id",
+                  "value": "vehicle_id_or_external_id",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"externalIds\": \"{\\r\\n  \\\"maintenanceId\\\": \\\"ABFS18600\\\"\\r\\n}\",\r\n  \"harsh_accel_setting\": \"Passenger\",\r\n  \"name\": \"name\"\r\n}"
+            },
+            "description": "Updates the specified vehicle using JSON merge patch format. See IETF RFC 7396: https://tools.ietf.org/html/rfc7396."
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "body": "{\r\n  \"externalIds\": \"{\\r\\n  \\\"maintenanceId\\\": \\\"ABFS18600\\\"\\r\\n}\",\r\n  \"harshAccelSetting\": \"Heavy\",\r\n  \"id\": 112,\r\n  \"name\": \"Truck A7\",\r\n  \"vehicleInfo\": {\r\n    \"make\": \"Honda\",\r\n    \"model\": \"Odyssey\",\r\n    \"vin\": \"1FUJA6BD31LJ09646\",\r\n    \"year\": 1997\r\n  }\r\n}",
+              "status": "The updated vehicle.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "7a02f429-03e0-4d5f-aaf9-65816cc188df"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "5c5a2a3d-a3d7-4b18-9ede-42b08a4c5d36"
+            }
+          ]
+        },
+        {
+          "id": "cbc86db7-05d7-4634-a206-aa729c301d24",
+          "name": "getDispatchRoutesByVehicleId",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "api.samsara.com",
+              "path": [
+                "v1",
+                "fleet/vehicles/:vehicle_id/dispatch/routes"
+              ],
+              "query": [
+                {
+                  "key": "access_token",
+                  "value": "access_token",
+                  "disabled": false
+                },
+                {
+                  "key": "end_time",
+                  "value": "119",
+                  "disabled": false
+                },
+                {
+                  "key": "duration",
+                  "value": "119",
+                  "disabled": false
+                }
+              ],
+              "variable": [
+                {
+                  "id": "vehicle_id",
+                  "value": "119",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw"
+            },
+            "description": "Fetch all of the dispatch routes for a given vehicle."
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "body": "[\r\n  {\r\n    \"dispatch_jobs\": [\r\n      {\r\n        \"arrived_at_ms\": 1462881998034,\r\n        \"completed_at_ms\": 1462881998034,\r\n        \"dispatch_route_id\": 55,\r\n        \"driver_id\": 444,\r\n        \"en_route_at_ms\": 1462881998034,\r\n        \"estimated_arrival_ms\": 1462881998034,\r\n        \"fleet_viewer_url\": \"https://cloud.samsara.com/fleet/viewer/job/fleet_viewer_token\",\r\n        \"group_id\": 101,\r\n        \"id\": 773,\r\n        \"job_state\": \"JobState_Arrived\",\r\n        \"skipped_at_ms\": 1462881998034,\r\n        \"vehicle_id\": 112,\r\n        \"destination_address\": \"123 Main St, Philadelphia, PA 19106\",\r\n        \"destination_address_id\": 67890,\r\n        \"destination_lat\": 123.456,\r\n        \"destination_lng\": 37.459,\r\n        \"destination_name\": \"ACME Inc. Philadelphia HQ\",\r\n        \"notes\": \"Ensure crates are stacked no more than 3 high.\",\r\n        \"scheduled_arrival_time_ms\": 1462881998034,\r\n        \"scheduled_departure_time_ms\": 1462881998034\r\n      }\r\n    ],\r\n    \"id\": 556,\r\n    \"actual_end_ms\": 1462882101000,\r\n    \"actual_start_ms\": 1462882098000,\r\n    \"driver_id\": 555,\r\n    \"group_id\": 101,\r\n    \"name\": \"Bid #123\",\r\n    \"scheduled_end_ms\": 1462881998034,\r\n    \"scheduled_meters\": 10000,\r\n    \"scheduled_start_ms\": 1462881998034,\r\n    \"start_location_address\": \"123 Main St, Philadelphia, PA 19106\",\r\n    \"start_location_address_id\": 67890,\r\n    \"start_location_lat\": 123.456,\r\n    \"start_location_lng\": 37.459,\r\n    \"start_location_name\": \"ACME Inc. Philadelphia HQ\",\r\n    \"trailer_id\": 666,\r\n    \"vehicle_id\": 444\r\n  }\r\n]",
+              "status": "Returns all of the dispatch routes for the given vehicle_id.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "7a893361-c7de-4acc-9a51-6a7d475a83b5"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "db6627d8-a606-4c53-a355-063410adcfbf"
+            }
+          ]
+        },
+        {
+          "id": "a7f96720-ba98-476e-b0ae-e83d9f393e54",
+          "name": "createVehicleDispatchRoute",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "api.samsara.com",
+              "path": [
+                "v1",
+                "fleet/vehicles/:vehicle_id/dispatch/routes"
+              ],
+              "query": [
+                {
+                  "key": "access_token",
+                  "value": "access_token",
+                  "disabled": false
+                }
+              ],
+              "variable": [
+                {
+                  "id": "vehicle_id",
+                  "value": "77",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"dispatch_jobs\": [\r\n    {\r\n      \"destination_address\": \"123 Main St, Philadelphia, PA 19106\",\r\n      \"destination_address_id\": 67890,\r\n      \"destination_lat\": 123.456,\r\n      \"destination_lng\": 37.459,\r\n      \"destination_name\": \"ACME Inc. Philadelphia HQ\",\r\n      \"notes\": \"Ensure crates are stacked no more than 3 high.\",\r\n      \"scheduled_arrival_time_ms\": 1462881998034,\r\n      \"scheduled_departure_time_ms\": 1462881998034\r\n    }\r\n  ],\r\n  \"actual_end_ms\": 1462882101000,\r\n  \"actual_start_ms\": 1462882098000,\r\n  \"driver_id\": 555,\r\n  \"group_id\": 101,\r\n  \"name\": \"Bid #123\",\r\n  \"scheduled_end_ms\": 1462881998034,\r\n  \"scheduled_meters\": 10000,\r\n  \"scheduled_start_ms\": 1462881998034,\r\n  \"start_location_address\": \"123 Main St, Philadelphia, PA 19106\",\r\n  \"start_location_address_id\": 67890,\r\n  \"start_location_lat\": 123.456,\r\n  \"start_location_lng\": 37.459,\r\n  \"start_location_name\": \"ACME Inc. Philadelphia HQ\",\r\n  \"trailer_id\": 666,\r\n  \"vehicle_id\": 444\r\n}"
+            },
+            "description": "Create a new dispatch route for the vehicle with vehicle_id."
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "body": "{\r\n  \"dispatch_jobs\": [\r\n    {\r\n      \"arrived_at_ms\": 1462881998034,\r\n      \"completed_at_ms\": 1462881998034,\r\n      \"dispatch_route_id\": 55,\r\n      \"driver_id\": 444,\r\n      \"en_route_at_ms\": 1462881998034,\r\n      \"estimated_arrival_ms\": 1462881998034,\r\n      \"fleet_viewer_url\": \"https://cloud.samsara.com/fleet/viewer/job/fleet_viewer_token\",\r\n      \"group_id\": 101,\r\n      \"id\": 773,\r\n      \"job_state\": \"JobState_Arrived\",\r\n      \"skipped_at_ms\": 1462881998034,\r\n      \"vehicle_id\": 112,\r\n      \"destination_address\": \"123 Main St, Philadelphia, PA 19106\",\r\n      \"destination_address_id\": 67890,\r\n      \"destination_lat\": 123.456,\r\n      \"destination_lng\": 37.459,\r\n      \"destination_name\": \"ACME Inc. Philadelphia HQ\",\r\n      \"notes\": \"Ensure crates are stacked no more than 3 high.\",\r\n      \"scheduled_arrival_time_ms\": 1462881998034,\r\n      \"scheduled_departure_time_ms\": 1462881998034\r\n    }\r\n  ],\r\n  \"id\": 556,\r\n  \"actual_end_ms\": 1462882101000,\r\n  \"actual_start_ms\": 1462882098000,\r\n  \"driver_id\": 555,\r\n  \"group_id\": 101,\r\n  \"name\": \"Bid #123\",\r\n  \"scheduled_end_ms\": 1462881998034,\r\n  \"scheduled_meters\": 10000,\r\n  \"scheduled_start_ms\": 1462881998034,\r\n  \"start_location_address\": \"123 Main St, Philadelphia, PA 19106\",\r\n  \"start_location_address_id\": 67890,\r\n  \"start_location_lat\": 123.456,\r\n  \"start_location_lng\": 37.459,\r\n  \"start_location_name\": \"ACME Inc. Philadelphia HQ\",\r\n  \"trailer_id\": 666,\r\n  \"vehicle_id\": 444\r\n}",
+              "status": "Created route object including the new route ID.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "d2548223-96e0-4f92-a048-2a02a4f05b9f"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "50502a43-0d54-491a-a0c6-c93124ac2e38"
+            }
+          ]
+        },
+        {
+          "id": "f0959b76-e69f-4fe5-9434-70bb57a001ba",
+          "name": "getVehicleLocations",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "api.samsara.com",
+              "path": [
+                "v1",
+                "fleet/vehicles/:vehicle_id/locations"
+              ],
+              "query": [
+                {
+                  "key": "access_token",
+                  "value": "access_token",
+                  "disabled": false
+                },
+                {
+                  "key": "startMs",
+                  "value": "77",
+                  "disabled": false
+                },
+                {
+                  "key": "endMs",
+                  "value": "77",
+                  "disabled": false
+                }
+              ],
+              "variable": [
+                {
+                  "id": "vehicle_id",
+                  "value": "77",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw"
+            },
+            "description": "Fetch locations for a given vehicle between a start/end time. The maximum query duration is one hour."
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "body": "[\r\n  {\r\n    \"latitude\": 37.2,\r\n    \"location\": \"525 York, San Francisco, CA\",\r\n    \"longitude\": -122.5,\r\n    \"speedMilesPerHour\": 35.2,\r\n    \"timeMs\": 1535586471332\r\n  }\r\n]",
+              "status": "Returns locations for a given vehicle between a start/end time, with a maximum query duration of one hour.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "7bf8d03d-0c8d-48d5-81e7-f0711f9e1ad7"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "e0a8f7d9-01b2-4832-8e02-fc7457994348"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Industrial",
+      "description": "Access to industrial data",
+      "item": [
+        {
+          "id": "08fa5de6-dbd9-4889-b0da-e5b591a66e98",
+          "name": "GetAllDataInputs",
+          "request": {
+            "url": "https://api.samsara.com/v1/industrial/data?access_token=access_token&group_id=77&startMs=77&endMs=77",
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw"
+            },
+            "description": "Fetch all of the data inputs for a group."
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "body": "{\r\n  \"dataInputs\": [\r\n    {\r\n      \"id\": 12345,\r\n      \"name\": \"Pump Flow\",\r\n      \"points\": [\r\n        {\r\n          \"timeMs\": 1453449599999,\r\n          \"value\": 12.332\r\n        }\r\n      ]\r\n    }\r\n  ]\r\n}",
+              "status": "List of data inputs.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "8ebecc62-e5c0-46c5-add7-56da21c47203"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "dd041a22-2b7c-4ac0-993d-29f2fa30ff9f"
+            }
+          ]
+        },
+        {
+          "id": "72c215aa-98f9-4646-b6f2-90f297f722e4",
+          "name": "GetDataInput",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "api.samsara.com",
+              "path": [
+                "v1",
+                "industrial/data/:data_input_id"
+              ],
+              "query": [
+                {
+                  "key": "access_token",
+                  "value": "access_token",
+                  "disabled": false
+                },
+                {
+                  "key": "startMs",
+                  "value": "77",
+                  "disabled": false
+                },
+                {
+                  "key": "endMs",
+                  "value": "77",
+                  "disabled": false
+                }
+              ],
+              "variable": [
+                {
+                  "id": "data_input_id",
+                  "value": "77",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw"
+            },
+            "description": "Fetch datapoints from a given data input."
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "body": "{\r\n  \"id\": 12345,\r\n  \"name\": \"Pump Flow\",\r\n  \"points\": [\r\n    {\r\n      \"timeMs\": 1453449599999,\r\n      \"value\": 12.332\r\n    }\r\n  ]\r\n}",
+              "status": "Returns datapoints for the given data input",
+              "code": 200,
+              "name": "Response_200",
+              "id": "0f167d65-f709-4d0c-a533-c460b75af0ae"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "b7a30294-2381-47c5-8644-49916d2ab986"
+            }
+          ]
+        },
+        {
+          "id": "092476f5-4721-4e27-b196-b9c4fe58efe2",
+          "name": "get_machines_history",
+          "request": {
+            "url": "https://api.samsara.com/v1/machines/history?access_token=access_token",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"endMs\": 1462881998034,\r\n  \"groupId\": 101,\r\n  \"startMs\": 1462878398034\r\n}"
+            },
+            "description": "Get historical data for machine objects. This method returns a set of historical data for all machines in a group"
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "body": "{\r\n  \"machines\": [\r\n    {\r\n      \"id\": 1,\r\n      \"name\": \"1/3 HP Motor\",\r\n      \"vibrations\": [\r\n        {\r\n          \"X\": 0.01,\r\n          \"Y\": 1.23,\r\n          \"Z\": 2.55,\r\n          \"time\": 1453449599999\r\n        }\r\n      ]\r\n    }\r\n  ]\r\n}",
+              "status": "List of machine results objects, each containing a time and a datapoint.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "93749eb6-02f4-4304-895f-92c856e3dc1d"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "dde2b88d-1082-4090-88c8-47bd02bb9a12"
+            }
+          ]
+        },
+        {
+          "id": "00532e35-6b35-4c6a-ab89-111c102b4cff",
+          "name": "get_machines",
+          "request": {
+            "url": "https://api.samsara.com/v1/machines/list?access_token=access_token",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"groupId\": 101\r\n}"
+            },
+            "description": "Get machine objects. This method returns a list of the machine objects in the Samsara Cloud and information about them."
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "body": "{\r\n  \"machines\": [\r\n    {\r\n      \"id\": 123,\r\n      \"name\": \"Freezer ABC\",\r\n      \"notes\": \"This is in the left hallway behind the conveyor belt\"\r\n    }\r\n  ]\r\n}",
+              "status": "List of machine objects.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "b0af09d8-6501-45e8-ac86-a5a3a13a591f"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "d43a039a-9bba-4305-a60d-53e2c1619cf5"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Sensors",
+      "description": "Access to sensor data",
+      "item": [
+        {
+          "id": "037eb3ef-7cdd-41ca-ae93-00a340d22845",
+          "name": "get_sensors_cargo",
+          "request": {
+            "url": "https://api.samsara.com/v1/sensors/cargo?access_token=access_token",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"groupId\": 101,\r\n  \"sensors\": [\r\n    122\r\n  ]\r\n}"
+            },
+            "description": "Get cargo monitor status (empty / full) for requested sensors."
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "body": "{\r\n  \"groupId\": 101,\r\n  \"sensors\": [\r\n    {\r\n      \"cargoEmpty\": true,\r\n      \"id\": 122,\r\n      \"name\": \"Trailer Cargo Sensor\"\r\n    }\r\n  ]\r\n}",
+              "status": "List of sensor objects containing the current cargo status reported by each sensor.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "dfaddcb2-62ba-4b19-bce2-d0451aaf74ea"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "431d7fc5-2bed-463f-aee0-40c05500b3e5"
+            }
+          ]
+        },
+        {
+          "id": "b32b8ffd-e595-49ca-ae92-ff12c84c3775",
+          "name": "get_sensors_door",
+          "request": {
+            "url": "https://api.samsara.com/v1/sensors/door?access_token=access_token",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"groupId\": 101,\r\n  \"sensors\": [\r\n    122\r\n  ]\r\n}"
+            },
+            "description": "Get door monitor status (closed / open) for requested sensors."
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "body": "{\r\n  \"groupId\": 101,\r\n  \"sensors\": [\r\n    {\r\n      \"doorClosed\": true,\r\n      \"id\": 122,\r\n      \"name\": \"Trailer Door Sensor\"\r\n    }\r\n  ]\r\n}",
+              "status": "List of sensor objects containing the current door status reported by each sensor.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "96213f4d-bfcf-4b49-890f-3dabcb97f001"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "62b39ee0-3524-44ec-bc40-3dc794be0dcd"
+            }
+          ]
+        },
+        {
+          "id": "c64483e1-83db-4afa-9e75-c8fb68bfe77b",
+          "name": "get_sensors_history",
+          "request": {
+            "url": "https://api.samsara.com/v1/sensors/history?access_token=access_token",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"endMs\": 1462881998034,\r\n  \"fillMissing\": \"withNull\",\r\n  \"groupId\": 101,\r\n  \"series\": [\r\n    {\r\n      \"field\": \"ambientTemperature\",\r\n      \"widgetId\": 1\r\n    }\r\n  ],\r\n  \"startMs\": 1462878398034,\r\n  \"stepMs\": 3600000\r\n}"
+            },
+            "description": "Get historical data for specified sensors. This method returns a set of historical data for the specified sensors in the specified time range and at the specified time resolution."
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "body": "{\r\n  \"results\": [\r\n    {\r\n      \"series\": [\r\n        87\r\n      ],\r\n      \"timeMs\": 1453449599999\r\n    }\r\n  ]\r\n}",
+              "status": "List of results objects, each containing a time and a datapoint for each requested sensor/field pair.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "d66c560d-0bb1-4130-9ab8-6afa5e3ff794"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "3b39e862-1aa7-4b66-a59e-f0404a3d65c5"
+            }
+          ]
+        },
+        {
+          "id": "d7eb29ea-99bf-4575-9512-c51df493db73",
+          "name": "get_sensors_humidity",
+          "request": {
+            "url": "https://api.samsara.com/v1/sensors/humidity?access_token=access_token",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"groupId\": 101,\r\n  \"sensors\": [\r\n    122\r\n  ]\r\n}"
+            },
+            "description": "Get humidity for requested sensors. This method returns the current relative humidity for the requested sensors."
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "body": "{\r\n  \"groupId\": 101,\r\n  \"sensors\": [\r\n    {\r\n      \"humidity\": 53,\r\n      \"id\": 122,\r\n      \"name\": \"Freezer Humidity Sensor\"\r\n    }\r\n  ]\r\n}",
+              "status": "List of sensor objects containing the current humidity reported by each sensor.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "c905f2af-fd16-4956-83d5-d3e780b8b0a3"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "543de885-d3f0-4c32-813a-8d0821ccb3a9"
+            }
+          ]
+        },
+        {
+          "id": "637483e9-a170-46e9-8735-5a53b725266a",
+          "name": "get_sensors",
+          "request": {
+            "url": "https://api.samsara.com/v1/sensors/list?access_token=access_token",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"groupId\": 101\r\n}"
+            },
+            "description": "Get sensor objects. This method returns a list of the sensor objects in the Samsara Cloud and information about them."
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "body": "{\r\n  \"sensors\": [\r\n    {\r\n      \"id\": 123,\r\n      \"macAddress\": \"11:11:11:11:11:11\",\r\n      \"name\": \"Freezer ABC\"\r\n    }\r\n  ]\r\n}",
+              "status": "List of sensor objects.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "daeadfcb-cd65-4713-8968-5e9616e4a846"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "116a7083-9d89-4d28-bd8a-0a4730c17980"
+            }
+          ]
+        },
+        {
+          "id": "2cbbdb4b-1e82-44a2-a29c-038d77ae0411",
+          "name": "get_sensors_temperature",
+          "request": {
+            "url": "https://api.samsara.com/v1/sensors/temperature?access_token=access_token",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"groupId\": 101,\r\n  \"sensors\": [\r\n    122\r\n  ]\r\n}"
+            },
+            "description": "Get temperature for requested sensors. This method returns the current ambient temperature (and probe temperature if applicable) for the requested sensors."
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "body": "{\r\n  \"groupId\": 101,\r\n  \"sensors\": [\r\n    {\r\n      \"ambientTemperature\": 11057,\r\n      \"id\": 122,\r\n      \"name\": \"Freezer Temp Sensor\",\r\n      \"probeTemperature\": -20145\r\n    }\r\n  ]\r\n}",
+              "status": "List of sensor objects containing the current temperature reported by each sensor.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "2d8cdedb-d579-48ee-ac5f-811d9f1b6b24"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "0451bb8d-5c86-4bfc-bc65-54522f0b686c"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "description": "Access to user data",
+      "item": [
+        {
+          "id": "9d861a93-af9c-48ce-b166-6fbb7336b44b",
+          "name": "listUserRoles",
+          "request": {
+            "url": "https://api.samsara.com/v1/user_roles?access_token=access_token",
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw"
+            },
+            "description": "Get all roles in the organization."
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "body": "[\r\n  {\r\n    \"id\": \"8a9371af-82d1-4158-bf91-4ecc8d3a114c\",\r\n    \"name\": \"Full Admin\"\r\n  }\r\n]",
+              "status": "List of user roles.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "6dd2ac33-05a5-415f-899b-4361c4532653"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "c918d8bd-e78a-4cb4-9971-2a8ef16a6142"
+            }
+          ]
+        },
+        {
+          "id": "f36d7164-34ed-4afe-876e-bfb295f33883",
+          "name": "list_users",
+          "request": {
+            "url": "https://api.samsara.com/v1/users?access_token=access_token",
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw"
+            },
+            "description": "List all users in the organization."
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "body": "[\r\n  {\r\n    \"authType\": \"default\",\r\n    \"email\": \"user@company.com\",\r\n    \"name\": \"Jane Doe\",\r\n    \"organizationRoleId\": \"23d4d8d3-dc10-4e7a-a183-69968751f23e\",\r\n    \"id\": 123,\r\n    \"organizationRole\": \"Full Admin\",\r\n    \"tagRoles\": [\r\n      {\r\n        \"role\": \"Full Admin\",\r\n        \"roleId\": \"8a9371af-82d1-4158-bf91-4ecc8d3a114c\",\r\n        \"tag\": {\r\n          \"id\": 12345,\r\n          \"name\": \"North Carolina Distribution\",\r\n          \"parentTagId\": 12345\r\n        }\r\n      }\r\n    ]\r\n  }\r\n]",
+              "status": "List of users.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "32aedc66-0324-4228-a647-5636cb14b96c"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "412bfef0-5af7-4139-aa5b-be66d3baa0f1"
+            }
+          ]
+        },
+        {
+          "id": "282ead77-be9e-4239-9c83-3fa08d369ed4",
+          "name": "getUserById",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "api.samsara.com",
+              "path": [
+                "v1",
+                "users/:userId"
+              ],
+              "query": [
+                {
+                  "key": "access_token",
+                  "value": "access_token",
+                  "disabled": false
+                }
+              ],
+              "variable": [
+                {
+                  "id": "userId",
+                  "value": "77",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw"
+            },
+            "description": "Get a user."
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "body": "{\r\n  \"authType\": \"default\",\r\n  \"email\": \"user@company.com\",\r\n  \"name\": \"Jane Doe\",\r\n  \"organizationRoleId\": \"23d4d8d3-dc10-4e7a-a183-69968751f23e\",\r\n  \"id\": 123,\r\n  \"organizationRole\": \"Full Admin\",\r\n  \"tagRoles\": [\r\n    {\r\n      \"role\": \"Full Admin\",\r\n      \"roleId\": \"8a9371af-82d1-4158-bf91-4ecc8d3a114c\",\r\n      \"tag\": {\r\n        \"id\": 12345,\r\n        \"name\": \"North Carolina Distribution\",\r\n        \"parentTagId\": 12345\r\n      }\r\n    }\r\n  ]\r\n}",
+              "status": "User record.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "fbef1c3c-6583-4384-ba53-70d73ca7b31a"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "41bce64d-a492-4343-aaac-ee3a4d84fb67"
+            }
+          ]
+        },
+        {
+          "id": "ef192765-9734-4ed0-bfd5-95fd6b162331",
+          "name": "deleteUserById",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "api.samsara.com",
+              "path": [
+                "v1",
+                "users/:userId"
+              ],
+              "query": [
+                {
+                  "key": "access_token",
+                  "value": "access_token",
+                  "disabled": false
+                }
+              ],
+              "variable": [
+                {
+                  "id": "userId",
+                  "value": "77",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw"
+            },
+            "description": "Remove a user from the organization."
+          },
+          "response": [
+            {
+              "header": [],
+              "status": "The user was successfully removed.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "37ec728a-1c2f-417a-854a-fa89eaf8eee6"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "c234d834-f69e-434c-b270-838c4cca60da"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Tags",
+      "description": "",
+      "item": [
+        {
+          "id": "e7bff95f-2b3f-4f20-a7f0-c4f9a8e76f1a",
+          "name": "GetAllTags",
+          "request": {
+            "url": "https://api.samsara.com/v1/tags?access_token=access_token&group_id=77",
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw"
+            },
+            "description": "Fetch all of the tags for a group."
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "body": "{\r\n  \"tags\": [\r\n    {\r\n      \"addresses\": [\r\n        {\r\n          \"id\": 345,\r\n          \"name\": \"Truck Lot 345\"\r\n        }\r\n      ],\r\n      \"assets\": [\r\n        {\r\n          \"id\": 789,\r\n          \"name\": \"Trailer 789\"\r\n        }\r\n      ],\r\n      \"drivers\": [\r\n        {\r\n          \"id\": 456,\r\n          \"name\": \"John Smith\"\r\n        }\r\n      ],\r\n      \"groupId\": 2348,\r\n      \"id\": 12345,\r\n      \"machines\": [\r\n        {\r\n          \"id\": 567,\r\n          \"name\": \"Vibration Monitor 567\"\r\n        }\r\n      ],\r\n      \"name\": \"Broken Vehicles\",\r\n      \"parentTagId\": 8389,\r\n      \"sensors\": [\r\n        {\r\n          \"id\": 345,\r\n          \"name\": \"Temperature Sensor 345\"\r\n        }\r\n      ],\r\n      \"vehicles\": [\r\n        {\r\n          \"id\": 123,\r\n          \"name\": \"Heavy Duty 123\"\r\n        }\r\n      ]\r\n    }\r\n  ]\r\n}",
+              "status": "List of tags.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "fa1d2406-6712-4427-99c5-3ee87476b173"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "e893d8ff-75ac-4c54-8905-13240d01d0ca"
+            }
+          ]
+        },
+        {
+          "id": "98fe5402-fd7f-47b1-ac3a-4ab23ae0f438",
+          "name": "CreateTag",
+          "request": {
+            "url": "https://api.samsara.com/v1/tags?access_token=access_token",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"assets\": [\r\n    {\r\n      \"id\": 789\r\n    }\r\n  ],\r\n  \"drivers\": [\r\n    {\r\n      \"id\": 456\r\n    }\r\n  ],\r\n  \"machines\": [\r\n    {\r\n      \"id\": 567\r\n    }\r\n  ],\r\n  \"name\": \"Broken Vehicles\",\r\n  \"parentTagId\": 8389,\r\n  \"sensors\": [\r\n    {\r\n      \"id\": 345\r\n    }\r\n  ],\r\n  \"vehicles\": [\r\n    {\r\n      \"id\": 123\r\n    }\r\n  ]\r\n}"
+            },
+            "description": "Create a new tag for the group."
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "body": "{\r\n  \"addresses\": [\r\n    {\r\n      \"id\": 345,\r\n      \"name\": \"Truck Lot 345\"\r\n    }\r\n  ],\r\n  \"assets\": [\r\n    {\r\n      \"id\": 789,\r\n      \"name\": \"Trailer 789\"\r\n    }\r\n  ],\r\n  \"drivers\": [\r\n    {\r\n      \"id\": 456,\r\n      \"name\": \"John Smith\"\r\n    }\r\n  ],\r\n  \"groupId\": 2348,\r\n  \"id\": 12345,\r\n  \"machines\": [\r\n    {\r\n      \"id\": 567,\r\n      \"name\": \"Vibration Monitor 567\"\r\n    }\r\n  ],\r\n  \"name\": \"Broken Vehicles\",\r\n  \"parentTagId\": 8389,\r\n  \"sensors\": [\r\n    {\r\n      \"id\": 345,\r\n      \"name\": \"Temperature Sensor 345\"\r\n    }\r\n  ],\r\n  \"vehicles\": [\r\n    {\r\n      \"id\": 123,\r\n      \"name\": \"Heavy Duty 123\"\r\n    }\r\n  ]\r\n}",
+              "status": "Newly created tag object, including the new tag ID.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "09a344f2-9546-457f-83c6-a14e3a553404"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "f184e26c-da06-4539-b81c-de731bd6f7ea"
+            }
+          ]
+        },
+        {
+          "id": "f7c85a5d-21fd-4b03-b57b-bb2bb78c857a",
+          "name": "getTagById",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "api.samsara.com",
+              "path": [
+                "v1",
+                "tags/:tag_id"
+              ],
+              "query": [
+                {
+                  "key": "access_token",
+                  "value": "access_token",
+                  "disabled": false
+                }
+              ],
+              "variable": [
+                {
+                  "id": "tag_id",
+                  "value": "77",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw"
+            },
+            "description": "Fetch a tag by id."
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "body": "{\r\n  \"addresses\": [\r\n    {\r\n      \"id\": 345,\r\n      \"name\": \"Truck Lot 345\"\r\n    }\r\n  ],\r\n  \"assets\": [\r\n    {\r\n      \"id\": 789,\r\n      \"name\": \"Trailer 789\"\r\n    }\r\n  ],\r\n  \"drivers\": [\r\n    {\r\n      \"id\": 456,\r\n      \"name\": \"John Smith\"\r\n    }\r\n  ],\r\n  \"groupId\": 2348,\r\n  \"id\": 12345,\r\n  \"machines\": [\r\n    {\r\n      \"id\": 567,\r\n      \"name\": \"Vibration Monitor 567\"\r\n    }\r\n  ],\r\n  \"name\": \"Broken Vehicles\",\r\n  \"parentTagId\": 8389,\r\n  \"sensors\": [\r\n    {\r\n      \"id\": 345,\r\n      \"name\": \"Temperature Sensor 345\"\r\n    }\r\n  ],\r\n  \"vehicles\": [\r\n    {\r\n      \"id\": 123,\r\n      \"name\": \"Heavy Duty 123\"\r\n    }\r\n  ]\r\n}",
+              "status": "The tag corresponding to tag_id.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "692a4353-1319-49af-9b69-5d4a10269dff"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "cb244273-2be2-4dc4-b613-527ccbfcd528"
+            }
+          ]
+        },
+        {
+          "id": "a098b64b-b266-4a6f-a640-6d15883ce248",
+          "name": "updateTagById",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "api.samsara.com",
+              "path": [
+                "v1",
+                "tags/:tag_id"
+              ],
+              "query": [
+                {
+                  "key": "access_token",
+                  "value": "access_token",
+                  "disabled": false
+                }
+              ],
+              "variable": [
+                {
+                  "id": "tag_id",
+                  "value": "77",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"assets\": [\r\n    {\r\n      \"id\": 789\r\n    }\r\n  ],\r\n  \"drivers\": [\r\n    {\r\n      \"id\": 456\r\n    }\r\n  ],\r\n  \"machines\": [\r\n    {\r\n      \"id\": 567\r\n    }\r\n  ],\r\n  \"name\": \"Broken Vehicles\",\r\n  \"parentTagId\": 8389,\r\n  \"sensors\": [\r\n    {\r\n      \"id\": 345\r\n    }\r\n  ],\r\n  \"vehicles\": [\r\n    {\r\n      \"id\": 123\r\n    }\r\n  ]\r\n}"
+            },
+            "description": "Update a tag with a new name and new members. This API call would replace all old members of a tag with new members specified in the request body. To modify only a few devices associated with a tag use the PATCH endpoint."
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "body": "{\r\n  \"addresses\": [\r\n    {\r\n      \"id\": 345,\r\n      \"name\": \"Truck Lot 345\"\r\n    }\r\n  ],\r\n  \"assets\": [\r\n    {\r\n      \"id\": 789,\r\n      \"name\": \"Trailer 789\"\r\n    }\r\n  ],\r\n  \"drivers\": [\r\n    {\r\n      \"id\": 456,\r\n      \"name\": \"John Smith\"\r\n    }\r\n  ],\r\n  \"groupId\": 2348,\r\n  \"id\": 12345,\r\n  \"machines\": [\r\n    {\r\n      \"id\": 567,\r\n      \"name\": \"Vibration Monitor 567\"\r\n    }\r\n  ],\r\n  \"name\": \"Broken Vehicles\",\r\n  \"parentTagId\": 8389,\r\n  \"sensors\": [\r\n    {\r\n      \"id\": 345,\r\n      \"name\": \"Temperature Sensor 345\"\r\n    }\r\n  ],\r\n  \"vehicles\": [\r\n    {\r\n      \"id\": 123,\r\n      \"name\": \"Heavy Duty 123\"\r\n    }\r\n  ]\r\n}",
+              "status": "The updated tag data.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "e1d74a59-8daa-40dd-97ca-9619902f128e"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "1da008d3-940f-4d2e-b1eb-5a16749059a1"
+            }
+          ]
+        },
+        {
+          "id": "ee3c4956-ca30-451c-95a5-554cd2183e74",
+          "name": "deleteTagById",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "api.samsara.com",
+              "path": [
+                "v1",
+                "tags/:tag_id"
+              ],
+              "query": [
+                {
+                  "key": "access_token",
+                  "value": "access_token",
+                  "disabled": false
+                }
+              ],
+              "variable": [
+                {
+                  "id": "tag_id",
+                  "value": "77",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw"
+            },
+            "description": "Permanently deletes a tag."
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "status": "Successfully deleted the tag. No response body is returned.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "004faf4b-b5dd-40b4-8e4f-92896d1da7cf"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "650fb02b-7b67-4644-81e7-3d3a0083eec1"
+            }
+          ]
+        },
+        {
+          "id": "ccc4c92d-015e-4a0a-b9dc-aa0bcd2a7b98",
+          "name": "modifyTagById",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "api.samsara.com",
+              "path": [
+                "v1",
+                "tags/:tag_id"
+              ],
+              "query": [
+                {
+                  "key": "access_token",
+                  "value": "access_token",
+                  "disabled": false
+                }
+              ],
+              "variable": [
+                {
+                  "id": "tag_id",
+                  "value": "77",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"add\": {\r\n    \"assets\": [\r\n      {\r\n        \"id\": 789\r\n      }\r\n    ],\r\n    \"drivers\": [\r\n      {\r\n        \"id\": 456\r\n      }\r\n    ],\r\n    \"machines\": [\r\n      {\r\n        \"id\": 567\r\n      }\r\n    ],\r\n    \"sensors\": [\r\n      {\r\n        \"id\": 345\r\n      }\r\n    ],\r\n    \"vehicles\": [\r\n      {\r\n        \"id\": 123\r\n      }\r\n    ]\r\n  },\r\n  \"delete\": {\r\n    \"assets\": [\r\n      {\r\n        \"id\": 789\r\n      }\r\n    ],\r\n    \"drivers\": [\r\n      {\r\n        \"id\": 456\r\n      }\r\n    ],\r\n    \"machines\": [\r\n      {\r\n        \"id\": 567\r\n      }\r\n    ],\r\n    \"sensors\": [\r\n      {\r\n        \"id\": 345\r\n      }\r\n    ],\r\n    \"vehicles\": [\r\n      {\r\n        \"id\": 123\r\n      }\r\n    ]\r\n  },\r\n  \"name\": \"Broken Vehicles\",\r\n  \"parentTagId\": 8389\r\n}"
+            },
+            "description": "Add or delete specific members from a tag, or modify the name of a tag."
+          },
+          "response": [
+            {
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "body": "{\r\n  \"addresses\": [\r\n    {\r\n      \"id\": 345,\r\n      \"name\": \"Truck Lot 345\"\r\n    }\r\n  ],\r\n  \"assets\": [\r\n    {\r\n      \"id\": 789,\r\n      \"name\": \"Trailer 789\"\r\n    }\r\n  ],\r\n  \"drivers\": [\r\n    {\r\n      \"id\": 456,\r\n      \"name\": \"John Smith\"\r\n    }\r\n  ],\r\n  \"groupId\": 2348,\r\n  \"id\": 12345,\r\n  \"machines\": [\r\n    {\r\n      \"id\": 567,\r\n      \"name\": \"Vibration Monitor 567\"\r\n    }\r\n  ],\r\n  \"name\": \"Broken Vehicles\",\r\n  \"parentTagId\": 8389,\r\n  \"sensors\": [\r\n    {\r\n      \"id\": 345,\r\n      \"name\": \"Temperature Sensor 345\"\r\n    }\r\n  ],\r\n  \"vehicles\": [\r\n    {\r\n      \"id\": 123,\r\n      \"name\": \"Heavy Duty 123\"\r\n    }\r\n  ]\r\n}",
+              "status": "The updated tag data.",
+              "code": 200,
+              "name": "Response_200",
+              "id": "e352fa46-014c-4d17-8a47-909f3a9994ae"
+            },
+            {
+              "status": "Unexpected error.",
+              "code": 0,
+              "name": "Response_0",
+              "id": "b579c1c9-72f8-4e66-ab9d-70650adf1a55"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
