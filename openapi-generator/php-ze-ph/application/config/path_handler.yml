@@ -1,0 +1,129 @@
+Articus\PathHandler\RouteInjection\Factory:
+  paths:
+    '/v1':
+    - App\Handler\Addresses
+    - App\Handler\AddressesAddressId
+    - App\Handler\Contacts
+    - App\Handler\ContactsContactId
+    - App\Handler\FleetAddAddress
+    - App\Handler\FleetAssets
+    - App\Handler\FleetAssetsLocations
+    - App\Handler\FleetAssetsAssetIdLocations
+    - App\Handler\FleetAssetsAssetIdReefer
+    - App\Handler\FleetDispatchRoutes
+    - App\Handler\FleetDispatchRoutesJobUpdates
+    - App\Handler\FleetDispatchRoutesRouteId
+    - App\Handler\FleetDispatchRoutesRouteIdHistory
+    - App\Handler\FleetDrivers
+    - App\Handler\FleetDriversCreate
+    - App\Handler\FleetDriversDocumentTypes
+    - App\Handler\FleetDriversDocuments
+    - App\Handler\FleetDriversInactive
+    - App\Handler\FleetDriversInactiveDriverIdOrExternalId
+    - App\Handler\FleetDriversSummary
+    - App\Handler\FleetDriversDriverIdSafetyScore
+    - App\Handler\FleetDriversDriverIdOrExternalId
+    - App\Handler\FleetDriversDriverIdDispatchRoutes
+    - App\Handler\FleetDriversDriverIdDocuments
+    - App\Handler\FleetDriversDriverIdHosDailyLogs
+    - App\Handler\FleetHosAuthenticationLogs
+    - App\Handler\FleetHosLogs
+    - App\Handler\FleetHosLogsSummary
+    - App\Handler\FleetList
+    - App\Handler\FleetLocations
+    - App\Handler\FleetMaintenanceDvirs
+    - App\Handler\FleetMaintenanceList
+    - App\Handler\FleetSetData
+    - App\Handler\FleetTrips
+    - App\Handler\FleetVehiclesLocations
+    - App\Handler\FleetVehiclesStats
+    - App\Handler\FleetVehiclesVehicleIdSafetyHarshEvent
+    - App\Handler\FleetVehiclesVehicleIdSafetyScore
+    - App\Handler\FleetVehiclesVehicleIdOrExternalId
+    - App\Handler\FleetVehiclesVehicleIdDispatchRoutes
+    - App\Handler\FleetVehiclesVehicleIdLocations
+    - App\Handler\IndustrialData
+    - App\Handler\IndustrialDataDataInputId
+    - App\Handler\MachinesHistory
+    - App\Handler\MachinesList
+    - App\Handler\SensorsCargo
+    - App\Handler\SensorsDoor
+    - App\Handler\SensorsHistory
+    - App\Handler\SensorsHumidity
+    - App\Handler\SensorsList
+    - App\Handler\SensorsTemperature
+    - App\Handler\Tags
+    - App\Handler\TagsTagId
+    - App\Handler\UserRoles
+    - App\Handler\Users
+    - App\Handler\UsersUserId
+  handlers:
+    abstract_factories:
+    - Zend\ServiceManager\AbstractFactory\ConfigAbstractFactory
+#  consumers:
+#    factories:
+#    invokables:
+#  attributes:
+#    factories:
+#    invokables:
+#  producers:
+#    factories:
+#    invokables:
+
+Zend\ServiceManager\AbstractFactory\ConfigAbstractFactory:
+  App\Handler\Addresses: []
+  App\Handler\AddressesAddressId: []
+  App\Handler\Contacts: []
+  App\Handler\ContactsContactId: []
+  App\Handler\FleetAddAddress: []
+  App\Handler\FleetAssets: []
+  App\Handler\FleetAssetsLocations: []
+  App\Handler\FleetAssetsAssetIdLocations: []
+  App\Handler\FleetAssetsAssetIdReefer: []
+  App\Handler\FleetDispatchRoutes: []
+  App\Handler\FleetDispatchRoutesJobUpdates: []
+  App\Handler\FleetDispatchRoutesRouteId: []
+  App\Handler\FleetDispatchRoutesRouteIdHistory: []
+  App\Handler\FleetDrivers: []
+  App\Handler\FleetDriversCreate: []
+  App\Handler\FleetDriversDocumentTypes: []
+  App\Handler\FleetDriversDocuments: []
+  App\Handler\FleetDriversInactive: []
+  App\Handler\FleetDriversInactiveDriverIdOrExternalId: []
+  App\Handler\FleetDriversSummary: []
+  App\Handler\FleetDriversDriverIdSafetyScore: []
+  App\Handler\FleetDriversDriverIdOrExternalId: []
+  App\Handler\FleetDriversDriverIdDispatchRoutes: []
+  App\Handler\FleetDriversDriverIdDocuments: []
+  App\Handler\FleetDriversDriverIdHosDailyLogs: []
+  App\Handler\FleetHosAuthenticationLogs: []
+  App\Handler\FleetHosLogs: []
+  App\Handler\FleetHosLogsSummary: []
+  App\Handler\FleetList: []
+  App\Handler\FleetLocations: []
+  App\Handler\FleetMaintenanceDvirs: []
+  App\Handler\FleetMaintenanceList: []
+  App\Handler\FleetSetData: []
+  App\Handler\FleetTrips: []
+  App\Handler\FleetVehiclesLocations: []
+  App\Handler\FleetVehiclesStats: []
+  App\Handler\FleetVehiclesVehicleIdSafetyHarshEvent: []
+  App\Handler\FleetVehiclesVehicleIdSafetyScore: []
+  App\Handler\FleetVehiclesVehicleIdOrExternalId: []
+  App\Handler\FleetVehiclesVehicleIdDispatchRoutes: []
+  App\Handler\FleetVehiclesVehicleIdLocations: []
+  App\Handler\IndustrialData: []
+  App\Handler\IndustrialDataDataInputId: []
+  App\Handler\MachinesHistory: []
+  App\Handler\MachinesList: []
+  App\Handler\SensorsCargo: []
+  App\Handler\SensorsDoor: []
+  App\Handler\SensorsHistory: []
+  App\Handler\SensorsHumidity: []
+  App\Handler\SensorsList: []
+  App\Handler\SensorsTemperature: []
+  App\Handler\Tags: []
+  App\Handler\TagsTagId: []
+  App\Handler\UserRoles: []
+  App\Handler\Users: []
+  App\Handler\UsersUserId: []

@@ -1,0 +1,52 @@
+# OpenapiClient::Driver
+
+## Properties
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**eld_adverse_weather_exemption_enabled** | **BOOLEAN** | Flag indicating this driver may use Adverse Weather exemptions in ELD logs. | [optional] 
+**eld_big_day_exemption_enabled** | **BOOLEAN** | Flag indicating this driver may use Big Day excemptions in ELD logs. | [optional] 
+**eld_day_start_hour** | **Integer** | 0 indicating midnight-to-midnight ELD driving hours, 12 to indicate noon-to-noon driving hours. | [optional] 
+**eld_exempt** | **BOOLEAN** | Flag indicating this driver is exempt from the Electronic Logging Mandate. | [optional] 
+**eld_exempt_reason** | **String** | Reason that this driver is exempt from the Electronic Logging Mandate (see eldExempt). | [optional] 
+**eld_pc_enabled** | **BOOLEAN** | Flag indicating this driver may select the Personal Conveyance duty status in ELD logs. | [optional] [default to false]
+**eld_ym_enabled** | **BOOLEAN** | Flag indicating this driver may select the Yard Move duty status in ELD logs. | [optional] [default to false]
+**external_ids** | **Hash&lt;String, String&gt;** | Dictionary of external IDs (string key-value pairs) | [optional] 
+**group_id** | **Integer** | ID of the group if the organization has multiple groups (uncommon). | [optional] 
+**license_number** | **String** | Driver&#39;s state issued license number. | [optional] 
+**license_state** | **String** | Abbreviation of state that issued driver&#39;s license. | [optional] 
+**name** | **String** | Driver&#39;s name. | 
+**notes** | **String** | Notes about the driver. | [optional] 
+**phone** | **String** | Driver&#39;s phone number. Please include only digits, ex. 4157771234 | [optional] 
+**username** | **String** | Driver&#39;s login username into the driver app. | [optional] 
+**vehicle_id** | **Integer** | ID of the vehicle assigned to the driver for static vehicle assignments. (uncommon). | [optional] 
+**id** | **Integer** | ID of the driver. | 
+**is_deactivated** | **BOOLEAN** | True if the driver account has been deactivated. | [optional] 
+**tags** | [**Array&lt;TagMetadata&gt;**](TagMetadata.md) |  | [optional] 
+
+## Code Sample
+
+```ruby
+require 'OpenapiClient'
+
+instance = OpenapiClient::Driver.new(eld_adverse_weather_exemption_enabled: null,
+                                 eld_big_day_exemption_enabled: null,
+                                 eld_day_start_hour: null,
+                                 eld_exempt: null,
+                                 eld_exempt_reason: null,
+                                 eld_pc_enabled: null,
+                                 eld_ym_enabled: null,
+                                 external_ids: {&quot;maintenanceId&quot;:&quot;250020&quot;,&quot;payrollId&quot;:&quot;123&quot;},
+                                 group_id: 101,
+                                 license_number: E1234567,
+                                 license_state: CA,
+                                 name: Susan Jones,
+                                 notes: Also goes by the nickname &#39;Furious Fred&#39;.,
+                                 phone: 5558234327,
+                                 username: Susan Jones,
+                                 vehicle_id: 444,
+                                 id: 556,
+                                 is_deactivated: null,
+                                 tags: null)
+```
+
+

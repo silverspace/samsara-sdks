@@ -1,0 +1,2 @@
+testCase,httpStatusCode,accessToken,groupParam,accessToken,sensorParam,accessToken,sensorParam,accessToken,historyParam,accessToken,sensorParam,accessToken,sensorParam
+Success,200,0,0,0,0,0,0,0,0,0,0,0,0

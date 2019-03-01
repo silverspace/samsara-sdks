@@ -1,0 +1,2 @@
+testCase,httpStatusCode,accessToken,createDriverParam,accessToken,driverIdOrExternalId,accessToken,groupId,accessToken,driverIdOrExternalId,accessToken,driverIdOrExternalId,accessToken,driverIdOrExternalId,reactivateDriverParam
+Success,200,0,0,0,0,0,0,0,0,0,0,0,0,0

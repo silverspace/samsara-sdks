@@ -1,0 +1,143 @@
+note
+ description:"[
+		Samsara API
+ 		# Introduction  Samsara provides API endpoints for interacting with Samsara Cloud, so that you can build powerful applications and custom solutions with sensor data. Samsara has endpoints available to track and analyze sensors, vehicles, and entire fleets.  The Samsara Cloud API is a [RESTful API](https://en.wikipedia.org/wiki/Representational_state_transfer) accessed by an [HTTP](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol) client such as wget or curl, or HTTP libraries of most modern programming languages including python, ruby, java. We use built-in HTTP features, like HTTP authentication and HTTP verbs, which are understood by off-the-shelf HTTP clients. We allow you to interact securely with our API from a client-side web application (though you should never expose your secret API key). [JSON](http://www.json.org/) is returned by all API responses, including errors. If you’re familiar with what you can build with a REST API, the following API reference guide will be your go-to resource.  API access to the Samsara cloud is available to all Samsara administrators. To start developing with Samsara APIs you will need to [obtain your API keys](#section/Authentication) to authenticate your API requests.  If you have any questions you can reach out to us on [support@samsara.com](mailto:support@samsara.com)  # Endpoints  All our APIs can be accessed through HTTP requests to URLs like:  ```curl https://api.samsara.com/<version>/<endpoint> ```  All our APIs are [versioned](#section/Versioning). If we intend to make breaking changes to an API which either changes the response format or request parameter, we will increment the version.  # Authentication  To authenticate your API request you will need to include your secret token. You can manage your API tokens in the [Dashboard](https://cloud.samsara.com). They are visible under `Settings->Organization->API Tokens`.  Your API tokens carry many privileges, so be sure to keep them secure. Do not share your secret API tokens in publicly accessible areas such as GitHub, client-side code, and so on.  Authentication to the API is performed via [HTTP Basic Auth](https://en.wikipedia.org/wiki/Basic_access_authentication). Provide your API token as the basic access_token value in the URL. You do not need to provide a password.  ```curl https://api.samsara.com/<version>/<endpoint>?access_token={access_token} ```  All API requests must be made over [HTTPS](https://en.wikipedia.org/wiki/HTTPS). Calls made over plain HTTP or without authentication will fail.  # Request Methods  Our API endpoints use [HTTP request methods](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods) to specify the desired operation to be performed. The documentation below specified request method supported by each endpoint and the resulting action.  ## GET  GET requests are typically used for fetching data (like data for a particular driver).  ## POST  POST requests are typically used for creating or updating a record (like adding new tags to the system). With that being said, a few of our POST requests can be used for fetching data (like current location data of your fleet).  ## PUT  PUT requests are typically used for updating an existing record (like updating all devices associated with a particular tag).  ## PATCH  PATCH requests are typically used for modifying an existing record (like modifying a few devices associated with a particular tag).  ## DELETE  DELETE requests are used for deleting a record (like deleting a tag from the system).  # Response Codes  All API requests will respond with appropriate [HTTP status code](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes). Your API client should handle each response class differently.  ## 2XX  These are successful responses and indicate that the API request returned the expected response.  ## 4XX  These indicate that there was a problem with the request like a missing parameter or invalid values. Check the response for specific [error details](#section/Error-Responses). Requests that respond with a 4XX status code, should be modified before retrying.  ## 5XX  These indicate server errors when the server is unreachable or is misconfigured. In this case, you should retry the API request after some delay.  # Error Responses  In case of a 4XX status code, the body of the response will contain information to briefly explain the error reported. To help debugging the error, you can refer to the following table for understanding the error message.  | Status Code | Message | Description | |-------------|----------------|-------------------------------------------------------------------| | 401 | Invalid token | The API token is invalid and could not be authenticated. Please refer to the [authentication section](#section/Authentication). | | 404 | Page not found | The API endpoint being accessed is invalid. | | 400 | Bad request | Default response for an invalid request. Please check the request to make sure it follows the format specified in the documentation. |  # Versioning  All our APIs are versioned. Our current API version is `v1` and we are continuously working on improving it further and provide additional endpoints. If we intend to make breaking changes to an API which either changes the response format or request parameter, we will increment the version. Thus, you can use our current API version worry free.  # FAQs  Check out our [responses to FAQs here](https://kb.samsara.com/hc/en-us/sections/360000538054-APIs). Don’t see an answer to your question? Reach out to us on [support@samsara.com](mailto:support@samsara.com).
+  		OpenAPI spec version: 1.0.0
+ 	    
+
+  	NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+
+ 		 Do not edit the class manually.
+ 	]"
+	date: "$Date$"
+	revision: "$Revision$"
+	EIS:"Eiffel openapi generator", "src=https://openapi-generator.tech", "protocol=uri"
+class ASSET_REEFER_RESPONSE_REEFER_STATS 
+
+inherit
+
+  ANY
+      redefine
+          out 
+      end
+
+
+feature --Access
+
+    fuel_percentage: detachable LIST [ASSET_REEFER_RESPONSE_REEFER_STATS_FUEL_PERCENTAGE] 
+      -- Fuel percentage of the reefer
+    power_status: detachable LIST [ASSET_REEFER_RESPONSE_REEFER_STATS_POWER_STATUS] 
+      -- Power status of the reefer
+    engine_hours: detachable LIST [ASSET_REEFER_RESPONSE_REEFER_STATS_ENGINE_HOURS] 
+      -- Engine hours of the reefer
+    set_point: detachable LIST [ASSET_REEFER_RESPONSE_REEFER_STATS_SET_POINT] 
+      -- Set point temperature of the reefer
+    return_air_temp: detachable LIST [ASSET_REEFER_RESPONSE_REEFER_STATS_RETURN_AIR_TEMP] 
+      -- Return air temperature of the reefer
+    alarms: detachable LIST [ASSET_REEFER_RESPONSE_REEFER_STATS_ALARMS_1] 
+      -- Reefer alarms
+
+feature -- Change Element  
+ 
+    set_fuel_percentage (a_name: like fuel_percentage)
+        -- Set 'fuel_percentage' with 'a_name'.
+      do
+        fuel_percentage := a_name
+      ensure
+        fuel_percentage_set: fuel_percentage = a_name		
+      end
+
+    set_power_status (a_name: like power_status)
+        -- Set 'power_status' with 'a_name'.
+      do
+        power_status := a_name
+      ensure
+        power_status_set: power_status = a_name		
+      end
+
+    set_engine_hours (a_name: like engine_hours)
+        -- Set 'engine_hours' with 'a_name'.
+      do
+        engine_hours := a_name
+      ensure
+        engine_hours_set: engine_hours = a_name		
+      end
+
+    set_set_point (a_name: like set_point)
+        -- Set 'set_point' with 'a_name'.
+      do
+        set_point := a_name
+      ensure
+        set_point_set: set_point = a_name		
+      end
+
+    set_return_air_temp (a_name: like return_air_temp)
+        -- Set 'return_air_temp' with 'a_name'.
+      do
+        return_air_temp := a_name
+      ensure
+        return_air_temp_set: return_air_temp = a_name		
+      end
+
+    set_alarms (a_name: like alarms)
+        -- Set 'alarms' with 'a_name'.
+      do
+        alarms := a_name
+      ensure
+        alarms_set: alarms = a_name		
+      end
+
+
+ feature -- Status Report
+
+    out: STRING
+          -- <Precursor>
+      do
+        create Result.make_empty
+        Result.append("%Nclass ASSET_REEFER_RESPONSE_REEFER_STATS%N")
+        if attached fuel_percentage as l_fuel_percentage then
+          across l_fuel_percentage as ic loop
+            Result.append ("%N fuel_percentage:")
+            Result.append (ic.item.out)
+            Result.append ("%N")
+          end
+        end 
+        if attached power_status as l_power_status then
+          across l_power_status as ic loop
+            Result.append ("%N power_status:")
+            Result.append (ic.item.out)
+            Result.append ("%N")
+          end
+        end 
+        if attached engine_hours as l_engine_hours then
+          across l_engine_hours as ic loop
+            Result.append ("%N engine_hours:")
+            Result.append (ic.item.out)
+            Result.append ("%N")
+          end
+        end 
+        if attached set_point as l_set_point then
+          across l_set_point as ic loop
+            Result.append ("%N set_point:")
+            Result.append (ic.item.out)
+            Result.append ("%N")
+          end
+        end 
+        if attached return_air_temp as l_return_air_temp then
+          across l_return_air_temp as ic loop
+            Result.append ("%N return_air_temp:")
+            Result.append (ic.item.out)
+            Result.append ("%N")
+          end
+        end 
+        if attached alarms as l_alarms then
+          across l_alarms as ic loop
+            Result.append ("%N alarms:")
+            Result.append (ic.item.out)
+            Result.append ("%N")
+          end
+        end 
+      end
+end
+
+

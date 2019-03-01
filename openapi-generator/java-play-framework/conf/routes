@@ -1,0 +1,125 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+GET     /api                        controllers.ApiDocController.api
+
+
+#Functions for Assets API
+GET     /v1/fleet/assets/locations                     controllers.AssetsApiController.getAllAssetCurrentLocations()
+GET     /v1/fleet/assets                     controllers.AssetsApiController.getAllAssets()
+GET     /v1/fleet/assets/:assetId/locations                     controllers.AssetsApiController.getAssetLocation(assetId: Long)
+GET     /v1/fleet/assets/:assetId/reefer                     controllers.AssetsApiController.getAssetReefer(assetId: Long)
+
+#Functions for Drivers API
+POST     /v1/fleet/drivers/create                     controllers.DriversApiController.createDriver()
+DELETE     /v1/fleet/drivers/:driverIdOrExternalId                     controllers.DriversApiController.deactivateDriver(driverIdOrExternalId: String)
+GET     /v1/fleet/drivers/inactive                     controllers.DriversApiController.getAllDeactivatedDrivers()
+GET     /v1/fleet/drivers/inactive/:driverIdOrExternalId                     controllers.DriversApiController.getDeactivatedDriverById(driverIdOrExternalId: String)
+GET     /v1/fleet/drivers/:driverIdOrExternalId                     controllers.DriversApiController.getDriverById(driverIdOrExternalId: String)
+PUT     /v1/fleet/drivers/inactive/:driverIdOrExternalId                     controllers.DriversApiController.reactivateDriverById(driverIdOrExternalId: String)
+
+#Functions for Fleet API
+POST     /v1/fleet/add_address                     controllers.FleetApiController.addFleetAddress()
+POST     /v1/addresses                     controllers.FleetApiController.addOrganizationAddresses()
+POST     /v1/fleet/dispatch/routes                     controllers.FleetApiController.createDispatchRoute()
+POST     /v1/fleet/drivers/create                     controllers.FleetApiController.createDriver()
+POST     /v1/fleet/drivers/:driverId/dispatch/routes                     controllers.FleetApiController.createDriverDispatchRoute(driverId: Long)
+POST     /v1/fleet/drivers/:driverId/documents                     controllers.FleetApiController.createDriverDocument(driverId: Long)
+POST     /v1/fleet/maintenance/dvirs                     controllers.FleetApiController.createDvir()
+POST     /v1/fleet/vehicles/:vehicleId/dispatch/routes                     controllers.FleetApiController.createVehicleDispatchRoute(vehicleId: Long)
+DELETE     /v1/fleet/drivers/:driverIdOrExternalId                     controllers.FleetApiController.deactivateDriver(driverIdOrExternalId: String)
+DELETE     /v1/fleet/dispatch/routes/:routeId                     controllers.FleetApiController.deleteDispatchRouteById(routeId: Long)
+DELETE     /v1/addresses/:addressId                     controllers.FleetApiController.deleteOrganizationAddress(addressId: Long)
+GET     /v1/fleet/dispatch/routes                     controllers.FleetApiController.fetchAllDispatchRoutes()
+GET     /v1/fleet/dispatch/routes/job_updates                     controllers.FleetApiController.fetchAllRouteJobUpdates()
+GET     /v1/fleet/assets/locations                     controllers.FleetApiController.getAllAssetCurrentLocations()
+GET     /v1/fleet/assets                     controllers.FleetApiController.getAllAssets()
+GET     /v1/fleet/drivers/inactive                     controllers.FleetApiController.getAllDeactivatedDrivers()
+GET     /v1/fleet/assets/:assetId/locations                     controllers.FleetApiController.getAssetLocation(assetId: Long)
+GET     /v1/fleet/assets/:assetId/reefer                     controllers.FleetApiController.getAssetReefer(assetId: Long)
+GET     /v1/fleet/drivers/inactive/:driverIdOrExternalId                     controllers.FleetApiController.getDeactivatedDriverById(driverIdOrExternalId: String)
+GET     /v1/fleet/dispatch/routes/:routeId                     controllers.FleetApiController.getDispatchRouteById(routeId: Long)
+GET     /v1/fleet/dispatch/routes/:routeId/history                     controllers.FleetApiController.getDispatchRouteHistory(routeId: Long)
+GET     /v1/fleet/drivers/:driverId/dispatch/routes                     controllers.FleetApiController.getDispatchRoutesByDriverId(driverId: Long)
+GET     /v1/fleet/vehicles/:vehicleId/dispatch/routes                     controllers.FleetApiController.getDispatchRoutesByVehicleId(vehicleId: Long)
+GET     /v1/fleet/drivers/:driverIdOrExternalId                     controllers.FleetApiController.getDriverById(driverIdOrExternalId: String)
+GET     /v1/fleet/drivers/document_types                     controllers.FleetApiController.getDriverDocumentTypesByOrgId()
+GET     /v1/fleet/drivers/documents                     controllers.FleetApiController.getDriverDocumentsByOrgId()
+GET     /v1/fleet/drivers/:driverId/safety/score                     controllers.FleetApiController.getDriverSafetyScore(driverId: Long)
+GET     /v1/fleet/maintenance/dvirs                     controllers.FleetApiController.getDvirs()
+POST     /v1/fleet/drivers                     controllers.FleetApiController.getFleetDrivers()
+POST     /v1/fleet/drivers/:driverId/hos_daily_logs                     controllers.FleetApiController.getFleetDriversHosDailyLogs(driverId: Long)
+POST     /v1/fleet/drivers/summary                     controllers.FleetApiController.getFleetDriversSummary()
+POST     /v1/fleet/hos_authentication_logs                     controllers.FleetApiController.getFleetHosAuthenticationLogs()
+POST     /v1/fleet/hos_logs                     controllers.FleetApiController.getFleetHosLogs()
+POST     /v1/fleet/hos_logs_summary                     controllers.FleetApiController.getFleetHosLogsSummary()
+POST     /v1/fleet/locations                     controllers.FleetApiController.getFleetLocations()
+POST     /v1/fleet/maintenance/list                     controllers.FleetApiController.getFleetMaintenanceList()
+POST     /v1/fleet/trips                     controllers.FleetApiController.getFleetTrips()
+GET     /v1/fleet/vehicles/:vehicleIdOrExternalId                     controllers.FleetApiController.getFleetVehicle(vehicleIdOrExternalId: String)
+GET     /v1/addresses/:addressId                     controllers.FleetApiController.getOrganizationAddress(addressId: Long)
+GET     /v1/addresses                     controllers.FleetApiController.getOrganizationAddresses()
+GET     /v1/contacts/:contactId                     controllers.FleetApiController.getOrganizationContact(contactId: Long)
+GET     /v1/fleet/vehicles/:vehicleId/safety/harsh_event                     controllers.FleetApiController.getVehicleHarshEvent(vehicleId: Long)
+GET     /v1/fleet/vehicles/:vehicleId/locations                     controllers.FleetApiController.getVehicleLocations(vehicleId: Long)
+GET     /v1/fleet/vehicles/:vehicleId/safety/score                     controllers.FleetApiController.getVehicleSafetyScore(vehicleId: Long)
+GET     /v1/fleet/vehicles/stats                     controllers.FleetApiController.getVehicleStats()
+GET     /v1/fleet/vehicles/locations                     controllers.FleetApiController.getVehiclesLocations()
+GET     /v1/contacts                     controllers.FleetApiController.listContacts()
+POST     /v1/fleet/list                     controllers.FleetApiController.listFleet()
+PATCH     /v1/fleet/vehicles/:vehicleIdOrExternalId                     controllers.FleetApiController.patchFleetVehicle(vehicleIdOrExternalId: String)
+PUT     /v1/fleet/drivers/inactive/:driverIdOrExternalId                     controllers.FleetApiController.reactivateDriverById(driverIdOrExternalId: String)
+PUT     /v1/fleet/dispatch/routes/:routeId                     controllers.FleetApiController.updateDispatchRouteById(routeId: Long)
+PATCH     /v1/addresses/:addressId                     controllers.FleetApiController.updateOrganizationAddress(addressId: Long)
+POST     /v1/fleet/set_data                     controllers.FleetApiController.updateVehicles()
+
+#Functions for Industrial API
+GET     /v1/industrial/data                     controllers.IndustrialApiController.getAllDataInputs()
+GET     /v1/industrial/data/:dataInputId                     controllers.IndustrialApiController.getDataInput(dataInputId: Long)
+POST     /v1/machines/list                     controllers.IndustrialApiController.getMachines()
+POST     /v1/machines/history                     controllers.IndustrialApiController.getMachinesHistory()
+
+#Functions for Routes API
+POST     /v1/fleet/dispatch/routes                     controllers.RoutesApiController.createDispatchRoute()
+POST     /v1/fleet/drivers/:driverId/dispatch/routes                     controllers.RoutesApiController.createDriverDispatchRoute(driverId: Long)
+POST     /v1/fleet/vehicles/:vehicleId/dispatch/routes                     controllers.RoutesApiController.createVehicleDispatchRoute(vehicleId: Long)
+DELETE     /v1/fleet/dispatch/routes/:routeId                     controllers.RoutesApiController.deleteDispatchRouteById(routeId: Long)
+GET     /v1/fleet/dispatch/routes                     controllers.RoutesApiController.fetchAllDispatchRoutes()
+GET     /v1/fleet/dispatch/routes/job_updates                     controllers.RoutesApiController.fetchAllRouteJobUpdates()
+GET     /v1/fleet/dispatch/routes/:routeId                     controllers.RoutesApiController.getDispatchRouteById(routeId: Long)
+GET     /v1/fleet/dispatch/routes/:routeId/history                     controllers.RoutesApiController.getDispatchRouteHistory(routeId: Long)
+GET     /v1/fleet/drivers/:driverId/dispatch/routes                     controllers.RoutesApiController.getDispatchRoutesByDriverId(driverId: Long)
+GET     /v1/fleet/vehicles/:vehicleId/dispatch/routes                     controllers.RoutesApiController.getDispatchRoutesByVehicleId(vehicleId: Long)
+PUT     /v1/fleet/dispatch/routes/:routeId                     controllers.RoutesApiController.updateDispatchRouteById(routeId: Long)
+
+#Functions for Safety API
+GET     /v1/fleet/drivers/:driverId/safety/score                     controllers.SafetyApiController.getDriverSafetyScore(driverId: Long)
+GET     /v1/fleet/vehicles/:vehicleId/safety/harsh_event                     controllers.SafetyApiController.getVehicleHarshEvent(vehicleId: Long)
+GET     /v1/fleet/vehicles/:vehicleId/safety/score                     controllers.SafetyApiController.getVehicleSafetyScore(vehicleId: Long)
+
+#Functions for Sensors API
+POST     /v1/sensors/list                     controllers.SensorsApiController.getSensors()
+POST     /v1/sensors/cargo                     controllers.SensorsApiController.getSensorsCargo()
+POST     /v1/sensors/door                     controllers.SensorsApiController.getSensorsDoor()
+POST     /v1/sensors/history                     controllers.SensorsApiController.getSensorsHistory()
+POST     /v1/sensors/humidity                     controllers.SensorsApiController.getSensorsHumidity()
+POST     /v1/sensors/temperature                     controllers.SensorsApiController.getSensorsTemperature()
+
+#Functions for Tags API
+POST     /v1/tags                     controllers.TagsApiController.createTag()
+DELETE     /v1/tags/:tagId                     controllers.TagsApiController.deleteTagById(tagId: Long)
+GET     /v1/tags                     controllers.TagsApiController.getAllTags()
+GET     /v1/tags/:tagId                     controllers.TagsApiController.getTagById(tagId: Long)
+PATCH     /v1/tags/:tagId                     controllers.TagsApiController.modifyTagById(tagId: Long)
+PUT     /v1/tags/:tagId                     controllers.TagsApiController.updateTagById(tagId: Long)
+
+#Functions for Users API
+DELETE     /v1/users/:userId                     controllers.UsersApiController.deleteUserById(userId: Long)
+GET     /v1/users/:userId                     controllers.UsersApiController.getUserById(userId: Long)
+GET     /v1/user_roles                     controllers.UsersApiController.listUserRoles()
+GET     /v1/users                     controllers.UsersApiController.listUsers()
+
+# Map static resources from the /public folder to the /assets URL path
+GET /assets/*file           controllers.Assets.at(file)
+GET /versionedAssets/*file  controllers.Assets.versioned(file)

@@ -1,0 +1,32 @@
+
+<h2>DocumentField</h2>
+<ul class="parameter">
+  <li class="param-required-false">numberValue : Double
+    <br/>Value of this field if this document field has valueType: ValueType_Number.
+  </li>
+</ul>
+<ul class="parameter">
+  <li class="param-required-false">photoValue : List
+    <br/>Value of this field if this document field has valueType: ValueType_Photo. Array of photo objects where each object contains a URL for a photo.
+  </li>
+</ul>
+<ul class="parameter">
+  <li class="param-required-false">stringValue : String
+    <br/>Value of this field if this document field has valueType: ValueType_String.
+  </li>
+</ul>
+<ul class="parameter">
+  <li class="param-required-true">valueType : String
+    <br/>Determines the type of this field and what type of value this field has. It should be either ValueType_Number, ValueType_String, or ValueType_Photo.
+  </li>
+</ul>
+<ul class="parameter">
+  <li class="param-required-true">label : String
+    <br/>Descriptive name of this field.
+  </li>
+</ul>
+<ul class="parameter">
+  <li class="param-required-false">value : Object
+    <br/>DEPRECATED: Please use stringValue, numberValue, or photoValue instead. Value of this field. Depending on what kind of field it is, this may be one of the following: an array of image urls, a float, an integer, or a string.
+  </li>
+</ul>

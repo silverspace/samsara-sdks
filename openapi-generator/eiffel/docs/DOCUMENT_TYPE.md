@@ -1,0 +1,13 @@
+# DOCUMENT_TYPE
+
+## Properties
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**field_types** | [**LIST [LIST]**](LIST.md) | The field types determine the names of fields for this document type. They also determine the types of values a document submitted for this document type can have. | [optional] [default to null]
+**name** | [**STRING_32**](STRING_32.md) | Name of the document type. | [default to null]
+**org_id** | **INTEGER_64** | ID for the organization this document belongs to. | [default to null]
+**uuid** | [**STRING_32**](STRING_32.md) | Universally unique identifier for the document type. Can be passed in as a documentTypeUuid when creating a document for this document type. | [default to null]
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

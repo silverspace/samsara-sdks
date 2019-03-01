@@ -1,0 +1,415 @@
+cmake_minimum_required (VERSION 2.6)
+project (CGenerator)
+
+cmake_policy(SET CMP0063 NEW)
+
+set(CMAKE_C_VISIBILITY_PRESET default)
+set(CMAKE_CXX_VISIBILITY_PRESET default)
+set(CMAKE_VISIBILITY_INLINES_HIDDEN OFF)
+set(CMAKE_BUILD_TYPE Debug)
+
+set(pkgName "samsara_api")
+
+find_program(VALGRIND valgrind)
+if(VALGRIND)
+	set(CMAKE_MEMORYCHECK_COMMAND valgrind)
+	set(CMAKE_MEMORYCHECK_COMMAND_OPTIONS "--leak-check=full --track-origins=yes --read-var-info=yes --show-leak-kinds=all --error-exitcode=1")
+	set(VALGRIND_LIST "")
+endif()
+
+find_package(CURL 7.58.0 REQUIRED)
+if(CURL_FOUND)
+	include_directories(${CURL_INCLUDE_DIR})
+	set(PLATFORM_LIBRARIES ${PLATFORM_LIBRARIES} ${CURL_LIBRARIES} )
+else(CURL_FOUND)
+	message(FATAL_ERROR "Could not find the CURL library and development files.")
+endif()
+
+set(SRCS
+    src/list.c
+    src/apiKey.c
+    src/apiClient.c
+    external/cJSON.c
+    model/_addresses_addresses.c
+    model/_sensors_history_series.c
+    model/address.c
+    model/address_geofence.c
+    model/address_geofence_circle.c
+    model/address_geofence_polygon.c
+    model/address_geofence_polygon_vertices.c
+    model/all_route_job_updates.c
+    model/asset.c
+    model/asset_cable.c
+    model/asset_current_location.c
+    model/asset_current_locations_response.c
+    model/asset_reefer_response.c
+    model/asset_reefer_response_reefer_stats.c
+    model/asset_reefer_response_reefer_stats_alarms.c
+    model/asset_reefer_response_reefer_stats_alarms_1.c
+    model/asset_reefer_response_reefer_stats_engine_hours.c
+    model/asset_reefer_response_reefer_stats_fuel_percentage.c
+    model/asset_reefer_response_reefer_stats_power_status.c
+    model/asset_reefer_response_reefer_stats_return_air_temp.c
+    model/asset_reefer_response_reefer_stats_set_point.c
+    model/aux_input.c
+    model/aux_input_series.c
+    model/cargo_response.c
+    model/cargo_response_sensors.c
+    model/contact.c
+    model/current_driver.c
+    model/data_input_history_response.c
+    model/data_input_history_response_points.c
+    model/dispatch_job.c
+    model/dispatch_job_create.c
+    model/dispatch_route.c
+    model/dispatch_route_base.c
+    model/dispatch_route_create.c
+    model/dispatch_route_historical_entry.c
+    model/dispatch_route_history.c
+    model/document.c
+    model/document_base.c
+    model/document_create.c
+    model/document_field.c
+    model/document_field_create.c
+    model/document_field_create_photo_value.c
+    model/document_field_type.c
+    model/document_field_type_number_value_type_metadata.c
+    model/document_type.c
+    model/door_response.c
+    model/door_response_sensors.c
+    model/driver.c
+    model/driver_base.c
+    model/driver_daily_log_response.c
+    model/driver_daily_log_response_days.c
+    model/driver_for_create.c
+    model/driver_safety_score_response.c
+    model/drivers_response.c
+    model/drivers_summary_response.c
+    model/drivers_summary_response_summaries.c
+    model/dvir_base.c
+    model/dvir_base_author_signature.c
+    model/dvir_base_mechanic_or_agent_signature.c
+    model/dvir_base_next_driver_signature.c
+    model/dvir_base_trailer_defects.c
+    model/dvir_base_vehicle.c
+    model/dvir_list_response.c
+    model/engine_state.c
+    model/fleet_vehicle_location.c
+    model/fleet_vehicle_response.c
+    model/fleet_vehicle_response_vehicle_info.c
+    model/hos_authentication_logs_response.c
+    model/hos_authentication_logs_response_authentication_logs.c
+    model/hos_logs_response.c
+    model/hos_logs_response_logs.c
+    model/hos_logs_summary_response.c
+    model/hos_logs_summary_response_drivers.c
+    model/humidity_response.c
+    model/humidity_response_sensors.c
+    model/inline_object.c
+    model/inline_object_1.c
+    model/inline_object_10.c
+    model/inline_object_11.c
+    model/inline_object_12.c
+    model/inline_object_13.c
+    model/inline_object_14.c
+    model/inline_object_15.c
+    model/inline_object_16.c
+    model/inline_object_17.c
+    model/inline_object_18.c
+    model/inline_object_19.c
+    model/inline_object_2.c
+    model/inline_object_20.c
+    model/inline_object_21.c
+    model/inline_object_22.c
+    model/inline_object_23.c
+    model/inline_object_24.c
+    model/inline_object_3.c
+    model/inline_object_4.c
+    model/inline_object_5.c
+    model/inline_object_6.c
+    model/inline_object_7.c
+    model/inline_object_8.c
+    model/inline_object_9.c
+    model/inline_response_200.c
+    model/inline_response_200_1.c
+    model/inline_response_200_2.c
+    model/inline_response_200_3.c
+    model/inline_response_200_4.c
+    model/inline_response_200_5.c
+    model/inline_response_200_5_vehicle_stats.c
+    model/inline_response_200_6.c
+    model/inline_response_200_7.c
+    model/inline_response_200_8.c
+    model/inline_response_200_9.c
+    model/job_status.c
+    model/job_update_object.c
+    model/machine.c
+    model/machine_history_response.c
+    model/machine_history_response_machines.c
+    model/machine_history_response_vibrations.c
+    model/pagination.c
+    model/prev_job_status.c
+    model/safety_report_harsh_event.c
+    model/sensor.c
+    model/sensor_history_response.c
+    model/sensor_history_response_results.c
+    model/tag.c
+    model/tag_create.c
+    model/tag_metadata.c
+    model/tag_modify.c
+    model/tag_modify_add.c
+    model/tag_modify_delete.c
+    model/tag_update.c
+    model/tagged_address.c
+    model/tagged_address_base.c
+    model/tagged_asset.c
+    model/tagged_asset_base.c
+    model/tagged_driver.c
+    model/tagged_driver_base.c
+    model/tagged_machine.c
+    model/tagged_machine_base.c
+    model/tagged_sensor.c
+    model/tagged_sensor_base.c
+    model/tagged_vehicle.c
+    model/tagged_vehicle_base.c
+    model/temperature_response.c
+    model/temperature_response_sensors.c
+    model/trip_response.c
+    model/trip_response_end_coordinates.c
+    model/trip_response_start_coordinates.c
+    model/trip_response_trips.c
+    model/user.c
+    model/user_base.c
+    model/user_role.c
+    model/user_tag_role.c
+    model/user_tag_role_tag.c
+    model/vehicle.c
+    model/vehicle_harsh_event_response.c
+    model/vehicle_harsh_event_response_location.c
+    model/vehicle_location.c
+    model/vehicle_maintenance.c
+    model/vehicle_maintenance_j1939.c
+    model/vehicle_maintenance_j1939_check_engine_light.c
+    model/vehicle_maintenance_j1939_diagnostic_trouble_codes.c
+    model/vehicle_maintenance_passenger.c
+    model/vehicle_maintenance_passenger_check_engine_light.c
+    model/vehicle_maintenance_passenger_diagnostic_trouble_codes.c
+    model/vehicle_safety_score_response.c
+    api/AssetsAPI.c
+    api/DriversAPI.c
+    api/FleetAPI.c
+    api/IndustrialAPI.c
+    api/RoutesAPI.c
+    api/SafetyAPI.c
+    api/SensorsAPI.c
+    api/TagsAPI.c
+    api/UsersAPI.c
+
+)
+
+set(HDRS
+    include/apiClient.h
+    include/list.h
+    include/keyValuePair.h
+    external/cJSON.h
+    model/_addresses_addresses.h
+    model/_sensors_history_series.h
+    model/address.h
+    model/address_geofence.h
+    model/address_geofence_circle.h
+    model/address_geofence_polygon.h
+    model/address_geofence_polygon_vertices.h
+    model/all_route_job_updates.h
+    model/asset.h
+    model/asset_cable.h
+    model/asset_current_location.h
+    model/asset_current_locations_response.h
+    model/asset_reefer_response.h
+    model/asset_reefer_response_reefer_stats.h
+    model/asset_reefer_response_reefer_stats_alarms.h
+    model/asset_reefer_response_reefer_stats_alarms_1.h
+    model/asset_reefer_response_reefer_stats_engine_hours.h
+    model/asset_reefer_response_reefer_stats_fuel_percentage.h
+    model/asset_reefer_response_reefer_stats_power_status.h
+    model/asset_reefer_response_reefer_stats_return_air_temp.h
+    model/asset_reefer_response_reefer_stats_set_point.h
+    model/aux_input.h
+    model/aux_input_series.h
+    model/cargo_response.h
+    model/cargo_response_sensors.h
+    model/contact.h
+    model/current_driver.h
+    model/data_input_history_response.h
+    model/data_input_history_response_points.h
+    model/dispatch_job.h
+    model/dispatch_job_create.h
+    model/dispatch_route.h
+    model/dispatch_route_base.h
+    model/dispatch_route_create.h
+    model/dispatch_route_historical_entry.h
+    model/dispatch_route_history.h
+    model/document.h
+    model/document_base.h
+    model/document_create.h
+    model/document_field.h
+    model/document_field_create.h
+    model/document_field_create_photo_value.h
+    model/document_field_type.h
+    model/document_field_type_number_value_type_metadata.h
+    model/document_type.h
+    model/door_response.h
+    model/door_response_sensors.h
+    model/driver.h
+    model/driver_base.h
+    model/driver_daily_log_response.h
+    model/driver_daily_log_response_days.h
+    model/driver_for_create.h
+    model/driver_safety_score_response.h
+    model/drivers_response.h
+    model/drivers_summary_response.h
+    model/drivers_summary_response_summaries.h
+    model/dvir_base.h
+    model/dvir_base_author_signature.h
+    model/dvir_base_mechanic_or_agent_signature.h
+    model/dvir_base_next_driver_signature.h
+    model/dvir_base_trailer_defects.h
+    model/dvir_base_vehicle.h
+    model/dvir_list_response.h
+    model/engine_state.h
+    model/fleet_vehicle_location.h
+    model/fleet_vehicle_response.h
+    model/fleet_vehicle_response_vehicle_info.h
+    model/hos_authentication_logs_response.h
+    model/hos_authentication_logs_response_authentication_logs.h
+    model/hos_logs_response.h
+    model/hos_logs_response_logs.h
+    model/hos_logs_summary_response.h
+    model/hos_logs_summary_response_drivers.h
+    model/humidity_response.h
+    model/humidity_response_sensors.h
+    model/inline_object.h
+    model/inline_object_1.h
+    model/inline_object_10.h
+    model/inline_object_11.h
+    model/inline_object_12.h
+    model/inline_object_13.h
+    model/inline_object_14.h
+    model/inline_object_15.h
+    model/inline_object_16.h
+    model/inline_object_17.h
+    model/inline_object_18.h
+    model/inline_object_19.h
+    model/inline_object_2.h
+    model/inline_object_20.h
+    model/inline_object_21.h
+    model/inline_object_22.h
+    model/inline_object_23.h
+    model/inline_object_24.h
+    model/inline_object_3.h
+    model/inline_object_4.h
+    model/inline_object_5.h
+    model/inline_object_6.h
+    model/inline_object_7.h
+    model/inline_object_8.h
+    model/inline_object_9.h
+    model/inline_response_200.h
+    model/inline_response_200_1.h
+    model/inline_response_200_2.h
+    model/inline_response_200_3.h
+    model/inline_response_200_4.h
+    model/inline_response_200_5.h
+    model/inline_response_200_5_vehicle_stats.h
+    model/inline_response_200_6.h
+    model/inline_response_200_7.h
+    model/inline_response_200_8.h
+    model/inline_response_200_9.h
+    model/job_status.h
+    model/job_update_object.h
+    model/machine.h
+    model/machine_history_response.h
+    model/machine_history_response_machines.h
+    model/machine_history_response_vibrations.h
+    model/pagination.h
+    model/prev_job_status.h
+    model/safety_report_harsh_event.h
+    model/sensor.h
+    model/sensor_history_response.h
+    model/sensor_history_response_results.h
+    model/tag.h
+    model/tag_create.h
+    model/tag_metadata.h
+    model/tag_modify.h
+    model/tag_modify_add.h
+    model/tag_modify_delete.h
+    model/tag_update.h
+    model/tagged_address.h
+    model/tagged_address_base.h
+    model/tagged_asset.h
+    model/tagged_asset_base.h
+    model/tagged_driver.h
+    model/tagged_driver_base.h
+    model/tagged_machine.h
+    model/tagged_machine_base.h
+    model/tagged_sensor.h
+    model/tagged_sensor_base.h
+    model/tagged_vehicle.h
+    model/tagged_vehicle_base.h
+    model/temperature_response.h
+    model/temperature_response_sensors.h
+    model/trip_response.h
+    model/trip_response_end_coordinates.h
+    model/trip_response_start_coordinates.h
+    model/trip_response_trips.h
+    model/user.h
+    model/user_base.h
+    model/user_role.h
+    model/user_tag_role.h
+    model/user_tag_role_tag.h
+    model/vehicle.h
+    model/vehicle_harsh_event_response.h
+    model/vehicle_harsh_event_response_location.h
+    model/vehicle_location.h
+    model/vehicle_maintenance.h
+    model/vehicle_maintenance_j1939.h
+    model/vehicle_maintenance_j1939_check_engine_light.h
+    model/vehicle_maintenance_j1939_diagnostic_trouble_codes.h
+    model/vehicle_maintenance_passenger.h
+    model/vehicle_maintenance_passenger_check_engine_light.h
+    model/vehicle_maintenance_passenger_diagnostic_trouble_codes.h
+    model/vehicle_safety_score_response.h
+    api/AssetsAPI.h
+    api/DriversAPI.h
+    api/FleetAPI.h
+    api/IndustrialAPI.h
+    api/RoutesAPI.h
+    api/SafetyAPI.h
+    api/SensorsAPI.h
+    api/TagsAPI.h
+    api/UsersAPI.h
+
+)
+
+add_library(${pkgName} SHARED ${SRCS} ${HDRS})
+target_link_libraries(${pkgName} ${CURL_LIBRARIES} )
+install(TARGETS ${pkgName} DESTINATION ${CMAKE_INSTALL_PREFIX})
+
+#For common coding standard (code beautifier/pretty printing)
+find_program(UNCRUSTIFY uncrustify)
+if(UNCRUSTIFY)
+	add_custom_target(
+		uncrustify
+	)
+
+	foreach(ELEMENT ${ALL_SRC_LIST})
+		string(REGEX REPLACE "/" "_" ELEMENT_NAME ${ELEMENT})
+		set(DEP_NAME "uncrustify-${ELEMENT_NAME}")
+		add_custom_target(
+			${DEP_NAME}
+			uncrustify -c uncrustify-rules.cfg --no-backup ${ELEMENT}
+			DEPENDS ${ELEMENT}
+			WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+			VERBATIM
+		)
+		add_dependencies(uncrustify ${DEP_NAME})
+	endforeach()
+endif()

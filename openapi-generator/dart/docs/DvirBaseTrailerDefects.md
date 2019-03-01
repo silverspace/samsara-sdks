@@ -1,0 +1,16 @@
+# openapi.model.DvirBaseTrailerDefects
+
+## Load the model package
+```dart
+import 'package:openapi/api.dart';
+```
+
+## Properties
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**comment** | **String** | The comment describing the type of DVIR defect | [optional] [default to null]
+**defectType** | **String** | The type of DVIR defect | [optional] [default to null]
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+
