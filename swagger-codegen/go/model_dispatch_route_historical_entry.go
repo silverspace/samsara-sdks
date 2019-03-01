@@ -11,6 +11,6 @@ package samsara
 
 type DispatchRouteHistoricalEntry struct {
 	// Timestamp that the route was updated, represented as Unix milliseconds since epoch.
-	ChangedAtMs int64 `json:"changed_at_ms,omitempty"`
-	Route *DispatchRoute `json:"route,omitempty"`
+	ChangedAtMs int64          `json:"changed_at_ms,omitempty"`
+	Route       *DispatchRoute `json:"route,omitempty"`
 }

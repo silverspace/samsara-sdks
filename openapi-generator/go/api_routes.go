@@ -11,12 +11,12 @@ package openapi
 
 import (
 	"context"
+	"fmt"
+	"github.com/antihax/optional"
 	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strings"
-	"fmt"
-	"github.com/antihax/optional"
 )
 
 // Linger please
@@ -425,8 +425,8 @@ Fetch all of the dispatch routes for the group.
 */
 
 type FetchAllDispatchRoutesOpts struct {
-	GroupId optional.Int64
-	EndTime optional.Int64
+	GroupId  optional.Int64
+	EndTime  optional.Int64
 	Duration optional.Int64
 }
 
@@ -543,9 +543,9 @@ Fetch all updates to a job including route data in the last 24 hours or subseque
 */
 
 type FetchAllRouteJobUpdatesOpts struct {
-	GroupId optional.Int64
+	GroupId    optional.Int64
 	SequenceId optional.String
-	Include optional.String
+	Include    optional.String
 }
 
 func (a *RoutesApiService) FetchAllRouteJobUpdates(ctx context.Context, accessToken string, localVarOptionals *FetchAllRouteJobUpdatesOpts) (AllRouteJobUpdates, *http.Response, error) {
@@ -762,7 +762,7 @@ Fetch the history of a dispatch route.
 
 type GetDispatchRouteHistoryOpts struct {
 	StartTime optional.Int64
-	EndTime optional.Int64
+	EndTime   optional.Int64
 }
 
 func (a *RoutesApiService) GetDispatchRouteHistory(ctx context.Context, accessToken string, routeId int64, localVarOptionals *GetDispatchRouteHistoryOpts) (DispatchRouteHistory, *http.Response, error) {
@@ -876,7 +876,7 @@ Fetch all of the dispatch routes for a given driver.
 */
 
 type GetDispatchRoutesByDriverIdOpts struct {
-	EndTime optional.Int64
+	EndTime  optional.Int64
 	Duration optional.Int64
 }
 
@@ -991,7 +991,7 @@ Fetch all of the dispatch routes for a given vehicle.
 */
 
 type GetDispatchRoutesByVehicleIdOpts struct {
-	EndTime optional.Int64
+	EndTime  optional.Int64
 	Duration optional.Int64
 }
 

@@ -11,12 +11,12 @@ package openapi
 
 import (
 	"context"
+	"fmt"
+	"github.com/antihax/optional"
 	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strings"
-	"fmt"
-	"github.com/antihax/optional"
 )
 
 // Linger please
@@ -1069,8 +1069,8 @@ Fetch all of the dispatch routes for the group.
 */
 
 type FetchAllDispatchRoutesOpts struct {
-	GroupId optional.Int64
-	EndTime optional.Int64
+	GroupId  optional.Int64
+	EndTime  optional.Int64
 	Duration optional.Int64
 }
 
@@ -1187,9 +1187,9 @@ Fetch all updates to a job including route data in the last 24 hours or subseque
 */
 
 type FetchAllRouteJobUpdatesOpts struct {
-	GroupId optional.Int64
+	GroupId    optional.Int64
 	SequenceId optional.String
-	Include optional.String
+	Include    optional.String
 }
 
 func (a *FleetApiService) FetchAllRouteJobUpdates(ctx context.Context, accessToken string, localVarOptionals *FetchAllRouteJobUpdatesOpts) (AllRouteJobUpdates, *http.Response, error) {
@@ -2038,7 +2038,7 @@ Fetch the history of a dispatch route.
 
 type GetDispatchRouteHistoryOpts struct {
 	StartTime optional.Int64
-	EndTime optional.Int64
+	EndTime   optional.Int64
 }
 
 func (a *FleetApiService) GetDispatchRouteHistory(ctx context.Context, accessToken string, routeId int64, localVarOptionals *GetDispatchRouteHistoryOpts) (DispatchRouteHistory, *http.Response, error) {
@@ -2152,7 +2152,7 @@ Fetch all of the dispatch routes for a given driver.
 */
 
 type GetDispatchRoutesByDriverIdOpts struct {
-	EndTime optional.Int64
+	EndTime  optional.Int64
 	Duration optional.Int64
 }
 
@@ -2267,7 +2267,7 @@ Fetch all of the dispatch routes for a given vehicle.
 */
 
 type GetDispatchRoutesByVehicleIdOpts struct {
-	EndTime optional.Int64
+	EndTime  optional.Int64
 	Duration optional.Int64
 }
 
@@ -2577,7 +2577,7 @@ Fetch all of the documents.
 */
 
 type GetDriverDocumentsByOrgIdOpts struct {
-	EndMs optional.Int64
+	EndMs      optional.Int64
 	DurationMs optional.Int64
 }
 
@@ -4540,11 +4540,11 @@ Fetch engine state and aux input data for all vehicles in the group between a st
 */
 
 type GetVehicleStatsOpts struct {
-	Series optional.String
-	TagIds optional.String
+	Series        optional.String
+	TagIds        optional.String
 	StartingAfter optional.String
-	EndingBefore optional.String
-	Limit optional.Int64
+	EndingBefore  optional.String
+	Limit         optional.Int64
 }
 
 func (a *FleetApiService) GetVehicleStats(ctx context.Context, accessToken string, startMs int32, endMs int32, localVarOptionals *GetVehicleStatsOpts) (InlineResponse2005, *http.Response, error) {
@@ -4870,8 +4870,8 @@ Get list of the vehicles. This method returns a list of the vehicles in the Sams
 
 type ListFleetOpts struct {
 	StartingAfter optional.String
-	EndingBefore optional.String
-	Limit optional.Int64
+	EndingBefore  optional.String
+	Limit         optional.Int64
 }
 
 func (a *FleetApiService) ListFleet(ctx context.Context, accessToken string, groupParam InlineObject10, localVarOptionals *ListFleetOpts) (InlineResponse2002, *http.Response, error) {

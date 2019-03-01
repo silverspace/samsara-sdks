@@ -11,7 +11,7 @@ package samsara
 
 type FleetVehiclesLocationsInner struct {
 	// ID of the vehicle.
-	Id int64 `json:"id,omitempty"`
+	Id        int64                  `json:"id,omitempty"`
 	Locations *FleetVehicleLocations `json:"locations,omitempty"`
 	// Name of the vehicle.
 	Name string `json:"name,omitempty"`

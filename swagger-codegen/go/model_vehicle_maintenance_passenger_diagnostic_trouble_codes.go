@@ -11,6 +11,6 @@ package samsara
 
 type VehicleMaintenancePassengerDiagnosticTroubleCodes struct {
 	DtcDescription string `json:"dtcDescription,omitempty"`
-	DtcId int32 `json:"dtcId,omitempty"`
-	DtcShortCode string `json:"dtcShortCode,omitempty"`
+	DtcId          int32  `json:"dtcId,omitempty"`
+	DtcShortCode   string `json:"dtcShortCode,omitempty"`
 }

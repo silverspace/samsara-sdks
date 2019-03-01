@@ -40,9 +40,9 @@ type DispatchJob struct {
 	EstimatedArrivalMs int64 `json:"estimated_arrival_ms,omitempty"`
 	// Fleet viewer url of the dispatch job.
 	FleetViewerUrl string `json:"fleet_viewer_url,omitempty"`
-	GroupId int64 `json:"group_id"`
+	GroupId        int64  `json:"group_id"`
 	// ID of the Samsara dispatch job.
-	Id int64 `json:"id"`
+	Id       int64     `json:"id"`
 	JobState JobStatus `json:"job_state"`
 	// The time at which the job was marked skipped.
 	SkippedAtMs int64 `json:"skipped_at_ms,omitempty"`

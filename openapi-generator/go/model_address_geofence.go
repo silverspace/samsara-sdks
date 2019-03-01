@@ -11,6 +11,6 @@ package openapi
 
 // The geofence that defines this address and its bounds. This can either be a circle, or a polygon - only one key should be provided, depending on the geofence type.
 type AddressGeofence struct {
-	Circle AddressGeofenceCircle `json:"circle,omitempty"`
+	Circle  AddressGeofenceCircle  `json:"circle,omitempty"`
 	Polygon AddressGeofencePolygon `json:"polygon,omitempty"`
 }

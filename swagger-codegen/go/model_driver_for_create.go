@@ -43,6 +43,6 @@ type DriverForCreate struct {
 	// ID of the vehicle assigned to the driver for static vehicle assignments. (uncommon).
 	VehicleId int64 `json:"vehicleId,omitempty"`
 	// Driver's password for the driver app.
-	Password string `json:"password"`
-	TagIds *TagIds `json:"tagIds,omitempty"`
+	Password string  `json:"password"`
+	TagIds   *TagIds `json:"tagIds,omitempty"`
 }

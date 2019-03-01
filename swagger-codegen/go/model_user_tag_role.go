@@ -13,6 +13,6 @@ type UserTagRole struct {
 	// The name of the role the user has been granted on this tag.
 	Role string `json:"role,omitempty"`
 	// The id of the role the user has been granted on this tag.
-	RoleId string `json:"roleId"`
-	Tag *UserTagRoleTag `json:"tag"`
+	RoleId string          `json:"roleId"`
+	Tag    *UserTagRoleTag `json:"tag"`
 }

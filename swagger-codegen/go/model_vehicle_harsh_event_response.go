@@ -22,6 +22,6 @@ type VehicleHarshEventResponse struct {
 	// URL of the associated incident report page
 	IncidentReportUrl string `json:"incidentReportUrl"`
 	// Whether the driver was deemed distracted during this harsh event
-	IsDistracted bool `json:"isDistracted,omitempty"`
-	Location *VehicleHarshEventResponseLocation `json:"location,omitempty"`
+	IsDistracted bool                               `json:"isDistracted,omitempty"`
+	Location     *VehicleHarshEventResponseLocation `json:"location,omitempty"`
 }

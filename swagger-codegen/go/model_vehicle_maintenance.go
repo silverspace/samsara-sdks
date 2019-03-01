@@ -12,7 +12,7 @@ package samsara
 // Contains any J1939/Passenger engine light warnings and engine faults.
 type VehicleMaintenance struct {
 	// ID of the vehicle.
-	Id int64 `json:"id"`
-	J1939 *VehicleMaintenanceJ1939 `json:"j1939,omitempty"`
+	Id        int64                        `json:"id"`
+	J1939     *VehicleMaintenanceJ1939     `json:"j1939,omitempty"`
 	Passenger *VehicleMaintenancePassenger `json:"passenger,omitempty"`
 }

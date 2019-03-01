@@ -11,8 +11,8 @@ package openapi
 
 // J1939 check engine lights.
 type VehicleMaintenanceJ1939CheckEngineLight struct {
-	ProtectIsOn bool `json:"protectIsOn,omitempty"`
-	StopIsOn bool `json:"stopIsOn,omitempty"`
-	WarningIsOn bool `json:"warningIsOn,omitempty"`
+	ProtectIsOn   bool `json:"protectIsOn,omitempty"`
+	StopIsOn      bool `json:"stopIsOn,omitempty"`
+	WarningIsOn   bool `json:"warningIsOn,omitempty"`
 	EmissionsIsOn bool `json:"emissionsIsOn,omitempty"`
 }

@@ -11,6 +11,6 @@ package openapi
 
 // Contains the current temperatures of a sensor.
 type TemperatureResponse struct {
-	GroupId int64 `json:"groupId,omitempty"`
+	GroupId int64                        `json:"groupId,omitempty"`
 	Sensors []TemperatureResponseSensors `json:"sensors,omitempty"`
 }

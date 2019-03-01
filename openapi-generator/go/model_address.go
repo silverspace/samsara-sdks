@@ -13,13 +13,13 @@ package openapi
 type Address struct {
 	Contacts []Contact `json:"contacts,omitempty"`
 	// The full address associated with this address/geofence, as it might be recognized by maps.google.com
-	FormattedAddress string `json:"formattedAddress,omitempty"`
-	Geofence AddressGeofence `json:"geofence,omitempty"`
+	FormattedAddress string          `json:"formattedAddress,omitempty"`
+	Geofence         AddressGeofence `json:"geofence,omitempty"`
 	// ID of the address
 	Id int64 `json:"id,omitempty"`
 	// Name of the address or geofence
 	Name string `json:"name,omitempty"`
 	// Notes associated with an address.
-	Notes string `json:"notes,omitempty"`
-	Tags []TagMetadata `json:"tags,omitempty"`
+	Notes string        `json:"notes,omitempty"`
+	Tags  []TagMetadata `json:"tags,omitempty"`
 }

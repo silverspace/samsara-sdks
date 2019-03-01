@@ -13,10 +13,10 @@ type JobUpdateObject struct {
 	// Timestamp that this event was updated, represented as Unix milliseconds since epoch.
 	ChangedAtMs int64 `json:"changed_at_ms,omitempty"`
 	// ID of the Samsara job.
-	JobId int64 `json:"job_id,omitempty"`
-	JobState *JobStatus `json:"job_state,omitempty"`
+	JobId        int64          `json:"job_id,omitempty"`
+	JobState     *JobStatus     `json:"job_state,omitempty"`
 	PrevJobState *PrevJobStatus `json:"prev_job_state,omitempty"`
-	Route *DispatchRoute `json:"route,omitempty"`
+	Route        *DispatchRoute `json:"route,omitempty"`
 	// ID of the Samsara dispatch route.
 	RouteId int64 `json:"route_id,omitempty"`
 }

@@ -13,8 +13,8 @@ type AddressesAddresses struct {
 	// Notes associated with an address.
 	Notes string `json:"notes,omitempty"`
 	// The full address associated with this address/geofence, as it might be recognized by maps.google.com
-	FormattedAddress string `json:"formattedAddress"`
-	Geofence AddressGeofence `json:"geofence"`
+	FormattedAddress string          `json:"formattedAddress"`
+	Geofence         AddressGeofence `json:"geofence"`
 	// A list of tag IDs.
 	TagIds []int64 `json:"tagIds,omitempty"`
 	// The name of this address/geofence

@@ -10,9 +10,9 @@
 package samsara
 
 type InlineResponse2005VehicleStats struct {
-	AuxInput1 *AuxInputSeries `json:"auxInput1,omitempty"`
-	AuxInput2 *AuxInputSeries `json:"auxInput2,omitempty"`
-	EngineState []EngineState `json:"engineState,omitempty"`
+	AuxInput1   *AuxInputSeries `json:"auxInput1,omitempty"`
+	AuxInput2   *AuxInputSeries `json:"auxInput2,omitempty"`
+	EngineState []EngineState   `json:"engineState,omitempty"`
 	// ID of the vehicle.
 	VehicleId int64 `json:"vehicleId"`
 }

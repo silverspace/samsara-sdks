@@ -11,12 +11,12 @@ package openapi
 
 import (
 	"context"
+	"fmt"
+	"github.com/antihax/optional"
 	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strings"
-	"fmt"
-	"github.com/antihax/optional"
 )
 
 // Linger please
@@ -41,7 +41,7 @@ Fetch all of the data inputs for a group.
 type GetAllDataInputsOpts struct {
 	GroupId optional.Int64
 	StartMs optional.Int64
-	EndMs optional.Int64
+	EndMs   optional.Int64
 }
 
 func (a *IndustrialApiService) GetAllDataInputs(ctx context.Context, accessToken string, localVarOptionals *GetAllDataInputsOpts) (InlineResponse2006, *http.Response, error) {
@@ -158,7 +158,7 @@ Fetch datapoints from a given data input.
 
 type GetDataInputOpts struct {
 	StartMs optional.Int64
-	EndMs optional.Int64
+	EndMs   optional.Int64
 }
 
 func (a *IndustrialApiService) GetDataInput(ctx context.Context, accessToken string, dataInputId int64, localVarOptionals *GetDataInputOpts) (DataInputHistoryResponse, *http.Response, error) {

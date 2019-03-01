@@ -12,6 +12,6 @@ package samsara
 // A list of aux input values over a timerange.
 type AuxInputSeries struct {
 	// The name of the aux input.
-	Name string `json:"name"`
+	Name   string     `json:"name"`
 	Values []AuxInput `json:"values"`
 }

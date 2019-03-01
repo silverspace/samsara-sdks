@@ -20,9 +20,9 @@ type DvirBase struct {
 	// Inspection type of the DVIR.
 	InspectionType string `json:"inspectionType,omitempty"`
 	// The mechanics notes on the DVIR.
-	MechanicNotes string `json:"mechanicNotes,omitempty"`
+	MechanicNotes            string                           `json:"mechanicNotes,omitempty"`
 	MechanicOrAgentSignature DvirBaseMechanicOrAgentSignature `json:"mechanicOrAgentSignature,omitempty"`
-	NextDriverSignature DvirBaseNextDriverSignature `json:"nextDriverSignature,omitempty"`
+	NextDriverSignature      DvirBaseNextDriverSignature      `json:"nextDriverSignature,omitempty"`
 	// The odometer reading in miles for the vehicle when the DVIR was done.
 	OdometerMiles int64 `json:"odometerMiles,omitempty"`
 	// Timestamp of this DVIR in UNIX milliseconds.
@@ -32,8 +32,8 @@ type DvirBase struct {
 	// The id of the trailer which was part of the DVIR.
 	TrailerId int32 `json:"trailerId,omitempty"`
 	// The name of the trailer which was part of the DVIR.
-	TrailerName string `json:"trailerName,omitempty"`
-	Vehicle DvirBaseVehicle `json:"vehicle,omitempty"`
+	TrailerName string          `json:"trailerName,omitempty"`
+	Vehicle     DvirBaseVehicle `json:"vehicle,omitempty"`
 	// The condition of vechile on which DVIR was done.
 	VehicleCondition string `json:"vehicleCondition,omitempty"`
 	// Defects registered for the vehicle which was part of the DVIR.

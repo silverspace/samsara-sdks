@@ -10,6 +10,6 @@
 package samsara
 
 type DataInputHistoryResponsePoints struct {
-	TimeMs int64 `json:"timeMs,omitempty"`
-	Value float64 `json:"value,omitempty"`
+	TimeMs int64   `json:"timeMs,omitempty"`
+	Value  float64 `json:"value,omitempty"`
 }

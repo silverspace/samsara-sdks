@@ -45,6 +45,6 @@ type Driver struct {
 	// ID of the driver.
 	Id int64 `json:"id"`
 	// True if the driver account has been deactivated.
-	IsDeactivated bool `json:"isDeactivated,omitempty"`
-	Tags []TagMetadata `json:"tags,omitempty"`
+	IsDeactivated bool          `json:"isDeactivated,omitempty"`
+	Tags          []TagMetadata `json:"tags,omitempty"`
 }

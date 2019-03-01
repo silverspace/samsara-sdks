@@ -11,6 +11,6 @@ package openapi
 
 type InlineResponse2003 struct {
 	// Group ID to query.
-	GroupId int64 `json:"groupId,omitempty"`
+	GroupId  int64             `json:"groupId,omitempty"`
 	Vehicles []VehicleLocation `json:"vehicles,omitempty"`
 }

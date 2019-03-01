@@ -12,10 +12,10 @@ package samsara
 type AddressesAddresses struct {
 	ContactIds *ContactIds `json:"contactIds,omitempty"`
 	// The full address associated with this address/geofence, as it might be recognized by maps.google.com
-	FormattedAddress string `json:"formattedAddress"`
-	Geofence *AddressGeofence `json:"geofence"`
+	FormattedAddress string           `json:"formattedAddress"`
+	Geofence         *AddressGeofence `json:"geofence"`
 	// The name of this address/geofence
-	Name string `json:"name"`
-	Notes *AddressNotes `json:"notes,omitempty"`
-	TagIds *TagIds `json:"tagIds,omitempty"`
+	Name   string        `json:"name"`
+	Notes  *AddressNotes `json:"notes,omitempty"`
+	TagIds *TagIds       `json:"tagIds,omitempty"`
 }

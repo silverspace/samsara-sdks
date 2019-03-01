@@ -12,7 +12,7 @@ package samsara
 // J1939 check engine lights.
 type VehicleMaintenanceJ1939CheckEngineLight struct {
 	EmissionsIsOn bool `json:"emissionsIsOn,omitempty"`
-	ProtectIsOn bool `json:"protectIsOn,omitempty"`
-	StopIsOn bool `json:"stopIsOn,omitempty"`
-	WarningIsOn bool `json:"warningIsOn,omitempty"`
+	ProtectIsOn   bool `json:"protectIsOn,omitempty"`
+	StopIsOn      bool `json:"stopIsOn,omitempty"`
+	WarningIsOn   bool `json:"warningIsOn,omitempty"`
 }

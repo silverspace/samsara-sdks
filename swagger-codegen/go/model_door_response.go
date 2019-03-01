@@ -11,6 +11,6 @@ package samsara
 
 // Contains the current door status of a sensor.
 type DoorResponse struct {
-	GroupId int64 `json:"groupId,omitempty"`
+	GroupId int64                 `json:"groupId,omitempty"`
 	Sensors []DoorResponseSensors `json:"sensors,omitempty"`
 }

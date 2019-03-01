@@ -10,10 +10,10 @@
 package openapi
 
 type VehicleMaintenanceJ1939DiagnosticTroubleCodes struct {
-	SpnDescription string `json:"spnDescription,omitempty"`
-	FmiText string `json:"fmiText,omitempty"`
-	SpnId int32 `json:"spnId,omitempty"`
-	OccurrenceCount int32 `json:"occurrenceCount,omitempty"`
-	TxId int32 `json:"txId,omitempty"`
-	FmiId int32 `json:"fmiId,omitempty"`
+	SpnDescription  string `json:"spnDescription,omitempty"`
+	FmiText         string `json:"fmiText,omitempty"`
+	SpnId           int32  `json:"spnId,omitempty"`
+	OccurrenceCount int32  `json:"occurrenceCount,omitempty"`
+	TxId            int32  `json:"txId,omitempty"`
+	FmiId           int32  `json:"fmiId,omitempty"`
 }

@@ -17,6 +17,6 @@ type FleetVehicleResponse struct {
 	// ID of the vehicle.
 	Id int64 `json:"id"`
 	// Name of the vehicle.
-	Name string `json:"name"`
+	Name        string                           `json:"name"`
 	VehicleInfo *FleetVehicleResponseVehicleInfo `json:"vehicleInfo,omitempty"`
 }

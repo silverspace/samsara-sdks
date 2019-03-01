@@ -31,6 +31,6 @@ type HosLogsResponseLogs struct {
 	// State in which the log was recorded.
 	LocState string `json:"locState,omitempty"`
 	// ID of the vehicle.
-	VehicleId int64 `json:"vehicleId,omitempty"`
+	VehicleId   int64   `json:"vehicleId,omitempty"`
 	CodriverIds []int64 `json:"codriverIds,omitempty"`
 }

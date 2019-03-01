@@ -11,6 +11,6 @@ package samsara
 
 type VehicleUpdateParam struct {
 	// Group ID to query.
-	GroupId int64 `json:"groupId"`
+	GroupId  int64     `json:"groupId"`
 	Vehicles []Vehicle `json:"vehicles"`
 }

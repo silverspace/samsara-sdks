@@ -10,8 +10,8 @@
 package openapi
 
 type MachineHistoryResponseVibrations struct {
-	X float64 `json:"X,omitempty"`
-	Y float64 `json:"Y,omitempty"`
-	Z float64 `json:"Z,omitempty"`
-	Time int64 `json:"time,omitempty"`
+	X    float64 `json:"X,omitempty"`
+	Y    float64 `json:"Y,omitempty"`
+	Z    float64 `json:"Z,omitempty"`
+	Time int64   `json:"time,omitempty"`
 }

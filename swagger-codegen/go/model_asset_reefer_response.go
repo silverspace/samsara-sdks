@@ -16,6 +16,6 @@ type AssetReeferResponse struct {
 	// Asset ID
 	Id int32 `json:"id,omitempty"`
 	// Asset name
-	Name string `json:"name,omitempty"`
+	Name        string                          `json:"name,omitempty"`
 	ReeferStats *AssetReeferResponseReeferStats `json:"reeferStats,omitempty"`
 }

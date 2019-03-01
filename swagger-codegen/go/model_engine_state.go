@@ -13,5 +13,5 @@ package samsara
 type EngineState struct {
 	// Timestamp in Unix epoch milliseconds.
 	TimeMs float32 `json:"timeMs"`
-	Value string `json:"value"`
+	Value  string  `json:"value"`
 }

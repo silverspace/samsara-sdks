@@ -11,11 +11,11 @@ package samsara
 
 type HistoryParam1 struct {
 	// End of the time range, specified in milliseconds UNIX time.
-	EndMs int32 `json:"endMs"`
+	EndMs       int32  `json:"endMs"`
 	FillMissing string `json:"fillMissing,omitempty"`
 	// Group ID to query.
-	GroupId int64 `json:"groupId"`
-	Series []SensorshistorySeries `json:"series"`
+	GroupId int64                  `json:"groupId"`
+	Series  []SensorshistorySeries `json:"series"`
 	// Beginning of the time range, specified in milliseconds UNIX time.
 	StartMs int32 `json:"startMs"`
 	// Time resolution for which data should be returned, in milliseconds. Specifying 3600000 will return data at hour intervals.

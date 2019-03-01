@@ -8,15 +8,16 @@
  */
 
 package openapi
+
 // PrevJobStatus : The previous state of the dispatch job.
 type PrevJobStatus string
 
 // List of prevJobStatus
 const (
 	UNASSIGNED PrevJobStatus = "JobState_Unassigned"
-	SCHEDULED PrevJobStatus = "JobState_Scheduled"
-	EN_ROUTE PrevJobStatus = "JobState_EnRoute"
-	ARRIVED PrevJobStatus = "JobState_Arrived"
-	COMPLETED PrevJobStatus = "JobState_Completed"
-	SKIPPED PrevJobStatus = "JobState_Skipped"
+	SCHEDULED  PrevJobStatus = "JobState_Scheduled"
+	EN_ROUTE   PrevJobStatus = "JobState_EnRoute"
+	ARRIVED    PrevJobStatus = "JobState_Arrived"
+	COMPLETED  PrevJobStatus = "JobState_Completed"
+	SKIPPED    PrevJobStatus = "JobState_Skipped"
 )

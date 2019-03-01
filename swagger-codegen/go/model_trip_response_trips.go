@@ -15,7 +15,7 @@ type TripResponseTrips struct {
 	// ID of the driver.
 	DriverId int32 `json:"driverId,omitempty"`
 	// Text representation of nearest identifiable location to the end (latitude, longitude) coordinates.
-	EndAddress string `json:"endAddress,omitempty"`
+	EndAddress     string                      `json:"endAddress,omitempty"`
 	EndCoordinates *TripResponseEndCoordinates `json:"endCoordinates,omitempty"`
 	// Geocoded street address of start (latitude, longitude) coordinates.
 	EndLocation string `json:"endLocation,omitempty"`
@@ -26,7 +26,7 @@ type TripResponseTrips struct {
 	// Amount in milliliters of fuel consumed on this trip.
 	FuelConsumedMl int32 `json:"fuelConsumedMl,omitempty"`
 	// Text representation of nearest identifiable location to the start (latitude, longitude) coordinates.
-	StartAddress string `json:"startAddress,omitempty"`
+	StartAddress     string                        `json:"startAddress,omitempty"`
 	StartCoordinates *TripResponseStartCoordinates `json:"startCoordinates,omitempty"`
 	// Geocoded street address of start (latitude, longitude) coordinates.
 	StartLocation string `json:"startLocation,omitempty"`

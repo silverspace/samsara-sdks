@@ -10,6 +10,6 @@
 package openapi
 
 type InlineResponse2005 struct {
-	Pagination Pagination `json:"pagination,omitempty"`
+	Pagination   Pagination                       `json:"pagination,omitempty"`
 	VehicleStats []InlineResponse2005VehicleStats `json:"vehicleStats"`
 }

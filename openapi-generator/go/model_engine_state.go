@@ -13,5 +13,5 @@ package openapi
 type EngineState struct {
 	// Timestamp in Unix epoch milliseconds.
 	TimeMs map[string]interface{} `json:"timeMs"`
-	Value string `json:"value"`
+	Value  string                 `json:"value"`
 }

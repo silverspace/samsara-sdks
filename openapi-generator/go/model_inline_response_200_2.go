@@ -12,6 +12,6 @@ package openapi
 type InlineResponse2002 struct {
 	Pagination Pagination `json:"pagination,omitempty"`
 	// Group ID to query.
-	GroupId int64 `json:"groupId,omitempty"`
+	GroupId  int64     `json:"groupId,omitempty"`
 	Vehicles []Vehicle `json:"vehicles,omitempty"`
 }

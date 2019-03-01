@@ -11,6 +11,6 @@ package openapi
 
 // Contains the current cargo status of a sensor.
 type CargoResponse struct {
-	GroupId int64 `json:"groupId,omitempty"`
+	GroupId int64                  `json:"groupId,omitempty"`
 	Sensors []CargoResponseSensors `json:"sensors,omitempty"`
 }

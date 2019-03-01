@@ -10,7 +10,7 @@
 package samsara
 
 type TagModify struct {
-	Add *TagModifyAdd `json:"add,omitempty"`
+	Add    *TagModifyAdd    `json:"add,omitempty"`
 	Delete *TagModifyDelete `json:"delete,omitempty"`
 	// Updated name of this tag.
 	Name string `json:"name,omitempty"`

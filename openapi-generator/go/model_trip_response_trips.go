@@ -21,9 +21,9 @@ type TripResponseTrips struct {
 	// Amount in milliliters of fuel consumed on this trip.
 	FuelConsumedMl int32 `json:"fuelConsumedMl,omitempty"`
 	// Text representation of nearest identifiable location to the start (latitude, longitude) coordinates.
-	StartAddress string `json:"startAddress,omitempty"`
+	StartAddress     string                       `json:"startAddress,omitempty"`
 	StartCoordinates TripResponseStartCoordinates `json:"startCoordinates,omitempty"`
-	EndCoordinates TripResponseEndCoordinates `json:"endCoordinates,omitempty"`
+	EndCoordinates   TripResponseEndCoordinates   `json:"endCoordinates,omitempty"`
 	// Odometer reading at the beginning of the trip.
 	StartOdometer int32 `json:"startOdometer,omitempty"`
 	// ID of the driver.

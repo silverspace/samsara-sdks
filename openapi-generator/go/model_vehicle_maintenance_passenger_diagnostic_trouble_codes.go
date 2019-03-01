@@ -10,7 +10,7 @@
 package openapi
 
 type VehicleMaintenancePassengerDiagnosticTroubleCodes struct {
-	DtcShortCode string `json:"dtcShortCode,omitempty"`
-	DtcId int32 `json:"dtcId,omitempty"`
+	DtcShortCode   string `json:"dtcShortCode,omitempty"`
+	DtcId          int32  `json:"dtcId,omitempty"`
 	DtcDescription string `json:"dtcDescription,omitempty"`
 }

@@ -10,9 +10,9 @@
 package openapi
 
 type InlineResponse2005VehicleStats struct {
-	EngineState []EngineState `json:"engineState,omitempty"`
-	AuxInput2 AuxInputSeries `json:"auxInput2,omitempty"`
+	EngineState []EngineState  `json:"engineState,omitempty"`
+	AuxInput2   AuxInputSeries `json:"auxInput2,omitempty"`
 	// ID of the vehicle.
-	VehicleId int64 `json:"vehicleId"`
+	VehicleId int64          `json:"vehicleId"`
 	AuxInput1 AuxInputSeries `json:"auxInput1,omitempty"`
 }

@@ -11,7 +11,7 @@ package samsara
 
 type InlineResponse2002 struct {
 	// Group ID to query.
-	GroupId int64 `json:"groupId,omitempty"`
+	GroupId    int64       `json:"groupId,omitempty"`
 	Pagination *Pagination `json:"pagination,omitempty"`
-	Vehicles []Vehicle `json:"vehicles,omitempty"`
+	Vehicles   []Vehicle   `json:"vehicles,omitempty"`
 }

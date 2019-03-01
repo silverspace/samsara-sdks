@@ -8,15 +8,16 @@
  */
 
 package openapi
+
 // JobStatus : The current state of the dispatch job.
 type JobStatus string
 
 // List of jobStatus
 const (
 	UNASSIGNED JobStatus = "JobState_Unassigned"
-	SCHEDULED JobStatus = "JobState_Scheduled"
-	EN_ROUTE JobStatus = "JobState_EnRoute"
-	ARRIVED JobStatus = "JobState_Arrived"
-	COMPLETED JobStatus = "JobState_Completed"
-	SKIPPED JobStatus = "JobState_Skipped"
+	SCHEDULED  JobStatus = "JobState_Scheduled"
+	EN_ROUTE   JobStatus = "JobState_EnRoute"
+	ARRIVED    JobStatus = "JobState_Arrived"
+	COMPLETED  JobStatus = "JobState_Completed"
+	SKIPPED    JobStatus = "JobState_Skipped"
 )

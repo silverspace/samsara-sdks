@@ -11,7 +11,7 @@ package openapi
 
 type DocumentFieldType struct {
 	// Descriptive name of this field type.
-	Label string `json:"label"`
+	Label                   string                                   `json:"label"`
 	NumberValueTypeMetadata DocumentFieldTypeNumberValueTypeMetadata `json:"numberValueTypeMetadata,omitempty"`
 	// The kind of value that can be submitted for this fieldType. It should be either ValueType_Number, ValueType_String, or ValueType_Photo.
 	ValueType string `json:"valueType"`

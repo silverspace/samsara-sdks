@@ -18,8 +18,8 @@ type DriverSafetyScoreResponse struct {
 	// Harsh acceleration event count
 	HarshAccelCount int32 `json:"harshAccelCount,omitempty"`
 	// Harsh braking event count
-	HarshBrakingCount int32 `json:"harshBrakingCount,omitempty"`
-	HarshEvents []SafetyReportHarshEvent `json:"harshEvents,omitempty"`
+	HarshBrakingCount int32                    `json:"harshBrakingCount,omitempty"`
+	HarshEvents       []SafetyReportHarshEvent `json:"harshEvents,omitempty"`
 	// Harsh turning event count
 	HarshTurningCount int32 `json:"harshTurningCount,omitempty"`
 	// Safety Score

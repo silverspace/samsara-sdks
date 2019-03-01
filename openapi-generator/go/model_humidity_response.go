@@ -11,6 +11,6 @@ package openapi
 
 // Contains the current humidity of a sensor.
 type HumidityResponse struct {
-	GroupId int64 `json:"groupId,omitempty"`
+	GroupId int64                     `json:"groupId,omitempty"`
 	Sensors []HumidityResponseSensors `json:"sensors,omitempty"`
 }

@@ -10,10 +10,10 @@
 package samsara
 
 type VehicleMaintenanceJ1939DiagnosticTroubleCodes struct {
-	FmiId int32 `json:"fmiId,omitempty"`
-	FmiText string `json:"fmiText,omitempty"`
-	OccurrenceCount int32 `json:"occurrenceCount,omitempty"`
-	SpnDescription string `json:"spnDescription,omitempty"`
-	SpnId int32 `json:"spnId,omitempty"`
-	TxId int32 `json:"txId,omitempty"`
+	FmiId           int32  `json:"fmiId,omitempty"`
+	FmiText         string `json:"fmiText,omitempty"`
+	OccurrenceCount int32  `json:"occurrenceCount,omitempty"`
+	SpnDescription  string `json:"spnDescription,omitempty"`
+	SpnId           int32  `json:"spnId,omitempty"`
+	TxId            int32  `json:"txId,omitempty"`
 }
