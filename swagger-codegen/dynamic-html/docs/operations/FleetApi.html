@@ -1,0 +1,2289 @@
+<div class="main-content">
+  <h2><a name=""></a></h2>
+  <p>This is the  API</p>
+
+  <h2><a name="addFleetAddress"></a>addFleetAddress</h2>
+  <hr>
+  <p></p>
+  <p>This method adds an address book entry to the specified group.</p>
+  <h3 class="section">URL</h3>
+  <code>https://api.samsara.com/v1/fleet/add_address</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>POST</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model=""><a href=""></a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">access_token</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Samsara API access token.</p>
+	  </li>
+	  <li class="parameter">
+      
+      
+      
+      
+      <span class="param-in">Body: </span>
+      <span class="param-name">addressParam</span>
+      <span class="param-type">AddressParam(AddressParam)</span>
+      
+      <p class="param-description"></p>
+	  </li>
+  </ul>
+  <h2><a name="addOrganizationAddresses"></a>addOrganizationAddresses</h2>
+  <hr>
+  <p></p>
+  <p>Add one or more addresses to the organization</p>
+  <h3 class="section">URL</h3>
+  <code>https://api.samsara.com/v1/addresses</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>POST</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="Address"><a href="">List</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">access_token</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Samsara API access token.</p>
+	  </li>
+	  <li class="parameter">
+      
+      
+      
+      
+      <span class="param-in">Body: </span>
+      <span class="param-name">addresses</span>
+      <span class="param-type">Addresses(Addresses)</span>
+      
+      <p class="param-description">List of addresses/geofences to add. Geofences can be circular or a polygon.  For each address, only one of &#39;circle&#39; or &#39;polygon&#39; should be provided. If both are provided, the geofence will be saved as a polygon.</p>
+	  </li>
+  </ul>
+  <h2><a name="createDispatchRoute"></a>createDispatchRoute</h2>
+  <hr>
+  <p></p>
+  <p>Create a new dispatch route.</p>
+  <h3 class="section">URL</h3>
+  <code>https://api.samsara.com/v1/fleet/dispatch/routes</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>POST</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="DispatchRoute"><a href="">DispatchRoute</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">access_token</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Samsara API access token.</p>
+	  </li>
+	  <li class="parameter">
+      
+      
+      
+      
+      <span class="param-in">Body: </span>
+      <span class="param-name">createDispatchRouteParams</span>
+      <span class="param-type">DispatchRouteCreate(DispatchRouteCreate)</span>
+      
+      <p class="param-description"></p>
+	  </li>
+  </ul>
+  <h2><a name="createDriver"></a>createDriver</h2>
+  <hr>
+  <p></p>
+  <p>Create a new driver.</p>
+  <h3 class="section">URL</h3>
+  <code>https://api.samsara.com/v1/fleet/drivers/create</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>POST</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="Driver"><a href="">Driver</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">access_token</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Samsara API access token.</p>
+	  </li>
+	  <li class="parameter">
+      
+      
+      
+      
+      <span class="param-in">Body: </span>
+      <span class="param-name">createDriverParam</span>
+      <span class="param-type">DriverForCreate(DriverForCreate)</span>
+      
+      <p class="param-description">Driver creation body</p>
+	  </li>
+  </ul>
+  <h2><a name="createDriverDispatchRoute"></a>createDriverDispatchRoute</h2>
+  <hr>
+  <p></p>
+  <p>Create a new dispatch route for the driver with driver_id.</p>
+  <h3 class="section">URL</h3>
+  <code>https://api.samsara.com/v1/fleet/drivers/{driver_id}/dispatch/routes</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>POST</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="DispatchRoute"><a href="">DispatchRoute</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">access_token</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Samsara API access token.</p>
+	  </li>
+	  <li class="parameter">
+      
+      
+      <span class="param-in">Path: </span>
+      
+      
+      <span class="param-name">driver_id</span>
+      <span class="param-type">Long</span>
+      
+      <p class="param-description">ID of the driver with the associated routes.</p>
+	  </li>
+	  <li class="parameter">
+      
+      
+      
+      
+      <span class="param-in">Body: </span>
+      <span class="param-name">createDispatchRouteParams</span>
+      <span class="param-type">DispatchRouteCreate(DispatchRouteCreate)</span>
+      
+      <p class="param-description"></p>
+	  </li>
+  </ul>
+  <h2><a name="createDriverDocument"></a>createDriverDocument</h2>
+  <hr>
+  <p></p>
+  <p>Create a driver document for the given driver.</p>
+  <h3 class="section">URL</h3>
+  <code>https://api.samsara.com/v1/fleet/drivers/{driver_id}/documents</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>POST</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="Document"><a href="">Document</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">access_token</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Samsara API access token.</p>
+	  </li>
+	  <li class="parameter">
+      
+      
+      <span class="param-in">Path: </span>
+      
+      
+      <span class="param-name">driver_id</span>
+      <span class="param-type">Long</span>
+      
+      <p class="param-description">ID of the driver for whom the document is created.</p>
+	  </li>
+	  <li class="parameter">
+      
+      
+      
+      
+      <span class="param-in">Body: </span>
+      <span class="param-name">createDocumentParams</span>
+      <span class="param-type">DocumentCreate(DocumentCreate)</span>
+      
+      <p class="param-description">To create a document for a given document type, the document type&#39;s uuid needs to be passed in to documentTypeUuid. The list of fields passed in should match the document type’s list of field types in the correct order. In other words, a field&#39;s valueType and value (i.e. only one of: stringValue, numberValue, or photoValue) at index _i_ should match with the document field type’s valueType at index _i_.</p>
+	  </li>
+  </ul>
+  <h2><a name="createDvir"></a>createDvir</h2>
+  <hr>
+  <p></p>
+  <p>Create a new dvir, marking a vehicle or trailer safe or unsafe.</p>
+  <h3 class="section">URL</h3>
+  <code>https://api.samsara.com/v1/fleet/maintenance/dvirs</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>POST</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="DvirBase"><a href="">DvirBase</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">access_token</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Samsara API access token.</p>
+	  </li>
+	  <li class="parameter">
+      
+      
+      
+      
+      <span class="param-in">Body: </span>
+      <span class="param-name">createDvirParam</span>
+      <span class="param-type">CreateDvirParam(CreateDvirParam)</span>
+      
+      <p class="param-description">DVIR creation body</p>
+	  </li>
+  </ul>
+  <h2><a name="createVehicleDispatchRoute"></a>createVehicleDispatchRoute</h2>
+  <hr>
+  <p></p>
+  <p>Create a new dispatch route for the vehicle with vehicle_id.</p>
+  <h3 class="section">URL</h3>
+  <code>https://api.samsara.com/v1/fleet/vehicles/{vehicle_id}/dispatch/routes</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>POST</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="DispatchRoute"><a href="">DispatchRoute</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">access_token</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Samsara API access token.</p>
+	  </li>
+	  <li class="parameter">
+      
+      
+      <span class="param-in">Path: </span>
+      
+      
+      <span class="param-name">vehicle_id</span>
+      <span class="param-type">Long</span>
+      
+      <p class="param-description">ID of the vehicle with the associated routes.</p>
+	  </li>
+	  <li class="parameter">
+      
+      
+      
+      
+      <span class="param-in">Body: </span>
+      <span class="param-name">createDispatchRouteParams</span>
+      <span class="param-type">DispatchRouteCreate(DispatchRouteCreate)</span>
+      
+      <p class="param-description"></p>
+	  </li>
+  </ul>
+  <h2><a name="deactivateDriver"></a>deactivateDriver</h2>
+  <hr>
+  <p></p>
+  <p>Deactivate a driver with the given id.</p>
+  <h3 class="section">URL</h3>
+  <code>https://api.samsara.com/v1/fleet/drivers/{driver_id_or_external_id}</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>DELETE</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model=""><a href=""></a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">access_token</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Samsara API access token.</p>
+	  </li>
+	  <li class="parameter">
+      
+      
+      <span class="param-in">Path: </span>
+      
+      
+      <span class="param-name">driver_id_or_external_id</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">ID of the driver.  This must be either the numeric ID generated by Samsara or the external ID of the driver.  External IDs are customer specified key-value pairs.</p>
+	  </li>
+  </ul>
+  <h2><a name="deleteDispatchRouteById"></a>deleteDispatchRouteById</h2>
+  <hr>
+  <p></p>
+  <p>Delete a dispatch route and its associated jobs.</p>
+  <h3 class="section">URL</h3>
+  <code>https://api.samsara.com/v1/fleet/dispatch/routes/{route_id}</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>DELETE</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model=""><a href=""></a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">access_token</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Samsara API access token.</p>
+	  </li>
+	  <li class="parameter">
+      
+      
+      <span class="param-in">Path: </span>
+      
+      
+      <span class="param-name">route_id</span>
+      <span class="param-type">Long</span>
+      
+      <p class="param-description">ID of the dispatch route.</p>
+	  </li>
+  </ul>
+  <h2><a name="deleteOrganizationAddress"></a>deleteOrganizationAddress</h2>
+  <hr>
+  <p></p>
+  <p>Delete an address.</p>
+  <h3 class="section">URL</h3>
+  <code>https://api.samsara.com/v1/addresses/{addressId}</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>DELETE</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model=""><a href=""></a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">access_token</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Samsara API access token.</p>
+	  </li>
+	  <li class="parameter">
+      
+      
+      <span class="param-in">Path: </span>
+      
+      
+      <span class="param-name">addressId</span>
+      <span class="param-type">Long</span>
+      
+      <p class="param-description">ID of the address/geofence</p>
+	  </li>
+  </ul>
+  <h2><a name="fetchAllDispatchRoutes"></a>fetchAllDispatchRoutes</h2>
+  <hr>
+  <p></p>
+  <p>Fetch all of the dispatch routes for the group.</p>
+  <h3 class="section">URL</h3>
+  <code>https://api.samsara.com/v1/fleet/dispatch/routes</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>GET</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="DispatchRoutes"><a href="">DispatchRoutes</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">access_token</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Samsara API access token.</p>
+	  </li>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">group_id</span>
+      <span class="param-type">Long</span>
+      
+      <p class="param-description">Optional group ID if the organization has multiple groups (uncommon).</p>
+	  </li>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">end_time</span>
+      <span class="param-type">Long</span>
+      
+      <p class="param-description">Time in unix milliseconds that represents the oldest routes to return. Used in combination with duration. Defaults to now.</p>
+	  </li>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">duration</span>
+      <span class="param-type">Long</span>
+      
+      <p class="param-description">Time in milliseconds that represents the duration before end_time to query. Defaults to 24 hours.</p>
+	  </li>
+  </ul>
+  <h2><a name="fetchAllRouteJobUpdates"></a>fetchAllRouteJobUpdates</h2>
+  <hr>
+  <p></p>
+  <p>Fetch all updates to a job including route data in the last 24 hours or subsequent to an sequence ID</p>
+  <h3 class="section">URL</h3>
+  <code>https://api.samsara.com/v1/fleet/dispatch/routes/job_updates</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>GET</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="allRouteJobUpdates"><a href="">allRouteJobUpdates</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">access_token</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Samsara API access token.</p>
+	  </li>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">group_id</span>
+      <span class="param-type">Long</span>
+      
+      <p class="param-description">Optional group ID if the organization has multiple groups (uncommon).</p>
+	  </li>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">sequence_id</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Sequence ID from the response payload of the last request. Defaults to fetching updates from last 24 hours.</p>
+	  </li>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">include</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Optionally set include&#x3D;route to include route object in response payload.</p>
+	  </li>
+  </ul>
+  <h2><a name="getAllAssetCurrentLocations"></a>getAllAssetCurrentLocations</h2>
+  <hr>
+  <p></p>
+  <p>Fetch current locations of all assets for the group.</p>
+  <h3 class="section">URL</h3>
+  <code>https://api.samsara.com/v1/fleet/assets/locations</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>GET</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="inline_response_200_1"><a href="">inline_response_200_1</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">access_token</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Samsara API access token.</p>
+	  </li>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">group_id</span>
+      <span class="param-type">Long</span>
+      
+      <p class="param-description">Optional group ID if the organization has multiple groups (uncommon).</p>
+	  </li>
+  </ul>
+  <h2><a name="getAllAssets"></a>getAllAssets</h2>
+  <hr>
+  <p></p>
+  <p>Fetch all of the assets for the group.</p>
+  <h3 class="section">URL</h3>
+  <code>https://api.samsara.com/v1/fleet/assets</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>GET</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="inline_response_200"><a href="">inline_response_200</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">access_token</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Samsara API access token.</p>
+	  </li>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">group_id</span>
+      <span class="param-type">Long</span>
+      
+      <p class="param-description">Optional group ID if the organization has multiple groups (uncommon).</p>
+	  </li>
+  </ul>
+  <h2><a name="getAllDeactivatedDrivers"></a>getAllDeactivatedDrivers</h2>
+  <hr>
+  <p></p>
+  <p>Fetch all deactivated drivers for the group.</p>
+  <h3 class="section">URL</h3>
+  <code>https://api.samsara.com/v1/fleet/drivers/inactive</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>GET</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="Driver"><a href="">List</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">access_token</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Samsara API access token.</p>
+	  </li>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">group_id</span>
+      <span class="param-type">Long</span>
+      
+      <p class="param-description">Optional group ID if the organization has multiple groups (uncommon).</p>
+	  </li>
+  </ul>
+  <h2><a name="getAssetLocation"></a>getAssetLocation</h2>
+  <hr>
+  <p></p>
+  <p>Fetch the historical locations for the asset.</p>
+  <h3 class="section">URL</h3>
+  <code>https://api.samsara.com/v1/fleet/assets/{asset_id}/locations</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>GET</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="AssetLocationResponse"><a href="">AssetLocationResponse</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">access_token</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Samsara API access token.</p>
+	  </li>
+	  <li class="parameter">
+      
+      
+      <span class="param-in">Path: </span>
+      
+      
+      <span class="param-name">asset_id</span>
+      <span class="param-type">Long</span>
+      
+      <p class="param-description">ID of the asset</p>
+	  </li>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">startMs</span>
+      <span class="param-type">Long</span>
+      
+      <p class="param-description">Timestamp in milliseconds representing the start of the period to fetch, inclusive. Used in combination with endMs.</p>
+	  </li>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">endMs</span>
+      <span class="param-type">Long</span>
+      
+      <p class="param-description">Timestamp in milliseconds representing the end of the period to fetch, inclusive. Used in combination with startMs.</p>
+	  </li>
+  </ul>
+  <h2><a name="getAssetReefer"></a>getAssetReefer</h2>
+  <hr>
+  <p></p>
+  <p>Fetch the reefer-specific stats of an asset.</p>
+  <h3 class="section">URL</h3>
+  <code>https://api.samsara.com/v1/fleet/assets/{asset_id}/reefer</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>GET</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="AssetReeferResponse"><a href="">AssetReeferResponse</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">access_token</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Samsara API access token.</p>
+	  </li>
+	  <li class="parameter">
+      
+      
+      <span class="param-in">Path: </span>
+      
+      
+      <span class="param-name">asset_id</span>
+      <span class="param-type">Long</span>
+      
+      <p class="param-description">ID of the asset</p>
+	  </li>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">startMs</span>
+      <span class="param-type">Long</span>
+      
+      <p class="param-description">Timestamp in milliseconds representing the start of the period to fetch, inclusive. Used in combination with endMs.</p>
+	  </li>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">endMs</span>
+      <span class="param-type">Long</span>
+      
+      <p class="param-description">Timestamp in milliseconds representing the end of the period to fetch, inclusive. Used in combination with startMs.</p>
+	  </li>
+  </ul>
+  <h2><a name="getDeactivatedDriverById"></a>getDeactivatedDriverById</h2>
+  <hr>
+  <p></p>
+  <p>Fetch deactivated driver by id.</p>
+  <h3 class="section">URL</h3>
+  <code>https://api.samsara.com/v1/fleet/drivers/inactive/{driver_id_or_external_id}</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>GET</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="Driver"><a href="">Driver</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">access_token</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Samsara API access token.</p>
+	  </li>
+	  <li class="parameter">
+      
+      
+      <span class="param-in">Path: </span>
+      
+      
+      <span class="param-name">driver_id_or_external_id</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">ID of the driver.  This must be either the numeric ID generated by Samsara or the external ID of the driver.  External IDs are customer specified key-value pairs.</p>
+	  </li>
+  </ul>
+  <h2><a name="getDispatchRouteById"></a>getDispatchRouteById</h2>
+  <hr>
+  <p></p>
+  <p>Fetch a dispatch route by id.</p>
+  <h3 class="section">URL</h3>
+  <code>https://api.samsara.com/v1/fleet/dispatch/routes/{route_id}</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>GET</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="DispatchRoute"><a href="">DispatchRoute</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">access_token</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Samsara API access token.</p>
+	  </li>
+	  <li class="parameter">
+      
+      
+      <span class="param-in">Path: </span>
+      
+      
+      <span class="param-name">route_id</span>
+      <span class="param-type">Long</span>
+      
+      <p class="param-description">ID of the dispatch route.</p>
+	  </li>
+  </ul>
+  <h2><a name="getDispatchRouteHistory"></a>getDispatchRouteHistory</h2>
+  <hr>
+  <p></p>
+  <p>Fetch the history of a dispatch route.</p>
+  <h3 class="section">URL</h3>
+  <code>https://api.samsara.com/v1/fleet/dispatch/routes/{route_id}/history</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>GET</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="DispatchRouteHistory"><a href="">DispatchRouteHistory</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">access_token</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Samsara API access token.</p>
+	  </li>
+	  <li class="parameter">
+      
+      
+      <span class="param-in">Path: </span>
+      
+      
+      <span class="param-name">route_id</span>
+      <span class="param-type">Long</span>
+      
+      <p class="param-description">ID of the route with history.</p>
+	  </li>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">start_time</span>
+      <span class="param-type">Long</span>
+      
+      <p class="param-description">Timestamp representing the start of the period to fetch, inclusive. Used in combination with end_time. Defaults to 0.</p>
+	  </li>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">end_time</span>
+      <span class="param-type">Long</span>
+      
+      <p class="param-description">Timestamp representing the end of the period to fetch, inclusive. Used in combination with start_time. Defaults to nowMs.</p>
+	  </li>
+  </ul>
+  <h2><a name="getDispatchRoutesByDriverId"></a>getDispatchRoutesByDriverId</h2>
+  <hr>
+  <p></p>
+  <p>Fetch all of the dispatch routes for a given driver.</p>
+  <h3 class="section">URL</h3>
+  <code>https://api.samsara.com/v1/fleet/drivers/{driver_id}/dispatch/routes</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>GET</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="DispatchRoutes"><a href="">DispatchRoutes</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">access_token</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Samsara API access token.</p>
+	  </li>
+	  <li class="parameter">
+      
+      
+      <span class="param-in">Path: </span>
+      
+      
+      <span class="param-name">driver_id</span>
+      <span class="param-type">Long</span>
+      
+      <p class="param-description">ID of the driver with the associated routes.</p>
+	  </li>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">end_time</span>
+      <span class="param-type">Long</span>
+      
+      <p class="param-description">Time in unix milliseconds that represents the oldest routes to return. Used in combination with duration. Defaults to now.</p>
+	  </li>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">duration</span>
+      <span class="param-type">Long</span>
+      
+      <p class="param-description">Time in milliseconds that represents the duration before end_time to query. Defaults to 24 hours.</p>
+	  </li>
+  </ul>
+  <h2><a name="getDispatchRoutesByVehicleId"></a>getDispatchRoutesByVehicleId</h2>
+  <hr>
+  <p></p>
+  <p>Fetch all of the dispatch routes for a given vehicle.</p>
+  <h3 class="section">URL</h3>
+  <code>https://api.samsara.com/v1/fleet/vehicles/{vehicle_id}/dispatch/routes</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>GET</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="DispatchRoutes"><a href="">DispatchRoutes</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">access_token</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Samsara API access token.</p>
+	  </li>
+	  <li class="parameter">
+      
+      
+      <span class="param-in">Path: </span>
+      
+      
+      <span class="param-name">vehicle_id</span>
+      <span class="param-type">Long</span>
+      
+      <p class="param-description">ID of the vehicle with the associated routes.</p>
+	  </li>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">end_time</span>
+      <span class="param-type">Long</span>
+      
+      <p class="param-description">Time in unix milliseconds that represents the oldest routes to return. Used in combination with duration. Defaults to now.</p>
+	  </li>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">duration</span>
+      <span class="param-type">Long</span>
+      
+      <p class="param-description">Time in milliseconds that represents the duration before end_time to query. Defaults to 24 hours.</p>
+	  </li>
+  </ul>
+  <h2><a name="getDriverById"></a>getDriverById</h2>
+  <hr>
+  <p></p>
+  <p>Fetch driver by id.</p>
+  <h3 class="section">URL</h3>
+  <code>https://api.samsara.com/v1/fleet/drivers/{driver_id_or_external_id}</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>GET</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="CurrentDriver"><a href="">CurrentDriver</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">access_token</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Samsara API access token.</p>
+	  </li>
+	  <li class="parameter">
+      
+      
+      <span class="param-in">Path: </span>
+      
+      
+      <span class="param-name">driver_id_or_external_id</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">ID of the driver.  This must be either the numeric ID generated by Samsara or the external ID of the driver.  External IDs are customer specified key-value pairs.</p>
+	  </li>
+  </ul>
+  <h2><a name="getDriverDocumentTypesByOrgId"></a>getDriverDocumentTypesByOrgId</h2>
+  <hr>
+  <p></p>
+  <p>Fetch all of the document types.</p>
+  <h3 class="section">URL</h3>
+  <code>https://api.samsara.com/v1/fleet/drivers/document_types</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>GET</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="DocumentTypes"><a href="">DocumentTypes</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+  </ul>
+  <h2><a name="getDriverDocumentsByOrgId"></a>getDriverDocumentsByOrgId</h2>
+  <hr>
+  <p></p>
+  <p>Fetch all of the documents.</p>
+  <h3 class="section">URL</h3>
+  <code>https://api.samsara.com/v1/fleet/drivers/documents</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>GET</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="Documents"><a href="">Documents</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">access_token</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Samsara API access token.</p>
+	  </li>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">endMs</span>
+      <span class="param-type">Long</span>
+      
+      <p class="param-description">Time in unix milliseconds that represents the oldest documents to return. Used in combination with durationMs. Defaults to now.</p>
+	  </li>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">durationMs</span>
+      <span class="param-type">Long</span>
+      
+      <p class="param-description">Time in milliseconds that represents the duration before endMs to query. Defaults to 24 hours.</p>
+	  </li>
+  </ul>
+  <h2><a name="getDriverSafetyScore"></a>getDriverSafetyScore</h2>
+  <hr>
+  <p></p>
+  <p>Fetch the safety score for the driver.</p>
+  <h3 class="section">URL</h3>
+  <code>https://api.samsara.com/v1/fleet/drivers/{driverId}/safety/score</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>GET</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="DriverSafetyScoreResponse"><a href="">DriverSafetyScoreResponse</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      
+      <span class="param-in">Path: </span>
+      
+      
+      <span class="param-name">driverId</span>
+      <span class="param-type">Long</span>
+      
+      <p class="param-description">ID of the driver</p>
+	  </li>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">access_token</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Samsara API access token.</p>
+	  </li>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">startMs</span>
+      <span class="param-type">Long</span>
+      
+      <p class="param-description">Timestamp in milliseconds representing the start of the period to fetch, inclusive. Used in combination with endMs.</p>
+	  </li>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">endMs</span>
+      <span class="param-type">Long</span>
+      
+      <p class="param-description">Timestamp in milliseconds representing the end of the period to fetch, inclusive. Used in combination with startMs.</p>
+	  </li>
+  </ul>
+  <h2><a name="getDvirs"></a>getDvirs</h2>
+  <hr>
+  <p></p>
+  <p>Get DVIRs for the org within provided time constraints</p>
+  <h3 class="section">URL</h3>
+  <code>https://api.samsara.com/v1/fleet/maintenance/dvirs</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>GET</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="DvirListResponse"><a href="">DvirListResponse</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">access_token</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Samsara API access token.</p>
+	  </li>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">end_ms</span>
+      <span class="param-type">Integer</span>
+      
+      <p class="param-description">time in millis until the last dvir log.</p>
+	  </li>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">duration_ms</span>
+      <span class="param-type">Integer</span>
+      
+      <p class="param-description">time in millis which corresponds to the duration before the end_ms.</p>
+	  </li>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">group_id</span>
+      <span class="param-type">Integer</span>
+      
+      <p class="param-description">Group ID to query.</p>
+	  </li>
+  </ul>
+  <h2><a name="getFleetDrivers"></a>getFleetDrivers</h2>
+  <hr>
+  <p></p>
+  <p>Get all the drivers for the specified group.</p>
+  <h3 class="section">URL</h3>
+  <code>https://api.samsara.com/v1/fleet/drivers</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>POST</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="DriversResponse"><a href="">DriversResponse</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">access_token</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Samsara API access token.</p>
+	  </li>
+	  <li class="parameter">
+      
+      
+      
+      
+      <span class="param-in">Body: </span>
+      <span class="param-name">groupDriversParam</span>
+      <span class="param-type">GroupDriversParam(GroupDriversParam)</span>
+      
+      <p class="param-description"></p>
+	  </li>
+  </ul>
+  <h2><a name="getFleetDriversHosDailyLogs"></a>getFleetDriversHosDailyLogs</h2>
+  <hr>
+  <p></p>
+  <p>Get summarized daily HOS charts for a specified driver.</p>
+  <h3 class="section">URL</h3>
+  <code>https://api.samsara.com/v1/fleet/drivers/{driver_id}/hos_daily_logs</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>POST</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="DriverDailyLogResponse"><a href="">DriverDailyLogResponse</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">access_token</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Samsara API access token.</p>
+	  </li>
+	  <li class="parameter">
+      
+      
+      <span class="param-in">Path: </span>
+      
+      
+      <span class="param-name">driver_id</span>
+      <span class="param-type">Long</span>
+      
+      <p class="param-description">ID of the driver with HOS logs.</p>
+	  </li>
+	  <li class="parameter">
+      
+      
+      
+      
+      <span class="param-in">Body: </span>
+      <span class="param-name">hosLogsParam</span>
+      <span class="param-type">HosLogsParam(HosLogsParam)</span>
+      
+      <p class="param-description"></p>
+	  </li>
+  </ul>
+  <h2><a name="getFleetDriversSummary"></a>getFleetDriversSummary</h2>
+  <hr>
+  <p></p>
+  <p>Get the distance and time each driver in an organization has driven in a given time period.</p>
+  <h3 class="section">URL</h3>
+  <code>https://api.samsara.com/v1/fleet/drivers/summary</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>POST</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="DriversSummaryResponse"><a href="">DriversSummaryResponse</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">access_token</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Samsara API access token.</p>
+	  </li>
+	  <li class="parameter">
+      
+      
+      
+      
+      <span class="param-in">Body: </span>
+      <span class="param-name">driversSummaryParam</span>
+      <span class="param-type">DriversSummaryParam(DriversSummaryParam)</span>
+      
+      <p class="param-description">Org ID and time range to query.</p>
+	  </li>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">snap_to_day_bounds</span>
+      <span class="param-type">Boolean</span>
+      
+      <p class="param-description">Snap query result to HOS day boundaries.</p>
+	  </li>
+  </ul>
+  <h2><a name="getFleetHosAuthenticationLogs"></a>getFleetHosAuthenticationLogs</h2>
+  <hr>
+  <p></p>
+  <p>Get the HOS (hours of service) signin and signout logs for the specified driver. Only signout logs include location information.</p>
+  <h3 class="section">URL</h3>
+  <code>https://api.samsara.com/v1/fleet/hos_authentication_logs</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>POST</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="HosAuthenticationLogsResponse"><a href="">HosAuthenticationLogsResponse</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">access_token</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Samsara API access token.</p>
+	  </li>
+	  <li class="parameter">
+      
+      
+      
+      
+      <span class="param-in">Body: </span>
+      <span class="param-name">hosAuthenticationLogsParam</span>
+      <span class="param-type">HosAuthenticationLogsParam(HosAuthenticationLogsParam)</span>
+      
+      <p class="param-description"></p>
+	  </li>
+  </ul>
+  <h2><a name="getFleetHosLogs"></a>getFleetHosLogs</h2>
+  <hr>
+  <p></p>
+  <p>Get the HOS (hours of service) logs for the specified driver. This method returns all the HOS statuses that the driver was in during this time period.</p>
+  <h3 class="section">URL</h3>
+  <code>https://api.samsara.com/v1/fleet/hos_logs</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>POST</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="HosLogsResponse"><a href="">HosLogsResponse</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">access_token</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Samsara API access token.</p>
+	  </li>
+	  <li class="parameter">
+      
+      
+      
+      
+      <span class="param-in">Body: </span>
+      <span class="param-name">hosLogsParam</span>
+      <span class="param-type">HosLogsParam_1(HosLogsParam_1)</span>
+      
+      <p class="param-description"></p>
+	  </li>
+  </ul>
+  <h2><a name="getFleetHosLogsSummary"></a>getFleetHosLogsSummary</h2>
+  <hr>
+  <p></p>
+  <p>Get the current HOS status for all drivers in the group.</p>
+  <h3 class="section">URL</h3>
+  <code>https://api.samsara.com/v1/fleet/hos_logs_summary</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>POST</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="HosLogsSummaryResponse"><a href="">HosLogsSummaryResponse</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">access_token</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Samsara API access token.</p>
+	  </li>
+	  <li class="parameter">
+      
+      
+      
+      
+      <span class="param-in">Body: </span>
+      <span class="param-name">hosLogsParam</span>
+      <span class="param-type">HosLogsParam_2(HosLogsParam_2)</span>
+      
+      <p class="param-description"></p>
+	  </li>
+  </ul>
+  <h2><a name="getFleetLocations"></a>getFleetLocations</h2>
+  <hr>
+  <p></p>
+  <p>Get current location of vehicles in a group. This method returns the current location in latitude and longitude of all vehicles in a requested group.</p>
+  <h3 class="section">URL</h3>
+  <code>https://api.samsara.com/v1/fleet/locations</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>POST</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="inline_response_200_3"><a href="">inline_response_200_3</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">access_token</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Samsara API access token.</p>
+	  </li>
+	  <li class="parameter">
+      
+      
+      
+      
+      <span class="param-in">Body: </span>
+      <span class="param-name">groupParam</span>
+      <span class="param-type">GroupParam(GroupParam)</span>
+      
+      <p class="param-description">Group ID to query.</p>
+	  </li>
+  </ul>
+  <h2><a name="getFleetMaintenanceList"></a>getFleetMaintenanceList</h2>
+  <hr>
+  <p></p>
+  <p>Get list of the vehicles with any engine faults or check light data.</p>
+  <h3 class="section">URL</h3>
+  <code>https://api.samsara.com/v1/fleet/maintenance/list</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>POST</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="inline_response_200_4"><a href="">inline_response_200_4</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">access_token</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Samsara API access token.</p>
+	  </li>
+	  <li class="parameter">
+      
+      
+      
+      
+      <span class="param-in">Body: </span>
+      <span class="param-name">groupParam</span>
+      <span class="param-type">GroupParam(GroupParam)</span>
+      
+      <p class="param-description">Group ID to query.</p>
+	  </li>
+  </ul>
+  <h2><a name="getFleetTrips"></a>getFleetTrips</h2>
+  <hr>
+  <p></p>
+  <p>Get historical trips data for specified vehicle. This method returns a set of historical trips data for the specified vehicle in the specified time range.</p>
+  <h3 class="section">URL</h3>
+  <code>https://api.samsara.com/v1/fleet/trips</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>POST</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="TripResponse"><a href="">TripResponse</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">access_token</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Samsara API access token.</p>
+	  </li>
+	  <li class="parameter">
+      
+      
+      
+      
+      <span class="param-in">Body: </span>
+      <span class="param-name">tripsParam</span>
+      <span class="param-type">TripsParam(TripsParam)</span>
+      
+      <p class="param-description">Group ID, vehicle ID and time range to query.</p>
+	  </li>
+  </ul>
+  <h2><a name="getFleetVehicle"></a>getFleetVehicle</h2>
+  <hr>
+  <p></p>
+  <p>Gets a specific vehicle.</p>
+  <h3 class="section">URL</h3>
+  <code>https://api.samsara.com/v1/fleet/vehicles/{vehicle_id_or_external_id}</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>GET</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="FleetVehicleResponse"><a href="">FleetVehicleResponse</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">access_token</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Samsara API access token.</p>
+	  </li>
+	  <li class="parameter">
+      
+      
+      <span class="param-in">Path: </span>
+      
+      
+      <span class="param-name">vehicle_id_or_external_id</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">ID of the vehicle.  This must be either the numeric ID generated by Samsara or the external ID of the vehicle.  External IDs are customer specified key-value pairs.</p>
+	  </li>
+  </ul>
+  <h2><a name="getOrganizationAddress"></a>getOrganizationAddress</h2>
+  <hr>
+  <p></p>
+  <p>Fetch an address by its id.</p>
+  <h3 class="section">URL</h3>
+  <code>https://api.samsara.com/v1/addresses/{addressId}</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>GET</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="Address"><a href="">Address</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">access_token</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Samsara API access token.</p>
+	  </li>
+	  <li class="parameter">
+      
+      
+      <span class="param-in">Path: </span>
+      
+      
+      <span class="param-name">addressId</span>
+      <span class="param-type">Long</span>
+      
+      <p class="param-description">ID of the address/geofence</p>
+	  </li>
+  </ul>
+  <h2><a name="getOrganizationAddresses"></a>getOrganizationAddresses</h2>
+  <hr>
+  <p></p>
+  <p>Fetch all addresses/geofences for the organization. An address contains either a circle or polygon geofence describing the address boundaries.</p>
+  <h3 class="section">URL</h3>
+  <code>https://api.samsara.com/v1/addresses</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>GET</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="Address"><a href="">List</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">access_token</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Samsara API access token.</p>
+	  </li>
+  </ul>
+  <h2><a name="getOrganizationContact"></a>getOrganizationContact</h2>
+  <hr>
+  <p></p>
+  <p>Fetch a contact by its id.</p>
+  <h3 class="section">URL</h3>
+  <code>https://api.samsara.com/v1/contacts/{contact_id}</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>GET</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="Contact"><a href="">Contact</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">access_token</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Samsara API access token.</p>
+	  </li>
+	  <li class="parameter">
+      
+      
+      <span class="param-in">Path: </span>
+      
+      
+      <span class="param-name">contact_id</span>
+      <span class="param-type">Long</span>
+      
+      <p class="param-description">ID of the contact</p>
+	  </li>
+  </ul>
+  <h2><a name="getVehicleHarshEvent"></a>getVehicleHarshEvent</h2>
+  <hr>
+  <p></p>
+  <p>Fetch harsh event details for a vehicle.</p>
+  <h3 class="section">URL</h3>
+  <code>https://api.samsara.com/v1/fleet/vehicles/{vehicleId}/safety/harsh_event</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>GET</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="VehicleHarshEventResponse"><a href="">VehicleHarshEventResponse</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      
+      <span class="param-in">Path: </span>
+      
+      
+      <span class="param-name">vehicleId</span>
+      <span class="param-type">Long</span>
+      
+      <p class="param-description">ID of the vehicle</p>
+	  </li>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">access_token</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Samsara API access token.</p>
+	  </li>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">timestamp</span>
+      <span class="param-type">Long</span>
+      
+      <p class="param-description">Timestamp in milliseconds representing the timestamp of a harsh event.</p>
+	  </li>
+  </ul>
+  <h2><a name="getVehicleLocations"></a>getVehicleLocations</h2>
+  <hr>
+  <p></p>
+  <p>Fetch locations for a given vehicle between a start/end time. The maximum query duration is one hour.</p>
+  <h3 class="section">URL</h3>
+  <code>https://api.samsara.com/v1/fleet/vehicles/{vehicle_id}/locations</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>GET</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="FleetVehicleLocations"><a href="">FleetVehicleLocations</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">access_token</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Samsara API access token.</p>
+	  </li>
+	  <li class="parameter">
+      
+      
+      <span class="param-in">Path: </span>
+      
+      
+      <span class="param-name">vehicle_id</span>
+      <span class="param-type">Long</span>
+      
+      <p class="param-description">ID of the vehicle with the associated routes.</p>
+	  </li>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">startMs</span>
+      <span class="param-type">Long</span>
+      
+      <p class="param-description">Time in Unix epoch milliseconds for the start of the query (cannot exceed 1 hour)</p>
+	  </li>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">endMs</span>
+      <span class="param-type">Long</span>
+      
+      <p class="param-description">Time in Unix epoch milliseconds for the end of the query (cannot exceed 1 hour)</p>
+	  </li>
+  </ul>
+  <h2><a name="getVehicleSafetyScore"></a>getVehicleSafetyScore</h2>
+  <hr>
+  <p></p>
+  <p>Fetch the safety score for the vehicle.</p>
+  <h3 class="section">URL</h3>
+  <code>https://api.samsara.com/v1/fleet/vehicles/{vehicleId}/safety/score</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>GET</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="VehicleSafetyScoreResponse"><a href="">VehicleSafetyScoreResponse</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      
+      <span class="param-in">Path: </span>
+      
+      
+      <span class="param-name">vehicleId</span>
+      <span class="param-type">Long</span>
+      
+      <p class="param-description">ID of the vehicle</p>
+	  </li>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">access_token</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Samsara API access token.</p>
+	  </li>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">startMs</span>
+      <span class="param-type">Long</span>
+      
+      <p class="param-description">Timestamp in milliseconds representing the start of the period to fetch, inclusive. Used in combination with endMs.</p>
+	  </li>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">endMs</span>
+      <span class="param-type">Long</span>
+      
+      <p class="param-description">Timestamp in milliseconds representing the end of the period to fetch, inclusive. Used in combination with startMs.</p>
+	  </li>
+  </ul>
+  <h2><a name="getVehicleStats"></a>getVehicleStats</h2>
+  <hr>
+  <p></p>
+  <p>Fetch engine state and aux input data for all vehicles in the group between a start/end time. Data returned may be affected by device connectivity and processing time.</p>
+  <h3 class="section">URL</h3>
+  <code>https://api.samsara.com/v1/fleet/vehicles/stats</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>GET</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="inline_response_200_5"><a href="">inline_response_200_5</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">access_token</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Samsara API access token.</p>
+	  </li>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">startMs</span>
+      <span class="param-type">Integer</span>
+      
+      <p class="param-description">Time in Unix epoch milliseconds for the start of the query.</p>
+	  </li>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">endMs</span>
+      <span class="param-type">Integer</span>
+      
+      <p class="param-description">Time in Unix epoch milliseconds for the end of the query.</p>
+	  </li>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">series</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Comma-separated list of stat types. Options are engineState, auxInput1, and auxInput2. If this parameter is excluded, all 3 stat types will be returned. Example: series&#x3D;engineState,auxInput2</p>
+	  </li>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">tagIds</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Comma-separated list of tag ids. Example: tagIds&#x3D;1,2,3</p>
+	  </li>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">startingAfter</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Pagination parameter indicating the cursor position to continue returning results after. Used in conjunction with the &#39;limit&#39; parameter. Mutually exclusive with &#39;endingBefore&#39; parameter.</p>
+	  </li>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">endingBefore</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Pagination parameter indicating the cursor position to return results before. Used in conjunction with the &#39;limit&#39; parameter. Mutually exclusive with &#39;startingAfter&#39; parameter.</p>
+	  </li>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">limit</span>
+      <span class="param-type">Long</span>
+      
+      <p class="param-description">Pagination parameter indicating the number of results to return in this request. Used in conjunction with either &#39;startingAfter&#39; or &#39;endingBefore&#39;.</p>
+	  </li>
+  </ul>
+  <h2><a name="getVehiclesLocations"></a>getVehiclesLocations</h2>
+  <hr>
+  <p></p>
+  <p>Fetch locations for a given vehicle between a start/end time. The maximum query duration is 30 minutes.</p>
+  <h3 class="section">URL</h3>
+  <code>https://api.samsara.com/v1/fleet/vehicles/locations</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>GET</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="FleetVehiclesLocations"><a href="">FleetVehiclesLocations</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">access_token</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Samsara API access token.</p>
+	  </li>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">startMs</span>
+      <span class="param-type">Integer</span>
+      
+      <p class="param-description">Time in Unix epoch milliseconds for the start of the query (cannot exceed 30 minutes)</p>
+	  </li>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">endMs</span>
+      <span class="param-type">Integer</span>
+      
+      <p class="param-description">Time in Unix epoch milliseconds for the end of the query (cannot exceed 30 minutes)</p>
+	  </li>
+  </ul>
+  <h2><a name="listContacts"></a>listContacts</h2>
+  <hr>
+  <p></p>
+  <p>Fetch all contacts for the organization.</p>
+  <h3 class="section">URL</h3>
+  <code>https://api.samsara.com/v1/contacts</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>GET</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="Contact"><a href="">List</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">access_token</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Samsara API access token.</p>
+	  </li>
+  </ul>
+  <h2><a name="listFleet"></a>listFleet</h2>
+  <hr>
+  <p></p>
+  <p>Get list of the vehicles. This method returns a list of the vehicles in the Samsara Cloud and information about them.</p>
+  <h3 class="section">URL</h3>
+  <code>https://api.samsara.com/v1/fleet/list</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>POST</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="inline_response_200_2"><a href="">inline_response_200_2</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">access_token</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Samsara API access token.</p>
+	  </li>
+	  <li class="parameter">
+      
+      
+      
+      
+      <span class="param-in">Body: </span>
+      <span class="param-name">groupParam</span>
+      <span class="param-type">GroupParam(GroupParam)</span>
+      
+      <p class="param-description">Group ID to query.</p>
+	  </li>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">startingAfter</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Pagination parameter indicating the cursor position to continue returning results after. Used in conjunction with the &#39;limit&#39; parameter. Mutually exclusive with &#39;endingBefore&#39; parameter.</p>
+	  </li>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">endingBefore</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Pagination parameter indicating the cursor position to return results before. Used in conjunction with the &#39;limit&#39; parameter. Mutually exclusive with &#39;startingAfter&#39; parameter.</p>
+	  </li>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">limit</span>
+      <span class="param-type">Long</span>
+      
+      <p class="param-description">Pagination parameter indicating the number of results to return in this request. Used in conjunction with either &#39;startingAfter&#39; or &#39;endingBefore&#39;.</p>
+	  </li>
+  </ul>
+  <h2><a name="patchFleetVehicle"></a>patchFleetVehicle</h2>
+  <hr>
+  <p></p>
+  <p>Updates the specified vehicle using JSON merge patch format. See IETF RFC 7396: https://tools.ietf.org/html/rfc7396.</p>
+  <h3 class="section">URL</h3>
+  <code>https://api.samsara.com/v1/fleet/vehicles/{vehicle_id_or_external_id}</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>PATCH</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="FleetVehicleResponse"><a href="">FleetVehicleResponse</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">access_token</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Samsara API access token.</p>
+	  </li>
+	  <li class="parameter">
+      
+      
+      <span class="param-in">Path: </span>
+      
+      
+      <span class="param-name">vehicle_id_or_external_id</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">ID of the vehicle.  This must be either the numeric ID generated by Samsara or the external ID of the vehicle.  External IDs are customer specified key-value pairs.</p>
+	  </li>
+	  <li class="parameter">
+      
+      
+      
+      
+      <span class="param-in">Body: </span>
+      <span class="param-name">data</span>
+      <span class="param-type">Data(Data)</span>
+      
+      <p class="param-description"></p>
+	  </li>
+  </ul>
+  <h2><a name="reactivateDriverById"></a>reactivateDriverById</h2>
+  <hr>
+  <p></p>
+  <p>Reactivate the inactive driver having id.</p>
+  <h3 class="section">URL</h3>
+  <code>https://api.samsara.com/v1/fleet/drivers/inactive/{driver_id_or_external_id}</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>PUT</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="CurrentDriver"><a href="">CurrentDriver</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">access_token</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Samsara API access token.</p>
+	  </li>
+	  <li class="parameter">
+      
+      
+      <span class="param-in">Path: </span>
+      
+      
+      <span class="param-name">driver_id_or_external_id</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">ID of the driver.  This must be either the numeric ID generated by Samsara or the external ID of the driver.  External IDs are customer specified key-value pairs.</p>
+	  </li>
+	  <li class="parameter">
+      
+      
+      
+      
+      <span class="param-in">Body: </span>
+      <span class="param-name">reactivateDriverParam</span>
+      <span class="param-type">ReactivateDriverParam(ReactivateDriverParam)</span>
+      
+      <p class="param-description">Driver reactivation body</p>
+	  </li>
+  </ul>
+  <h2><a name="updateDispatchRouteById"></a>updateDispatchRouteById</h2>
+  <hr>
+  <p></p>
+  <p>Update a dispatch route and its associated jobs.</p>
+  <h3 class="section">URL</h3>
+  <code>https://api.samsara.com/v1/fleet/dispatch/routes/{route_id}</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>PUT</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="DispatchRoute"><a href="">DispatchRoute</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">access_token</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Samsara API access token.</p>
+	  </li>
+	  <li class="parameter">
+      
+      
+      <span class="param-in">Path: </span>
+      
+      
+      <span class="param-name">route_id</span>
+      <span class="param-type">Long</span>
+      
+      <p class="param-description">ID of the dispatch route.</p>
+	  </li>
+	  <li class="parameter">
+      
+      
+      
+      
+      <span class="param-in">Body: </span>
+      <span class="param-name">updateDispatchRouteParams</span>
+      <span class="param-type">DispatchRoute(DispatchRoute)</span>
+      
+      <p class="param-description"></p>
+	  </li>
+  </ul>
+  <h2><a name="updateOrganizationAddress"></a>updateOrganizationAddress</h2>
+  <hr>
+  <p></p>
+  <p>Update the name, formatted address, geofence, notes, or tag and contact Ids for an address. The set of tags or contacts associated with this address will be updated to exactly match the list of IDs passed in. To remove all tags or contacts from an address, pass an empty list; to remove notes, pass an empty string.</p>
+  <h3 class="section">URL</h3>
+  <code>https://api.samsara.com/v1/addresses/{addressId}</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>PATCH</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model=""><a href=""></a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">access_token</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Samsara API access token.</p>
+	  </li>
+	  <li class="parameter">
+      
+      
+      
+      
+      <span class="param-in">Body: </span>
+      <span class="param-name">address</span>
+      <span class="param-type">Address(Address)</span>
+      
+      <p class="param-description">Update parts of an address&#39;s value. If the geofence &#39;circle&#39; or &#39;polygon&#39; key is specified, the update will change the type of geofence accordingly.</p>
+	  </li>
+	  <li class="parameter">
+      
+      
+      <span class="param-in">Path: </span>
+      
+      
+      <span class="param-name">addressId</span>
+      <span class="param-type">Long</span>
+      
+      <p class="param-description">ID of the address/geofence</p>
+	  </li>
+  </ul>
+  <h2><a name="updateVehicles"></a>updateVehicles</h2>
+  <hr>
+  <p></p>
+  <p>This method enables the mutation of metadata for vehicles in the Samsara Cloud.</p>
+  <h3 class="section">URL</h3>
+  <code>https://api.samsara.com/v1/fleet/set_data</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>POST</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model=""><a href=""></a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">access_token</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Samsara API access token.</p>
+	  </li>
+	  <li class="parameter">
+      
+      
+      
+      
+      <span class="param-in">Body: </span>
+      <span class="param-name">vehicleUpdateParam</span>
+      <span class="param-type">VehicleUpdateParam(VehicleUpdateParam)</span>
+      
+      <p class="param-description"></p>
+	  </li>
+  </ul>
+</div>

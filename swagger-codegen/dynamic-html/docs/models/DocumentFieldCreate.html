@@ -1,0 +1,22 @@
+
+<h2>DocumentFieldCreate</h2>
+<ul class="parameter">
+  <li class="param-required-false">numberValue : Double
+    <br/>Value of this field if this document field has valueType: ValueType_Number.
+  </li>
+</ul>
+<ul class="parameter">
+  <li class="param-required-false">photoValue : List
+    <br/>Value of this field if this document field has valueType: ValueType_Photo. Array of photo objects where each object contains a URL for a photo.
+  </li>
+</ul>
+<ul class="parameter">
+  <li class="param-required-false">stringValue : String
+    <br/>Value of this field if this document field has valueType: ValueType_String.
+  </li>
+</ul>
+<ul class="parameter">
+  <li class="param-required-true">valueType : String
+    <br/>Determines the type of this field and what type of value this field has. It should be either ValueType_Number, ValueType_String, or ValueType_Photo.
+  </li>
+</ul>

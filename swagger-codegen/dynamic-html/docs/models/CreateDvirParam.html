@@ -1,0 +1,58 @@
+
+<h2>CreateDvirParam</h2>
+<ul class="parameter">
+  <li class="param-required-true">inspectionType : String
+    <br/>Only type &#39;mechanic&#39; is currently accepted.
+      <dl class="param-enum">
+        <dt>Enum:
+            <dd>mechanic</dd>
+        </dt>
+      </dl>
+  </li>
+</ul>
+<ul class="parameter">
+  <li class="param-required-false">mechanicNotes : String
+    <br/>Any notes from the mechanic.
+  </li>
+</ul>
+<ul class="parameter">
+  <li class="param-required-false">odometerMiles : Integer
+    <br/>The current odometer of the vehicle.
+  </li>
+</ul>
+<ul class="parameter">
+  <li class="param-required-false">previousDefectsCorrected : Boolean
+    <br/>Whether any previous defects were corrected. If this vehicle or trailer was previously marked unsafe, and this DVIR marks it as safe, either previousDefectsCorrected or previousDefectsIgnored must be true.
+  </li>
+</ul>
+<ul class="parameter">
+  <li class="param-required-false">previousDefectsIgnored : Boolean
+    <br/>Whether any previous defects were ignored. If this vehicle or trailer was previously marked unsafe, and this DVIR marks it as safe, either previousDefectsCorrected or previousDefectsIgnored must be true.
+  </li>
+</ul>
+<ul class="parameter">
+  <li class="param-required-true">safe : String
+    <br/>Whether or not this vehicle or trailer is safe to drive.
+      <dl class="param-enum">
+        <dt>Enum:
+            <dd>safe</dd>
+            <dd>unsafe</dd>
+        </dt>
+      </dl>
+  </li>
+</ul>
+<ul class="parameter">
+  <li class="param-required-false">trailerId : Integer
+    <br/>Id of trailer being inspected. Either vehicleId or trailerId must be provided.
+  </li>
+</ul>
+<ul class="parameter">
+  <li class="param-required-true">userEmail : String
+    <br/>The Samsara login email for the person creating the DVIR. The email must correspond to a Samsara user&#39;s email.
+  </li>
+</ul>
+<ul class="parameter">
+  <li class="param-required-false">vehicleId : Integer
+    <br/>Id of vehicle being inspected. Either vehicleId or trailerId must be provided.
+  </li>
+</ul>

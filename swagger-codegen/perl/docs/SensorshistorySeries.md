@@ -1,0 +1,16 @@
+# WWW::SwaggerClient::Object::SensorshistorySeries
+
+## Load the model package
+```perl
+use WWW::SwaggerClient::Object::SensorshistorySeries;
+```
+
+## Properties
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**field** | **string** | Field to query. | 
+**widget_id** | **int** | Sensor ID to query. | 
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

@@ -1,0 +1,8 @@
+
+# PrevJobStatus
+
+## Enum
+
+
+
+
